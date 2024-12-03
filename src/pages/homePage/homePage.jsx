@@ -1,5 +1,5 @@
 import Images from "../../assets/images";
-import DefaultLayout from "../../layouts/defaultlayout";
+import DefaultLayout from "../../layouts/defaultLayout";
 import CallToAction from "./callToAction";
 import EasyDineTransformation from "./easyDineTransformation";
 import EasyDineWorks from "./easyDineWorks";
