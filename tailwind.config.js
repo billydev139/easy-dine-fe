@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         primaryBlack: "#171717",
+        secondaryBlack:"#434343",
         primaryBlue: "#0F0A33",
         // primary_linear_gradient:"linear-gradient(45deg, #1967D2, #004DB7)"
       },
