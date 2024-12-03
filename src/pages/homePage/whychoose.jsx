@@ -29,7 +29,7 @@ const WhyChoose = () => {
     },
   ];
   return (
-    <div className=" bg-black py-24 text-white ">
+    <div className=" bg-primaryBlack py-24 text-white ">
         <div className="container mx-auto">
         <h2 className="text-3xl font-semibold text-center mb-6">
         Why Choose EasyDine?

@@ -3,7 +3,7 @@ import Images from "../../assets/images";
 
 const CallToAction = () => {
   return (
-    <div className="bg-black py-44">
+    <div className="bg-primaryBlack py-44">
       <div className="container mx-auto px-6">
         <div className= " relative py-10 contact-bg text-white rounded-lg grid grid-cols-2 items-center lg:items-start p-8 space-y-6 lg:space-y-0 lg:space-x-8">
           {/* Text Content */}
