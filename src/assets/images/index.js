@@ -9,11 +9,21 @@ import user from './user.png'
 import person from './person.png'
 import support from './support.png'
 import loyalty from './loyalty.png'
+import who from './who.png'
+import mission from './mission.png'
+import vision from './vision.png'
+import user1 from './user1.png'
+import beTheFirst from './beTheFirst.png'
 
 
 
 
 const Images={
+    beTheFirst:beTheFirst,
+    user1:user1,
+    who:who,
+    mission:mission,
+    vision:vision,
     mainLogo:mainLogo,
     bar:bar,
     centerDashboard:centerDashboard,

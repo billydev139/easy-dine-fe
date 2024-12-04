@@ -1,8 +1,8 @@
 // src/Routes.js
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/homePage/homePage";
+import AboutUs from "../pages/aboutUs";
 // Import the ProtectedRoute component
-
 
 const AppRoutes = () => {
   // Check if the user is authenticated
@@ -18,7 +18,10 @@ const AppRoutes = () => {
   //   ];
 
   // Define public routes in an array
-  const publicRoutes = [{ path: "/", component: <HomePage /> }];
+  const publicRoutes = [
+    { path: "/", component: <HomePage /> },
+    { path: "/about-us", component: <AboutUs /> },
+  ];
 
   return (
     <Router>

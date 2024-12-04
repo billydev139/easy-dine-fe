@@ -25,7 +25,7 @@ const Footer = () => {
     //     aria-label="Global"
     //     className="flex  items-center container  justify-between mx-auto  border-[#9BB7FF]   lg:pb-6 pb-8 pt-2 lg:pt-6"
     //   >
-    <div className="bg-primaryBlack px-4">
+    <div className="bg-primaryBlack px-4 border-t-2">
         <div className="lg:flex  container mx-auto   justify-between items-center  gap-12 lg:pb-6 pb-8 pt-2 lg:pt-6">
           <p className="flex justify-center pb-4 lg:pb-0  text-white">
             {" "}

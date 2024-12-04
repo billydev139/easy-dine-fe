@@ -6,11 +6,11 @@ import Images from "../assets/images";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/" },
+  { name: "About Us", href: "/about-us" },
   { name: "Contact Us", href: "/" },
-//   { name: "Compare salaries", href: "/compare-salaries" },
-//   { name: "Recruiter area", href: "/add-salary" },
-//   { name: "Pages", href: "#" },
+  //   { name: "Compare salaries", href: "/compare-salaries" },
+  //   { name: "Recruiter area", href: "/add-salary" },
+  //   { name: "Pages", href: "#" },
 ];
 // const mobileNavigation = [
 //   {
@@ -61,17 +61,17 @@ const navigation = [
 //   { icons: <Icons.RiLogoutBoxLine />, name: "Log Out", href: "/" },
 // ];
 const Header = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   const { profile } = useSelector((state) => state?.profileSlice);
-//   console.log("🚀 ~ UserProfile ~ profile:", profile);
+  //   const dispatch = useDispatch();
+  //   const navigate = useNavigate();
+  //   const { profile } = useSelector((state) => state?.profileSlice);
+  //   console.log("🚀 ~ UserProfile ~ profile:", profile);
 
-//   useEffect(() => {
-//     dispatch(userProfile());
-//   }, [dispatch]);
-//   const isAuthenticated = useSelector(
-//     (state) => state?.LoginSlice?.user?.data?.success
-//   );
+  //   useEffect(() => {
+  //     dispatch(userProfile());
+  //   }, [dispatch]);
+  //   const isAuthenticated = useSelector(
+  //     (state) => state?.LoginSlice?.user?.data?.success
+  //   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerColor, setHeaderColor] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -84,17 +84,17 @@ const Header = () => {
       setDropdownOpen(false);
     }
   };
-//   let name = "samran nadeem";
-//   const initials = name
-//     .split(" ")
-//     .map((n) => n[0].toUpperCase())
-//     .join("");
+  //   let name = "samran nadeem";
+  //   const initials = name
+  //     .split(" ")
+  //     .map((n) => n[0].toUpperCase())
+  //     .join("");
 
-//   const handleLogout = () => {
-//     dispatch(LogoutReducer());
-//     navigate("/");
-//     setMobileMenuOpen(false);
-//   };
+  //   const handleLogout = () => {
+  //     dispatch(LogoutReducer());
+  //     navigate("/");
+  //     setMobileMenuOpen(false);
+  //   };
 
   return (
     <header className="bg-primaryBlack  shadow-md">
@@ -119,14 +119,11 @@ const Header = () => {
                   key={index}
                   to={item.href}
                   className={`${
-                    headerColor == item.name
-                      ? " text-primaryBlue"
-                      : " text-white"
-                  } text-[16px] font-semibold`}
+                    headerColor == item.name ? " font-bold" : " font-medium "
+                  } text-[18px] text-white`}
                   onClick={() => handleColor(item.name)}
                 >
                   {item.name}
-                 
                 </NavLink>
               ))}
               {/* Dropdown menu for "Pages" */}
@@ -160,25 +157,24 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-5 ">
             {/* {!isAuthenticated ? ( */}
-              <div>
+            <div>
               <Link to={"/login"}>
                 {" "}
                 <div className="lg:flex items-center gap-x-2 hidden text-white bg-primaryBlue font-semibold py-2 px-3">
                   {/* <Icons.FaUser />  */}
                   Login/Register
-           
                 </div>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(true)}
-                  className="-my-2.5 inline-flex items-center justify-center p-2.5 text-gray-700 gap-2  lg:hidden"
-                >
-                  {/* <span className="sr-only">Open main menu</span> */}
-                  {/* <Icons.FaBars className="h-6 w-6" /> */}
-                  bars
-                </button>
-                </div>
+              </Link>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(true)}
+                className="-my-2.5 inline-flex items-center justify-center p-2.5 text-gray-700 gap-2  lg:hidden"
+              >
+                {/* <span className="sr-only">Open main menu</span> */}
+                {/* <Icons.FaBars className="h-6 w-6" /> */}
+                bars
+              </button>
+            </div>
             {/* // ) : (
             //   <div className="flex items-center gap-2">
             //     <div className="flex items-center gap-2 relative py-2">

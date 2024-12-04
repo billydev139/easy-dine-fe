@@ -38,11 +38,11 @@ const Testimonials = () => {
         <p className="text-center text-white mb-8">
           Customer testimonial
         </p>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex justify-center gap-8 ">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-white text-black rounded-lg shadow-lg p-6"
+              className="bg-white text-black rounded-lg shadow-lg p-6 max-w-sm"
             >
               <p className="italic mb-4">{testimonial.message}</p>
               <div className="flex items-center space-x-4">

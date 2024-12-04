@@ -24,7 +24,7 @@ const CallToAction = () => {
             </button>
           </div>
           {/* Image */}
-          <div className="flex-shrink-0 absolute right-36 bottom-0">
+          <div className="flex-shrink-0 absolute right-28 bottom-0">
             <img
               src={Images.person} // Replace with the actual image URL
               alt="Person pointing"
