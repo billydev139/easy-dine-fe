@@ -7,7 +7,7 @@ import Images from "../assets/images";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about-us" },
-  { name: "Contact Us", href: "/" },
+  { name: "Contact Us", href: "/contact-us" },
   //   { name: "Compare salaries", href: "/compare-salaries" },
   //   { name: "Recruiter area", href: "/add-salary" },
   //   { name: "Pages", href: "#" },

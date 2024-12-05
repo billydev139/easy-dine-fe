@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import Icons from "../assets/icons";
 
 
-const navigationLinks = [
+export const navigationLinks = [
   { name: "Follow us", href: "#", id: 1 },
-  { name: <Icons.FaLinkedin />, href: "#", id: 2 },
+  { name: <Icons.TiSocialLinkedin />, href: "#", id: 2 },
   {
     name: <Icons.FaSquareInstagram size={34} color="white" />,
     href: "#",
