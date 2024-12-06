@@ -160,9 +160,9 @@ const Header = () => {
             <div>
               <Link to={"/login"}>
                 {" "}
-                <div className="lg:flex items-center gap-x-2 hidden text-white bg-primaryBlue font-semibold py-2 px-3">
+                <div className="lg:flex items-center gap-x-2 hidden text-white bg-primaryBlue font-semibold py-3 px-12">
                   {/* <Icons.FaUser />  */}
-                  Login/Register
+                  Sign in
                 </div>
               </Link>
               <button

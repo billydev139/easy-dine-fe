@@ -26,6 +26,7 @@ const InputField = ({
   labelWeight,
   rows,
   textSize,
+  PaddingX
 }) => {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
@@ -99,7 +100,7 @@ const InputField = ({
               borderColor ? borderColor : " border-[#CCCCCC]"
             }${type === "textarea" ? "h-[85px] placeholder:top-[-50px]" : ""} ${
               paddingY ? `${paddingY}` : "py-[10px]"
-            } px-7  outline-none ${
+            } ${PaddingX?PaddingX: "px-7"}  outline-none ${
               backgroundcolor ? `${backgroundcolor}` : "bg-white"
             } placeholder:text-[14px] ${
               placeholderColor ? placeholderColor : "placeholder:text-primaryGray"
@@ -139,6 +140,8 @@ InputField.propTypes = {
   borderColor: PropTypes.any,
   labelWeight: PropTypes.any,
   rows: PropTypes.any,
+  PaddingX: PropTypes.any,
+
 
 
 };

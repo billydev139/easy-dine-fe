@@ -12,9 +12,11 @@ import {
 import { IoIosLock } from "react-icons/io";
 import { LuMapPin } from "react-icons/lu";
 import { MdLocalPhone, MdOutlineEmail, MdOutlinePhoneInTalk } from "react-icons/md";
+import { RiLockLine } from "react-icons/ri";
 import { TiSocialLinkedin } from "react-icons/ti";
 
 const Icons = {
+  RiLockLine,
   IoIosLock,
   FaRegEyeSlash,
   FaRegEye,
