@@ -3,7 +3,7 @@ import Icons from "../../assets/icons";
 /* eslint-disable react/prop-types */
 const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
   return (
-    <div className="flex justify-between items-center bg-[#343434] shadow p-4 rounded-md text-white">
+    <div className="flex justify-between items-center bg-[#343434] shadow p-3 rounded-md text-white">
       <div className="flex gap-2">
         <button
           aria-controls="sidebar"

@@ -102,7 +102,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               MENU
             </h3> */}
 
-            <ul className="mb-6 flex flex-col gap-1.5 text-lg text-white">
+            <ul className="mb-6 flex flex-col gap-1.5 text-base text-white">
               {/* <!-- Menu Item Dashboard --> */}
 
               <React.Fragment>
