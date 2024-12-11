@@ -40,10 +40,7 @@ const Login = () => {
     <div className="">
       <div className="flex lg:flex-row flex-col  min-h-screen ">
         {/* Left Section */}
-        <div
-         
-          className=" lg:flex lg:w-1/2 bg-cover bg-center w-full signup-background"
-        >
+        <div className=" lg:flex lg:w-1/2 bg-cover bg-center w-full signup-background">
           <div
             className="signup-background w-full h-full flex flex-col items-center justify-center text-white"
             style={{
@@ -79,7 +76,6 @@ const Login = () => {
                 type="email"
                 placeholder="Enter your username or email here"
                 label={"Email Address"}
-                
                 PaddingX={"px-12"}
                 firstIcon={
                   <Icons.MdOutlineEmail
@@ -87,7 +83,6 @@ const Login = () => {
                     className="absolute left-3 top-[44px] "
                   />
                 }
-                
                 borderColor={"border-[#CCCCCC]"}
                 borderShape={"rounded-xl"}
                 placeholderColor={"placeholder:text-primaryGray"}
@@ -138,12 +133,11 @@ const Login = () => {
                 )}
               </span>
             </div>
-          
+
             <Button
               type="submit"
               className="w-full p-6 bg-primaryBlue text-white rounded font-semibold text-base flex items-center justify-center gap-4"
             >
-        
               {renderButtonContent(
                 loading,
                 "Next",
@@ -151,7 +145,6 @@ const Login = () => {
               )}
             </Button>
           </form>
-
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import AboutUs from "../pages/aboutUs";
 import ContactUs from "../pages/contactUs";
 import TermsofServices from "../pages/terms/terms";
 import Login from "../pages/login/login";
+import Dashboard from "../pages/dashboard";
 
 
 const AppRoutes = () => {
@@ -26,7 +27,8 @@ const AppRoutes = () => {
     { path: "/about-us", component: <AboutUs /> },
     {path:'/contact-us',component:<ContactUs/>},
     {path:'/terms',component:<TermsofServices/>},
-    {path:'/login',component:<Login/>}
+    {path:'/login',component:<Login/>},
+    {path:'/dashboard',component:<Dashboard/>},
 
 
   ];
