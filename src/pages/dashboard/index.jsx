@@ -1,4 +1,5 @@
 import DashboardLayout from "../../layouts/dashBoardLayout";
+import DashboardStats from "./dashboardStats";
 
 const Dashboard = () => {
   //   const stats = [
@@ -25,7 +26,7 @@ const Dashboard = () => {
   //   ];
   return (
     <DashboardLayout>
-      <div className="p-4 space-y-4">
+      <div className="">
         {/* <div className="grid grid-cols-4 gap-4">
           {stats.map((stat, index) => (
             <div
@@ -44,7 +45,7 @@ const Dashboard = () => {
             </div>
           ))}
         </div> */}
-        <p>Qasim</p>
+       <DashboardStats/>
         {/* Analytics */}
         {/* <div className="bg-white p-6 shadow rounded">
         <h3 className="text-lg font-bold mb-4">Analytics & Reporting</h3>
