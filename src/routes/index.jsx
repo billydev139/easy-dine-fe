@@ -6,6 +6,7 @@ import ContactUs from "../pages/contactUs";
 import TermsofServices from "../pages/terms/terms";
 import Login from "../pages/login/login";
 import Dashboard from "../pages/dashboard";
+import RestaurantManagement from "../pages/dashboard/restaurantManagement";
 
 
 const AppRoutes = () => {
@@ -29,6 +30,7 @@ const AppRoutes = () => {
     {path:'/terms',component:<TermsofServices/>},
     {path:'/login',component:<Login/>},
     {path:'/dashboard',component:<Dashboard/>},
+    {path:'/restaurant-management',component:<RestaurantManagement/>},
 
 
   ];

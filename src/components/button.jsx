@@ -13,11 +13,11 @@ const Button = ({
   textcolor,
   bordercolor,
 }) => {
-  const classes = `  py-2 px-2 ${
-    background ? background : "bg-bodyblue"
+  const classes = `  py-2 px-3 ${
+    background ? background : "bg-white"
   }  rounded text-base ${
-    textcolor ? textcolor : "text-white"
-  } hover:border-bodyblue tracking-wide  ${
+    textcolor ? textcolor : "text-primaryBlack"
+  } font-medium   ${
     bordercolor ? bordercolor : "border-primaryBlack " 
   }  `;
 

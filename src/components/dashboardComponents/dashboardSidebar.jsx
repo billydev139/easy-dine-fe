@@ -7,6 +7,10 @@ import Images from "../../assets/images";
 import Icons from "../../assets/icons";
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const [isOpen, setIsOpen] = useState(false); // State to toggle dropdown visibility
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen); // Toggle state
+  };
   const location = useLocation();
   const { pathname } = location;
 
@@ -56,7 +60,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute shadow-2xl left-0 top-0 z-9999 flex h-screen w-[21rem] flex-col overflow-y-hidden bg-[#343434] mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute shadow-2xl left-0 top-0 z-9999 flex min-h-screen w-[21rem] flex-col overflow-y-hidden bg-primaryBlue mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -96,7 +100,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-5 py-4 px-5  lg:mt-9  ">
+        <nav className="mt-5  lg:mt-9  ">
           <div>
             {/* <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               MENU
@@ -108,7 +112,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <React.Fragment>
                 <NavLink
                   to="/dashboard"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-6 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("dashboard")) &&
                     "bg-[#F4F9FF] text-primaryBlue "
                   }`}
@@ -118,7 +122,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </NavLink>
               </React.Fragment>
 
-              <li>
+              {/* <li>
                 <NavLink
                   // to="/post-a-job"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out  ${
@@ -128,12 +132,75 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <Icons.HiOutlineBuildingStorefront size={22} />
                   Restaurant Management
                 </NavLink>
+              </li> */}
+                 <li>
+                {/* Dropdown Button */}
+                <button
+                  type="button"
+                  onClick={toggleDropdown}
+                  className={`flex items-center w-full font-medium outline-none  text-base  px-8 py-2.5  transition duration-75 rounded-lg group  ${
+                    pathname.includes("/restaurant-management") &&
+                    "bg-[#F4F9FF] text-primaryBlue"
+                  }`}
+                  aria-expanded={isOpen}
+                >
+                  {/* Shopping cart icon */}
+                  <Icons.HiOutlineBuildingStorefront size={22} />
+
+                  <NavLink
+                    to="/restaurant-management"
+                    className={"flex-1 ms-3 text-left"}
+                  >
+                    {/* Dropdown Title */}
+                    <span className="  rtl:text-right whitespace-nowrap">
+                    Restaurant Management
+                    </span>
+                  </NavLink>
+                  {/* Arrow icon */}
+                  <svg
+                    className={`w-3 h-3 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                {/* Dropdown Items */}
+                <ul className={`py-2 space-y-2 ${isOpen ? "block" : "hidden"}`}>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center w-full p-2 font-medium    transition duration-75 rounded-lg pl-11 group hover:bg-gray-700 "
+                    >
+                   <span className="inline-block w-2 h-2 bg-white rounded-full mr-2"></span> Add Restaurant
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center w-full p-2 font-medium  transition duration-75 rounded-lg pl-11 group hover:bg-gray-700 "
+                    >
+                       <span className="inline-block w-2 h-2 bg-white rounded-full mr-2"></span> Manage Restaurant
+                    </a>
+                  </li>
+                </ul>
               </li>
 
               <li>
                 <NavLink
                   // to="/upload-films"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/upload-films") &&
                     "bg-graydark dark:bg-meta-4"
                   }`}
@@ -146,7 +213,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/photos") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
@@ -157,7 +224,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/upload-photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/upload-photos") &&
                     "bg-graydark dark:bg-meta-4"
                   }`}
@@ -169,7 +236,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/reels"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/reels") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
@@ -180,7 +247,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/photos") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
@@ -191,7 +258,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/upload-photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/upload-photos") &&
                     "bg-graydark dark:bg-meta-4"
                   }`}
@@ -203,7 +270,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <li>
                 <NavLink
                   // to="/reels"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("/reels") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >

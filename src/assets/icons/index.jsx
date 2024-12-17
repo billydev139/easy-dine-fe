@@ -1,4 +1,4 @@
-import { BiBadgeCheck, BiEdit, BiSolidHide, BiSolidShow } from "react-icons/bi";
+import { BiBadgeCheck, BiBarChart, BiEdit, BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { BsCoin } from "react-icons/bs";
 import {
   FaLinkedin,
@@ -9,11 +9,13 @@ import {
   FaArrowRightLong,
   FaRegEye,
   FaRegEyeSlash,
+  FaUserTie,
+  FaEllipsisVertical,
 } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { GoChecklist } from "react-icons/go";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
-import { IoIosLock } from "react-icons/io";
+import { IoIosLock, IoMdCloudUpload } from "react-icons/io";
 import { IoBriefcaseOutline, IoSettingsOutline } from "react-icons/io5";
 import { LiaFileContractSolid } from "react-icons/lia";
 import { LuMapPin } from "react-icons/lu";
@@ -32,6 +34,10 @@ import { TfiWallet } from "react-icons/tfi";
 import { TiMessages, TiSocialLinkedin } from "react-icons/ti";
 
 const Icons = {
+  IoMdCloudUpload,
+  FaEllipsisVertical,
+  FaUserTie,
+  BiBarChart,
   FiUsers,
   BiEdit,
   TfiWallet,

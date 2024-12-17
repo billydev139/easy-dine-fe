@@ -16,7 +16,7 @@ const DashboardStats = () => {
       value: "250,48",
       percentage: "+4%",
       color: "red",
-      chartColor: "#E54B47",
+      chartColor: "#00AFEC",
       icon: <Icons.BiEdit/>,// Replace with your custom icon
     },
     {
@@ -49,7 +49,7 @@ const DashboardStats = () => {
       {cardData.map((card, index) => (
         <div
           key={index}
-          className="bg-secondaryBlack text-white p-4 rounded-lg w-1/3 shadow-md"
+          className="bg-primaryBlue text-white p-4 rounded-lg w-1/3 shadow-md"
         >
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-sm font-semibold">{card.title}</h2>
