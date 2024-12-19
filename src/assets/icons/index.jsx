@@ -1,5 +1,6 @@
 import { BiBadgeCheck, BiBarChart, BiEdit, BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { BsCoin } from "react-icons/bs";
+import { FaRegEdit } from "react-icons/fa";
 import {
   FaLinkedin,
   FaSquareInstagram,
@@ -28,12 +29,14 @@ import {
   MdOutlinePhoneInTalk,
 } from "react-icons/md";
 import { PiBellSimpleBold } from "react-icons/pi";
-import { RiLockLine, RiMenu3Fill } from "react-icons/ri";
+import { RiDeleteBin6Line, RiLockLine, RiMenu3Fill } from "react-icons/ri";
 import { SiNginxproxymanager } from "react-icons/si";
 import { TfiWallet } from "react-icons/tfi";
 import { TiMessages, TiSocialLinkedin } from "react-icons/ti";
 
 const Icons = {
+  RiDeleteBin6Line,
+  FaRegEdit,
   IoMdCloudUpload,
   FaEllipsisVertical,
   FaUserTie,

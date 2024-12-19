@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }) => {
             setSidebarOpen={setSidebarOpen}
           />
           <main>
-            <div className="mx-auto max-w-screen-2xl ">{children}</div>
+            <div className="mx-auto min-w-screen-2xl">{children}</div>
           </main>
           {/* <DashboardFooter /> */}
         </div>
