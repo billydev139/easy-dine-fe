@@ -30,7 +30,7 @@ const RestaurantManagement = () => {
   });
   return (
     <DashboardLayout>
-      <div className="container mx-auto bg-primaryBlue  rounded-md shadow-md mb-20">
+      <div className="container mx-auto bg-primaryBlue  rounded-md shadow-md mb-20 mt-8">
         <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Add Restaurant"}

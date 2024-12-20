@@ -1,4 +1,5 @@
-const SearchBar=()=>{
+/* eslint-disable react/prop-types */
+const SearchBar=({placeholder})=>{
     return(
         <div className="flex justify-between items-center   px-4">
         <form className="w-full">
@@ -24,7 +25,7 @@ const SearchBar=()=>{
               type="search"
               id="default-search"
               className="block w-full px-4 py-2 pe-10 text-sm  text-white outline-none rounded-lg bg-[#1F1565] placeholder:text-white "
-              placeholder="Search here..."
+              placeholder={placeholder || "Search here ..."}
               required
             />
           </div>

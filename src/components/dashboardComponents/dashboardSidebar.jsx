@@ -60,7 +60,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute  shadow-2xl left-0 top-0 z-9999 flex min-h-screen min-w-[21rem] flex-col overflow-y-hidden bg-primaryBlue mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute  shadow-2xl left-0 top-0 z-9999 flex min-h-screen min-w-[20rem] flex-col overflow-y-hidden bg-primaryBlue mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -187,22 +187,22 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/restaurant-management/manage-restaurant"}
                       className="flex items-center w-full p-2 font-medium  transition duration-75 rounded-lg pl-11 group hover:bg-gray-700 "
                     >
                        <span className="inline-block w-2 h-2 bg-white rounded-full mr-2"></span> Manage Restaurant
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
 
               <li>
                 <NavLink
-                  // to="/upload-films"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("/upload-films") &&
-                    "bg-graydark dark:bg-meta-4"
+                  to="/user-management"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    (pathname === "/" || pathname.includes("user-management")) &&
+                    "bg-[#F4F9FF] text-primaryBlue "
                   }`}
                 >
                   <Icons.SiNginxproxymanager size={22} />

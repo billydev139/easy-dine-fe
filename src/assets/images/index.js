@@ -16,11 +16,13 @@ import user1 from './user1.png'
 import beTheFirst from './beTheFirst.png'
 import easydineWhiteLogo from './mainLogo.png'
 import login from './login.png'
+import bin from './bin.png'
 
 
 
 
 const Images={
+    bin:bin,
     login:login,
     easydineWhiteLogo:easydineWhiteLogo,
     beTheFirst:beTheFirst,
