@@ -12,10 +12,11 @@ const Button = ({
   navigate,
   textcolor,
   bordercolor,
+  textSize
 }) => {
   const classes = `  py-2 px-3 ${
     background ? background : "bg-white"
-  }  rounded text-base ${
+  }  rounded ${textSize? textSize:"text-base"}  ${
     textcolor ? textcolor : "text-primaryBlack"
   } font-medium   ${
     bordercolor ? bordercolor : "border-primaryBlack " 
@@ -47,6 +48,7 @@ Button.propTypes = {
   bordercolor: PropTypes.any,
   children: PropTypes.any,
   className: PropTypes.string,
+  textSize:PropTypes.any,
   hoverbg: PropTypes.any,
   icon: PropTypes.any,
   navigate: PropTypes.any,

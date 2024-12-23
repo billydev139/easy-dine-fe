@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import DashboardLayout from "../../../layouts/dashboardLayout";
 import Icons from "../../../assets/icons";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import Images from "../../../assets/images";
 import Button from "../../../components/button";
 import SearchBar from "../../../components/searchBar";
+import { useDropzone } from "react-dropzone";
 
 const UserManagement = () => {
   const [data] = useState([
@@ -15,14 +16,14 @@ const UserManagement = () => {
       name: "Red Stiletto Restaurant",
       lastName: "Thomsan",
       email: "tgnzl@freesourcecodes.com",
-      gender:"Male",
+      gender: "Male",
       status: "Active",
       manager: "Mr John",
     },
     {
       name: "The Nouveau Table",
       lastName: "Marrie",
-      gender:"Female",
+      gender: "Female",
       email: "tgnzl@gmel.com",
       status: "Active",
       manager: "Mr Smith",
@@ -30,7 +31,7 @@ const UserManagement = () => {
     {
       name: "Red Stiletto Restaurant",
       lastName: "Doe",
-      gender:"Male",    
+      gender: "Male",
       email: "iendnx@codes.com",
       status: "Active",
       manager: "Mr Johnson",
@@ -38,13 +39,13 @@ const UserManagement = () => {
     {
       name: "The Nouveau Table",
       lastName: "Marrie",
-      gender:"Female",
+      gender: "Female",
       email: "poensu@gamil.com",
       status: "Active",
       manager: "Mr John",
     },
     {
-        gender:"Female",
+      gender: "Female",
       name: "The Winstonian",
       lastName: "Marrie",
       email: "sdafafa@fmieaes.com",
@@ -52,7 +53,7 @@ const UserManagement = () => {
       manager: "Mr Johnson",
     },
     {
-        gender:"Female",
+      gender: "Female",
       name: "Fauna Kitchen",
       lastName: "Marrie",
       email: "tgnzl@fremmail.com",
@@ -60,7 +61,7 @@ const UserManagement = () => {
       manager: "Mr Johnson",
     },
     {
-        gender:"Male",
+      gender: "Male",
       name: "The Nouveau Table",
       lastName: "Marrie",
       email: "opeio@email.com",
@@ -68,7 +69,7 @@ const UserManagement = () => {
       manager: "Mr Johnson",
     },
     {
-        gender:"Male",
+      gender: "Male",
       name: "Duke's Table",
       lastName: "Marrie",
       email: "tgnzl@meailscodes.com",
@@ -76,7 +77,7 @@ const UserManagement = () => {
       manager: "Mr Johnson",
     },
     {
-        gender:"Female",
+      gender: "Female",
       name: "Alpine-Style Cuisine",
       lastName: "Marrie",
       email: "tgnzl@freesourcecodes.com",
@@ -84,7 +85,7 @@ const UserManagement = () => {
       manager: "Mr Johnson",
     },
     {
-        gender:"Female",
+      gender: "Female",
       name: "The Nouveau Table",
       lastName: "Marrie",
       email: "tgnzl@freesourcecodes.com",
@@ -135,6 +136,19 @@ const UserManagement = () => {
       }
     });
   };
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  const onDrop = useCallback((acceptedFiles) => {
+    // Handle file upload
+    const file = acceptedFiles[0];
+    setUploadedFile(file);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    multiple: false,
+  });
   return (
     <DashboardLayout>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -168,8 +182,8 @@ const UserManagement = () => {
                   {/* <label className=" text-sm font-semibold text-primaryBlack">Company Name</label> */}
                   <InputField
                     type="text"
-                    label={"Restaurant Name"}
-                    placeholder="Restaurant Name"
+                    label={"First Name"}
+                    placeholder="Type First Name ...."
                     borderColor={"border-white"}
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
@@ -179,9 +193,9 @@ const UserManagement = () => {
                 <div>
                   <InputField
                     type="text"
-                    label={"Address"}
+                    label={"Last Name"}
                     labelstyle={""}
-                    placeholder="Type your Address...."
+                    placeholder="Type Last Name ...."
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
                     className="w-full  border rounded-md "
@@ -194,7 +208,7 @@ const UserManagement = () => {
                   <InputField
                     type="text"
                     label={"Phone Number"}
-                    placeholder="031XXXXXXXX"
+                    placeholder="Type phone number....."
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
                     className="w-full mt-1 p-2 border rounded-md"
@@ -204,97 +218,71 @@ const UserManagement = () => {
                   <InputField
                     type="text"
                     label={"Email Address"}
-                    placeholder="Type your Address...."
+                    placeholder="Type email address........"
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
                     className="w-full mt-1 p-2 border rounded-md"
                   />
                 </div>
                 <div>
-                  {/* <label className=" text-sm font-semibold text-primaryBlack">Company Name</label> */}
-                  <InputField
-                    type="text"
-                    label={"Website"}
-                    placeholder="pizzaplanetxyz.com"
-                    borderColor={"border-white"}
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full  border rounded-md "
-                  />
+                  <label className="  text-sm font-semibold text-white">
+                    Gender
+                  </label>
+                  <select
+                    name="gender"
+                    id="gender"
+                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-white rounded-md shadow-md outline-none w-full"
+                  >
+                    <option className=" ">Select Gender</option>
+                    <option className=" ">Male</option>
+                    <option className=" ">Female</option>
+                  </select>
                 </div>
                 <div>
                   <InputField
                     type="text"
-                    label={"Operating Hours"}
+                    label={"Age"}
                     labelstyle={""}
-                    placeholder="24 hours"
+                    placeholder="Type Age.."
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
                     className="w-full  border rounded-md "
                   />
                 </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Type of Cuisine"}
-                    placeholder="Chinese"
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full mt-1 p-2 border rounded-md"
-                  />
-                </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Delivery Available"}
-                    placeholder="Yes/No"
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full mt-1 p-2 border rounded-md"
-                  />
-                </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Manager Name"}
-                    placeholder="Enter your name...."
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full mt-1 p-2 border rounded-md"
-                  />
-                </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Manager Contact"}
-                    placeholder="031XXXXXXXX"
-                    borderColor={"border-white"}
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full  border rounded-md "
-                  />
-                </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Status"}
-                    labelstyle={""}
-                    placeholder="24 hours"
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full  border rounded-md "
-                  />
-                </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Seating Capacity"}
-                    placeholder="Type your Capacity"
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full mt-1 p-2 border rounded-md"
-                  />
-                </div>
+             {/* ////////////////////////drop zone /////////////////////////// */}
+          <div className="col-span-2">
+      <label className="block mb-2 text-white font-medium">Upload Picture</label>
+      <div
+        {...getRootProps()}
+        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-[#151239] hover:border-blue-500 transition-all"
+      >
+        <input {...getInputProps()} />
+        <div className="flex flex-col items-center text-gray-400">
+            <Icons.IoMdCloudUpload size={60} />
+          {/* <svg
+            className="w-10 h-10 mb-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 3a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 102 0V3a3 3 0 00-3-3H4a3 3 0 00-3 3v10a1 1 0 102 0V3zm14 10a1 1 0 10-2 0v4H5v-4a1 1 0 10-2 0v4a3 3 0 003 3h8a3 3 0 003-3v-4z"
+              clipRule="evenodd"
+            />
+          </svg> */}
+          <p className="text-sm">Drag File to Upload</p>
+          <p className="text-xs">(or click to choose a file)</p>
+        </div>
+      </div>
+
+      {/* Display Uploaded File Name */}
+      {uploadedFile && (
+        <div className="mt-2 text-sm text-white">
+          File Uploaded: <strong>{uploadedFile.name}</strong>
+        </div>
+      )}
+    </div>
 
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
@@ -317,24 +305,30 @@ const UserManagement = () => {
       </Dialog>
 
       <div className="bg-primaryBlue  text-white my-12 rounded-md shadow-xl">
-      <div className="flex justify-between items-center ">
+        <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Staff User List"}
             para={"Lorem ipsum dolor sit amet,consecteture"}
           />
           <div className="w-[40%]">
-          <SearchBar placeholder={"Search for name, email......"}/>
+            <SearchBar placeholder={"Search for name, email......"} />
           </div>
           <div className="flex gap-2 mr-4">
-            <Button className="flex items-center gap-2 rounded-md"><Icons.FaUserPlus />Add User</Button>
-            <button  className="flex items-center bg-inherit gap-2 border border-white py-2 px-3 rounded-md"><Icons.LuDownload />Export</button>
+            <Button    onClick={() => setOpen(true)} className="flex items-center gap-2 rounded-md">
+              <Icons.FaUserPlus />
+              Add User
+            </Button>
+            <button className="flex items-center bg-inherit gap-2 border border-white py-2 px-3 rounded-md">
+              <Icons.LuDownload />
+              Export
+            </button>
           </div>
         </div>
-      <table className="w-full text-left ">
-      <thead className="bg-[#150F43] font-semibold text-white ">
-      <tr>
-      <th className="py-4 px-6">ID</th>
-      <th className="py-4 px-6">Profile</th>
+        <table className="w-full text-left ">
+          <thead className="bg-[#150F43] font-semibold text-white ">
+            <tr>
+              <th className="py-4 px-6">ID</th>
+              <th className="py-4 px-6">Profile</th>
               <th className="py-4 px-6">Last Name</th>
               <th className="py-4 px-6">Gender</th>
               <th className="py-4 px-6">Email</th>
@@ -345,9 +339,9 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((job,index) => (
+            {data.map((job, index) => (
               <tr key={index} className="border-b border-[#1F1565] ">
-                <td className="py-4 px-6 font-semibold">{index+1}</td>
+                <td className="py-4 px-6 font-semibold">{index + 1}</td>
 
                 <td className="py-6 px-6">
                   <div className="flex items-center ">
@@ -357,7 +351,9 @@ const UserManagement = () => {
                       className="mr-3 w-8 h-8 rounded-full"
                     />
                     <div>
-                      <p className="font-semibold text-sm text-white">{job.name}</p>
+                      <p className="font-semibold text-sm text-white">
+                        {job.name}
+                      </p>
 
                       <p className="text-xs text-[#6B7280] font-medium flex gap-1">
                         Loyalty User
@@ -365,41 +361,32 @@ const UserManagement = () => {
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-6 text-white text-sm">
-                  {job.lastName}
-                </td>
-                <td className="py-4 px-6 text-white text-sm">
-                  {job.gender}
-                </td>
-                <td className="py-4 px-6 text-white text-sm">
-                  {job.email}
-                </td>
+                <td className="py-4 px-6 text-white text-sm">{job.lastName}</td>
+                <td className="py-4 px-6 text-white text-sm">{job.gender}</td>
+                <td className="py-4 px-6 text-white text-sm">{job.email}</td>
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td
-                    className={`px-4 py-2 ${
-                      job.status === "Active"
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }`}
+                  className={`px-4 py-2 ${
+                    job.status === "Active" ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {job.status}
+                </td>
+                <td className="px-4 py-2 space-x-2">
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="text-green-500 hover:text-green-700 border border-green-500 bg-green-500 bg-opacity-30 p-1 rounded-md"
                   >
-                    {job.status}
-                  </td>
-                  <td className="px-4 py-2 space-x-2">
-                    <button
-                      onClick={() => setOpen(true)}
-                      className="text-green-500 hover:text-green-700 border border-green-500 bg-green-500 bg-opacity-30 p-1 rounded-md"
-                    >
-                      <Icons.FaRegEdit />
-                    </button>
-                    <button
-                      onClick={handleDelete}
-                      className="text-red-500 hover:text-red-700 border-red-500 border bg-red-500 bg-opacity-30 p-1 rounded-md"
-                    >
-                      <Icons.RiDeleteBin6Line />
-                    </button>
-                  </td>
+                    <Icons.FaRegEdit />
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="text-red-500 hover:text-red-700 border-red-500 border bg-red-500 bg-opacity-30 p-1 rounded-md"
+                  >
+                    <Icons.RiDeleteBin6Line />
+                  </button>
+                </td>
                 {/* <td className="py-4 px-6 text-[#00C92C]">{job.date}</td> */}
-              
               </tr>
             ))}
           </tbody>
@@ -423,9 +410,8 @@ const UserManagement = () => {
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">
-            <Icons.MdKeyboardArrowLeft size={25}/>
-            <Icons.MdKeyboardArrowRight size={25}/>
-
+            <Icons.MdKeyboardArrowLeft size={25} />
+            <Icons.MdKeyboardArrowRight size={25} />
           </div>
         </div>
       </div>

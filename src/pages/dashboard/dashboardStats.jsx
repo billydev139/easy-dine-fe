@@ -24,7 +24,7 @@ const DashboardStats = () => {
       value: "124,12",
       percentage: "+2%",
       color: "purple",
-      chartColor: "#6C4EAC",
+      chartColor: "#E54B47",
       icon: <Icons.FiUsers/>, // Replace with your custom icon
     },
   ];

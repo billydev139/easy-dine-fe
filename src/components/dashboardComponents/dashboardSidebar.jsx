@@ -212,9 +212,10 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
               <li>
                 <NavLink
-                  // to="/photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("/photos") && "bg-graydark dark:bg-meta-4"
+                  to="/order-management"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    (pathname === "/" || pathname.includes("order-management")) &&
+                    "bg-[#F4F9FF] text-primaryBlue "
                   }`}
                 >
                   <Icons.GoChecklist size={22} />
