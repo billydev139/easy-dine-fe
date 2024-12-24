@@ -374,7 +374,7 @@ const ManageRestaurants = () => {
       </Dialog>
       <div className="bg-primaryBlue my-8 text-white  rounded-lg">
         <div className="relative overflow-x-auto shadow-md ">
-          <table className="w-max my-8 text-sm text-left border-b bg-primaryBlue border-gray-700   ">
+          <table className="w-max  text-sm text-left border-b bg-primaryBlue border-gray-700   ">
             <thead className="bg-[#150F43] font-semibold text-gray-300 ">
               <tr>
                 <th className="px-4 py-2">Restaurant Name</th>
