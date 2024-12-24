@@ -1,15 +1,25 @@
+/* eslint-disable no-unused-vars */
 import { useCallback, useState } from "react";
 import DashboardLayout from "../../../layouts/dashboardLayout";
 import Icons from "../../../assets/icons";
-import { Dialog, DialogBackdrop, DialogPanel, Menu, MenuButton, MenuItems } from "@headlessui/react";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
 import InputField from "../../../components/inputField";
 import SectionHeading from "../../../components/sectionHeading";
 import Swal from "sweetalert2";
 import Images from "../../../assets/images";
 import SearchBar from "../../../components/searchBar";
-import { useDropzone } from "react-dropzone";
 import DashboardStats from "../dashboardStats";
 import Button from "../../../components/button";
+import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
 
 const OrderManagement = () => {
   //   const [data] = useState([
@@ -104,7 +114,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "03",
       status: "New Order",
-      payment:"Express"
+      payment: "Express",
     },
     {
       id: 2,
@@ -114,7 +124,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "05",
       status: "New Order",
-        payment:"Card Payment"
+      payment: "Card Payment",
     },
     {
       id: 3,
@@ -124,8 +134,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "07",
       status: "Delivered",
-      payment:"Cash in Hand"
-
+      payment: "Cash in Hand",
     },
     {
       id: 4,
@@ -135,7 +144,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "06",
       status: "Pending",
-       payment:"Express"
+      payment: "Express",
     },
     {
       id: 5,
@@ -145,7 +154,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "06",
       status: "Pending",
-       payment:"Card Payment"
+      payment: "Card Payment",
     },
     {
       id: 6,
@@ -155,8 +164,7 @@ const OrderManagement = () => {
       applications: "#5552375",
       position: "10",
       status: "Delivered",
-      payment:"Cash in Hand"
-
+      payment: "Cash in Hand",
     },
   ];
 
@@ -201,19 +209,18 @@ const OrderManagement = () => {
       }
     });
   };
-  const [uploadedFile, setUploadedFile] = useState(null);
 
-  const onDrop = useCallback((acceptedFiles) => {
-    // Handle file upload
-    const file = acceptedFiles[0];
-    setUploadedFile(file);
-  }, []);
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*",
-    multiple: false,
-  });
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [isTimeDropdownOpen, setIsTimeDropdownOpen] = useState(false);
+  const times = [
+    "12:00:00 AM",
+    "12:30:00 AM",
+    "1:00:00 AM",
+    "1:30:00 AM",
+    "2:00:00 AM", // Add all time slots
+    "11:30:00 PM",
+  ];
   return (
     <DashboardLayout>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -230,7 +237,7 @@ const OrderManagement = () => {
             >
               <div className="flex justify-between items-center px-6 bg-[#150F43] ">
                 <SectionHeading
-                  heading={"Edit Restaurant"}
+                  heading={"Add Seating"}
                   para={"Lorem ipsum dolor sit amet,consecteture"}
                 />
                 <div>
@@ -247,7 +254,7 @@ const OrderManagement = () => {
                   {/* <label className=" text-sm font-semibold text-primaryBlack">Company Name</label> */}
                   <InputField
                     type="text"
-                    label={"First Name"}
+                    label={"Customer Name"}
                     placeholder="Type First Name ...."
                     borderColor={"border-white"}
                     placeholderColor={"placeholder:text-primaryGray"}
@@ -258,7 +265,7 @@ const OrderManagement = () => {
                 <div>
                   <InputField
                     type="text"
-                    label={"Last Name"}
+                    label={"Phone Number"}
                     labelstyle={""}
                     placeholder="Type Last Name ...."
                     placeholderColor={"placeholder:text-primaryGray"}
@@ -266,13 +273,50 @@ const OrderManagement = () => {
                     className="w-full  border rounded-md "
                   />
                 </div>
+                {/* Time Dropdown */}
+                <div className="relative">
+                  <label className="  text-sm font-semibold text-white">
+                    Select Time
+                  </label>
+                  <button
+                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-white rounded-md "
+                    onClick={() => setIsTimeDropdownOpen(!isTimeDropdownOpen)}
+                    type="button"
+                  >
+                    {selectedTime || "Select Time"}
+                    <Icons.FaCaretDown />
+                  </button>
+                  {isTimeDropdownOpen && (
+                    <div className="absolute z-10 w-full mt-2 bg-white text-black rounded-md text-center  ">
+                      {times.map((time, index) => (
+                        <div
+                          key={index}
+                          className="px-4 py-2 hover:bg-[#1A1448] hover:text-white cursor-pointer border-b"
+                          onClick={() => {
+                            setSelectedTime(time);
+                            setIsTimeDropdownOpen(false);
+                          }}
+                        >
+                          {time}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <div>
-                  {/* <label className="block text-sm font-medium text-gray-700">
-              Application Email/URL
-            </label> */}
+                  <InputField
+                    type="date"
+                    label={"Select Date"}
+                    placeholder="Date"
+                    placeholderColor={"placeholder:text-primaryGray"}
+                    backgroundcolor={"bg-[#7B68FF1A]"}
+                    className="w-full p-2 border rounded-md text-sm text-white"
+                  />
+                </div>
+                <div>
                   <InputField
                     type="text"
-                    label={"Phone Number"}
+                    label={"Number of Guests"}
                     placeholder="Type phone number....."
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
@@ -282,7 +326,7 @@ const OrderManagement = () => {
                 <div>
                   <InputField
                     type="text"
-                    label={"Email Address"}
+                    label={"Available Seats"}
                     placeholder="Type email address........"
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
@@ -291,66 +335,17 @@ const OrderManagement = () => {
                 </div>
                 <div>
                   <label className="  text-sm font-semibold text-white">
-                    Gender
+                    Payment Methods
                   </label>
                   <select
                     name="gender"
                     id="gender"
                     className="bg-[#1A1448] px-4 py-3 border  mt-1 text-white rounded-md shadow-md outline-none w-full"
                   >
-                    <option className=" ">Select Gender</option>
-                    <option className=" ">Male</option>
-                    <option className=" ">Female</option>
+                    <option className="online">Online</option>
+                    <option className="cash">Cash</option>
                   </select>
                 </div>
-                <div>
-                  <InputField
-                    type="text"
-                    label={"Age"}
-                    labelstyle={""}
-                    placeholder="Type Age.."
-                    placeholderColor={"placeholder:text-primaryGray"}
-                    backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full  border rounded-md "
-                  />
-                </div>
-                {/* ////////////////////////drop zone /////////////////////////// */}
-                <div className="col-span-2">
-                  <label className="block mb-2 text-white font-medium">
-                    Upload Picture
-                  </label>
-                  <div
-                    {...getRootProps()}
-                    className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-[#151239] hover:border-blue-500 transition-all"
-                  >
-                    <input {...getInputProps()} />
-                    <div className="flex flex-col items-center text-gray-400">
-                      <Icons.IoMdCloudUpload size={60} />
-                      {/* <svg
-            className="w-10 h-10 mb-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 3a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 102 0V3a3 3 0 00-3-3H4a3 3 0 00-3 3v10a1 1 0 102 0V3zm14 10a1 1 0 10-2 0v4H5v-4a1 1 0 10-2 0v4a3 3 0 003 3h8a3 3 0 003-3v-4z"
-              clipRule="evenodd"
-            />
-          </svg> */}
-                      <p className="text-sm">Drag File to Upload</p>
-                      <p className="text-xs">(or click to choose a file)</p>
-                    </div>
-                  </div>
-
-                  {/* Display Uploaded File Name */}
-                  {uploadedFile && (
-                    <div className="mt-2 text-sm text-white">
-                      File Uploaded: <strong>{uploadedFile.name}</strong>
-                    </div>
-                  )}
-                </div>
-
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
@@ -383,13 +378,13 @@ const OrderManagement = () => {
             <SearchBar placeholder={"Search for name, email......"} />
           </div>
           <div className="flex gap-2 mr-4">
-            <select className="border rounded bg-secondaryGray font-medium text-primaryBlack px-3 py-2 focus:outline-none ">
+            <select className="border rounded bg-secondaryGray text-sm font-medium text-primaryBlack px-3 py-2 focus:outline-none ">
               <option>Payment</option>
               <option>Card</option>
               <option>Cash</option>
               <option>Express</option>
             </select>
-            <select className="border rounded bg-secondaryGray font-medium text-primaryBlack px-3 py-2 focus:outline-none">
+            <select className="border rounded bg-secondaryGray text-sm font-medium text-primaryBlack px-3 py-2 focus:outline-none">
               <option>Order Status</option>
               <option>New Order</option>
               <option>Pending</option>
@@ -442,9 +437,13 @@ const OrderManagement = () => {
                   </span>
                 </td>
                 <td className="py-4 px-6 text-white text-sm">94001001</td>
-                <td className="py-4 px-6 text-white text-sm"> <span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>{job.payment}</td>
+                <td className="py-4 px-6 text-white text-sm">
+                  {" "}
+                  <span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>
+                  {job.payment}
+                </td>
                 <td className="px-4 py-2 space-x-2">
-                  <button
+                  {/* <button
                     onClick={() => setOpen(true)}
                     className="text-green-500 hover:text-green-700 border border-green-500 bg-green-500 bg-opacity-30 p-1 rounded-md"
                   >
@@ -455,7 +454,8 @@ const OrderManagement = () => {
                     className="text-red-500 hover:text-red-700 border-red-500 border bg-red-500 bg-opacity-30 p-1 rounded-md"
                   >
                     <Icons.RiDeleteBin6Line />
-                  </button>
+                  </button> */}
+                  <Icons.FaEllipsisH />
                 </td>
                 {/* <td className="py-4 px-6 text-[#00C92C]">{job.date}</td> */}
               </tr>
@@ -495,14 +495,15 @@ const OrderManagement = () => {
         />
         <div className="flex justify-between items-center mb-8">
           <div className="w-[40%]">
-            <SearchBar placeholder={"Search by Customer Name, Table, or Order..."} />
+            <SearchBar
+              placeholder={"Search by Customer Name, Table, or Order..."}
+            />
           </div>
           <div className="flex gap-2 ">
             <select className="border rounded bg-secondaryGray font-medium text-[13px] text-primaryBlue  px-3 py-2 focus:outline-none ">
               <option>Seating Status</option>
               <option>Assigned</option>
               <option>UnAssigned</option>
-             
             </select>
             <select className="border rounded bg-secondaryGray font-medium text-[13px] text-primaryBlue  px-3 py-2 focus:outline-none ">
               <option>Time Range</option>
@@ -516,8 +517,11 @@ const OrderManagement = () => {
               <option>Pending</option>
               <option>Delivered</option>
             </select>
-            <Button textSize={"text-[13px]"}   onClick={() => setOpen(true)} className="flex items-center gap-2 rounded-md  text-primaryBlue mr-4">
-           
+            <Button
+              textSize={"text-[13px]"}
+              onClick={() => setOpen(true)}
+              className="flex items-center gap-2 rounded-md  text-primaryBlue mr-4"
+            >
               Add +
             </Button>
           </div>
@@ -566,24 +570,55 @@ const OrderManagement = () => {
                     {job.status}{" "}
                   </span>
                 </td>
-                <td className="py-4 px-6 text-white text-sm"><span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>Assigned</td>
-                <td className="py-4 px-6 text-white text-sm"> 4:30 PM</td>
-                
-                <td className="px-4 py-2 space-x-2">
-                  <button
-                    onClick={() => setOpen(true)}
-                    className="text-green-500 hover:text-green-700 border border-green-500 bg-green-500 bg-opacity-30 p-1 rounded-md"
-                  >
-                    <Icons.FaRegEdit />
-                  </button>
-                  <button
-                    onClick={handleDelete}
-                    className="text-red-500 hover:text-red-700 border-red-500 border bg-red-500 bg-opacity-30 p-1 rounded-md"
-                  >
-                    <Icons.RiDeleteBin6Line />
-                  </button>
+                <td className="py-4 px-6 text-white text-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>
+                  Assigned
                 </td>
-                {/* <td className="py-4 px-6 text-[#00C92C]">{job.date}</td> */}
+                <td className="py-4 px-6 text-white text-sm"> 4:30 PM</td>
+
+                <td className="px-4 py-2 space-x-2">
+                  {/* /////////////////////menu////////////////////////// */}
+                  <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                      <MenuButton className=" flex items-center px-4 py-1  cursor-pointer text-sm font-medium">
+                        <span className="sr-only">Open options</span>
+                        <Icons.FaEllipsisH
+                          aria-hidden="true"
+                          size={16}
+                          className="ml-2"
+                        />
+                      </MenuButton>
+                    </div>
+
+                    <MenuItems
+                      transition
+                      className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                    >
+                      <div className="py-1 font-semibold">
+                        <MenuItem>
+                          {/* <Link to={"/post-a-job"}> */}
+                          <button
+                            onClick={() => setOpen(true)}
+                            className="w-full px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none flex items-center gap-1 "
+                          >
+                            <Icons.AiOutlineEdit size={20} />
+                            Edit
+                          </button>
+                          {/* </Link> */}
+                        </MenuItem>
+                        <MenuItem>
+                          <button
+                            onClick={handleDelete}
+                            className="w-full px-4 py-2 text-sm text-[#E80000] data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none flex items-center gap-1 "
+                          >
+                            <Icons.RiDeleteBin6Line size={17} />
+                            Delete
+                          </button>
+                        </MenuItem>
+                      </div>
+                    </MenuItems>
+                  </Menu>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -612,7 +647,6 @@ const OrderManagement = () => {
           </div>
         </div>
       </div>
-
     </DashboardLayout>
   );
 };

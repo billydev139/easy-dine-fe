@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }) => {
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
         />
-        <div className="relative flex flex-1 flex-col ">
+        <div className="relative flex flex-1 flex-col overflow-auto">
           <DashboardHeader
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}

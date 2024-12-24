@@ -1,6 +1,7 @@
+import { AiOutlineEdit } from "react-icons/ai";
 import { BiBadgeCheck, BiBarChart, BiEdit, BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { BsCoin } from "react-icons/bs";
-import { FaRegEdit, FaRegTimesCircle } from "react-icons/fa";
+import { FaCaretDown, FaEllipsisH, FaRegEdit, FaRegTimesCircle } from "react-icons/fa";
 import {
   FaLinkedin,
   FaSquareInstagram,
@@ -38,6 +39,9 @@ import { TfiWallet } from "react-icons/tfi";
 import { TiMessages, TiSocialLinkedin } from "react-icons/ti";
 
 const Icons = {
+  AiOutlineEdit,
+  FaCaretDown,
+  FaEllipsisH,
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft,
   LuDownload,

@@ -372,9 +372,9 @@ const ManageRestaurants = () => {
           </div>
         </div>
       </Dialog>
-      <div className="bg-primaryBlue  text-white">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full my-8 text-sm text-left border bg-primaryBlue border-gray-700   ">
+      <div className="bg-primaryBlue my-8 text-white  rounded-lg">
+        <div className="relative overflow-x-auto shadow-md ">
+          <table className="w-max my-8 text-sm text-left border-b bg-primaryBlue border-gray-700   ">
             <thead className="bg-[#150F43] font-semibold text-gray-300 ">
               <tr>
                 <th className="px-4 py-2">Restaurant Name</th>
@@ -392,7 +392,7 @@ const ManageRestaurants = () => {
             <tbody>
               {combinedData.slice(0, perPage).map((row, index) => (
                 <tr key={index} className="border-t border-gray-700">
-                  <td className="px-4 py-2">{row.name}</td>
+                  <td className="px-4 py-4">{row.name}</td>
                   <td className="px-4 py-2">{row.address}</td>
                   <td className="px-4 py-2">{row.email}</td>
                   <td
@@ -409,18 +409,18 @@ const ManageRestaurants = () => {
                   <td className="px-4 py-2">{row.address}</td>
                   <td className="px-4 py-2">{row.website}</td>
                   <td className="px-4 py-2">{row.seating}</td>
-                  <td className="px-4 py-2 flex gap-2">
+                  <td className="px-4 py-2 space-x-1">
                     <button
                       onClick={() => setOpen(true)}
                       className="text-green-500 hover:text-green-700"
                     >
-                      <Icons.FaRegEdit />
+                      <Icons.FaRegEdit size={20} />
                     </button>
                     <button
                       onClick={handleDelete}
                       className="text-red-500 hover:text-red-700"
                     >
-                      <Icons.RiDeleteBin6Line />
+                      <Icons.RiDeleteBin6Line size={20} />
                     </button>
                   </td>
                 </tr>

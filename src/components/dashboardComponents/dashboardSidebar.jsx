@@ -224,10 +224,10 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </li>
               <li>
                 <NavLink
-                  // to="/upload-photos"
-                  className={`group relative flex items-center gap-2.5 rounded-sm  px-8 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("/upload-photos") &&
-                    "bg-graydark dark:bg-meta-4"
+                  to="/inventory-management"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    (pathname === "/" || pathname.includes("inventory-management")) &&
+                    "bg-[#F4F9FF] text-primaryBlue "
                   }`}
                 >
                  <Icons.MdOutlineInventory2 size={22} />

@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 
 import ReactApexChart from 'react-apexcharts';
 import Icons from '../../assets/icons';
 
-const RevenueChart = () => {
+const RevenueChart = ({heading}) => {
   const chartOptions = {
     chart: {
       type: 'area',
@@ -52,16 +53,16 @@ const RevenueChart = () => {
 
   return (
     <div className="bg-primaryBlue p-4 rounded-md w-full ">
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-white text-lg font-medium">Revenue</h2>
+          <h2 className="text-white text-lg font-medium">{heading || "Revenue"}</h2>
           <p className="text-white text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
         </div>
         <select className="text-primaryBlack bg-white px-3 py-1 rounded-md outline-none font-medium">
           <option>Monthly</option>
         </select>
       </div>
-      <div className='flex items-center'>
+      <div className='flex items-center mb-8'>
         <Icons.BiBarChart color='#1EB564' size={40} />
       <div>
       <div className="text-white ">Income</div>
