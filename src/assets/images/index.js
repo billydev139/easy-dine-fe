@@ -17,11 +17,17 @@ import beTheFirst from './beTheFirst.png'
 import easydineWhiteLogo from './mainLogo.png'
 import login from './login.png'
 import bin from './bin.png'
+import chicken from './chicken.png'
+import empty from './empty.png'
+import chicken1 from './chicken1.png'
 
 
 
 
 const Images={
+    chicken1:chicken1,
+    empty:empty,
+    chicken:chicken,
     bin:bin,
     login:login,
     easydineWhiteLogo:easydineWhiteLogo,

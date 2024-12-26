@@ -20,7 +20,7 @@ import { GoChecklist } from "react-icons/go";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { IoIosLock, IoMdCloudUpload } from "react-icons/io";
 import { IoBriefcaseOutline, IoSettingsOutline } from "react-icons/io5";
-import { LiaFileContractSolid } from "react-icons/lia";
+import { LiaFileContractSolid, LiaJediOrder } from "react-icons/lia";
 import { LuDownload, LuMapPin } from "react-icons/lu";
 import {
   MdKeyboardArrowLeft,
@@ -36,9 +36,11 @@ import { PiBellSimpleBold } from "react-icons/pi";
 import { RiDeleteBin6Line, RiLockLine, RiMenu3Fill } from "react-icons/ri";
 import { SiNginxproxymanager } from "react-icons/si";
 import { TfiWallet } from "react-icons/tfi";
-import { TiMessages, TiSocialLinkedin } from "react-icons/ti";
+import { TiArrowSortedDown, TiMessages, TiSocialLinkedin } from "react-icons/ti";
 
 const Icons = {
+  TiArrowSortedDown,
+  LiaJediOrder,
   AiOutlineEdit,
   FaCaretDown,
   FaEllipsisH,

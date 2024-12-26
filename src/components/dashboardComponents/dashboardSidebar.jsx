@@ -224,6 +224,18 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </li>
               <li>
                 <NavLink
+                  to="/manual-order"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    (pathname === "/" || pathname.includes("manual-order")) &&
+                    "bg-[#F4F9FF] text-primaryBlue "
+                  }`}
+                >
+                 <Icons.LiaJediOrder size={22} />
+                 Manual Order Tool
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/inventory-management"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("inventory-management")) &&

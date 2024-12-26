@@ -43,3 +43,8 @@
     background: #7B68FF38;
     height: 10px;
   }
+
+
+  svg.star-svg{
+    display: inline;
+  }

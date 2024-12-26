@@ -11,6 +11,7 @@ import ManageRestaurants from "../pages/dashboard/restaurantManagement/manageRes
 import UserManagement from "../pages/dashboard/userManagement";
 import OrderManagement from "../pages/dashboard/orderManagement";
 import InventoryManagement from "../pages/dashboard/inventoryManagement";
+import ManualOrderTool from "../pages/dashboard/manualOrderTool";
 
 
 const AppRoutes = () => {
@@ -37,6 +38,7 @@ const AppRoutes = () => {
     {path:'/user-management',component:<UserManagement/>},
     {path:'/order-management',component:<OrderManagement/>},
     {path:'/inventory-management',component:<InventoryManagement/>},
+    {path:'/manual-order',component:<ManualOrderTool/>},
 
     {path:'/restaurant-management',component:<RestaurantManagement/>},
     {path:'/restaurant-management/manage-restaurant',component:<ManageRestaurants/>},
