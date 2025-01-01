@@ -83,6 +83,13 @@ const PopularItems = () => {
     // other logic
   };
   const [open, setOpen] = useState(false);
+  const [count, setCount] = useState(0);
+
+  // Function to increment the count
+  const increment = () => setCount(count + 1);
+
+  // Function to decrement the count
+  const decrement = () => setCount(count - 1);
   return (
     <div className="bg-primaryBlue text-white py-5 rounded-lg shadow-md">
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -95,7 +102,7 @@ const PopularItems = () => {
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-[80%]   data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-7 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-[62%] data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
             >
               <div>
                 <div>
@@ -119,16 +126,21 @@ const PopularItems = () => {
                   </DialogTitle>
                   <div className="mt-2 grid grid-cols-2 text-white px-4 gap-4 h-[593px] ">
                     <div
-                      className=" rounded-[20px]"
-                      style={{
-                        backgroundImage: `url(${Images.chicken1})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    ></div>
+                      className="flex items-center justify-center"
+                      // style={{
+                      //   backgroundImage: `url(${Images.chicken1})`,
+                      //   backgroundSize: "cover",
+                      //   backgroundPosition: "center",
+                      //   backgroundRepeat: "no-repeat",
+                      // }}
+                    >
+                      <img
+                        src={Images.chicken1}
+                        className="w-[514p] h-[593px]"
+                      />
+                    </div>
                     <div>
-                      <p className="text-5xl font-semibold leading-[72px]">
+                      <p className="text-5xl font-semibold leading-[52px]">
                         {" "}
                         Chicken curry special with cucumber
                       </p>
@@ -139,30 +151,46 @@ const PopularItems = () => {
                         fragrant blend of traditional spices and a velvety curry
                         sauce.{" "}
                       </p>
-                            <div className="mt-8 self-end">
-                                        <InputField
-                                          type="textarea"
-                                          label={"Special Instructions (Optional)"}
-                                          placeholder="Type your comments......"
-                                          placeholderColor={"placeholder:text-primaryGray"}
-                                          backgroundcolor={"bg-[#7B68FF1A]"}
-                                          className="w-full p-2 ps-7 border-dashed hover:border-[#C4C0E1] rounded-md text-sm text-white"
-                                        />
-                                      </div>
-                                      <div className="mt-20 ">
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="flex w-full justify-center items-end rounded bg-white px-3 py-2 text-sm font-semibold text-black  "
-                >
-                  Add to Order
-                </button>
-              </div>
+                      <div className="mt-8 self-end">
+                        <InputField
+                          type="textarea"
+                          label={"Special Instructions (Optional)"}
+                          placeholder="Type your comments......"
+                          placeholderColor={"placeholder:text-primaryGray"}
+                          backgroundcolor={"bg-[#7B68FF1A]"}
+                          className="w-full p-2 ps-7 border-dashed hover:border-[#C4C0E1] rounded-md text-sm text-white"
+                        />
+                      </div>
+                      <div className="flex bg-white rounded-lg w-28 justify-center py-1 mt-2 items-center gap-3">
+                        <button
+                          onClick={decrement}
+                          className="text-2xl text-black"
+                        >
+                          -
+                        </button>
+                        <h2 className="text-black text-xl border px-2 rounded-lg">
+                          {count}
+                        </h2>
+                        <button
+                          onClick={increment}
+                          className=" text-2xl text-black"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <div className="mt-10 ">
+                        <button
+                          type="button"
+                          onClick={() => setOpen(false)}
+                          className="flex w-full justify-center items-end rounded bg-white px-3 py-3 text-sm font-semibold text-black  "
+                        >
+                          Add to Order {"  "} 100$
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            
             </DialogPanel>
           </div>
         </div>

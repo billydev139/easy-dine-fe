@@ -6,8 +6,8 @@ import SeatingArea from "./sittingArea";
 const ManualOrderTool=()=>{
 return(
     <DashboardLayout>
-        <div className="  p-8 text-white">
-      <div className="grid grid-cols-2 gap-8">
+        <div className=" p-8 text-white">
+      <div className="grid lg:grid-cols-2 gap-8">
         <div className=" space-y-8">
           <SeatingArea />
           <PopularItems />

@@ -12,6 +12,7 @@ import UserManagement from "../pages/dashboard/userManagement";
 import OrderManagement from "../pages/dashboard/orderManagement";
 import InventoryManagement from "../pages/dashboard/inventoryManagement";
 import ManualOrderTool from "../pages/dashboard/manualOrderTool";
+import MenuManagement from "../pages/dashboard/menuManagement";
 
 
 const AppRoutes = () => {
@@ -42,6 +43,8 @@ const AppRoutes = () => {
 
     {path:'/restaurant-management',component:<RestaurantManagement/>},
     {path:'/restaurant-management/manage-restaurant',component:<ManageRestaurants/>},
+    {path:'/menu-management',component:<MenuManagement/>}
+
 
 
   ];
