@@ -1,4 +1,5 @@
 
+import Images from "../../assets/images";
 import DefaultLayout from "../../layouts/defaultLayout";
 import CallToAction from "./callToAction";
 import EasyDineTransformation from "./easyDineTransformation";
@@ -11,7 +12,7 @@ const HomePage = () => {
   return (
     <div>
       <DefaultLayout>
-      <HeroSection heroBar={true}/>
+      <HeroSection heroBar={true} image={Images.heroImage} />
         <WhyChoose/>
         <EasyDineWorks />
         <EasyDineTransformation/>

@@ -20,7 +20,9 @@ import bin from './bin.png'
 import chicken from './chicken.png'
 import empty from './empty.png'
 import chicken1 from './chicken1.png'
-
+import aboutusbg from "./about-us-bg.png"
+import contactus from "./contact-us.png"
+import loginGroup from './loginGroup.png'
 
 
 
@@ -46,6 +48,9 @@ const Images={
     user:user,
     person:person,
     support:support,
-    loyalty:loyalty
+    loyalty:loyalty,
+    aboutusbg:aboutusbg,
+    contactus:contactus,
+    loginGroup: loginGroup,
 }
 export default Images;

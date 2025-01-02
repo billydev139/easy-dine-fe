@@ -38,9 +38,9 @@ const Login = () => {
 
   return (
     <div className="">
-      <div className="flex lg:flex-row flex-col  min-h-screen ">
+      <div className="grid lg:grid-cols-2  min-h-screen ">
         {/* Left Section */}
-        <div className=" lg:flex lg:w-1/2 bg-cover bg-center w-full signup-background">
+        <div className=" lg:flex bg-cover bg-center w-full signup-background">
           <div
             className="signup-background w-full h-full flex flex-col items-center justify-center text-white"
             style={{
@@ -61,90 +61,82 @@ const Login = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col   items-start justify-center  xl:max-w-xl lg:max-w-md sm:max-w-[70%] max-w-[90%] w-full lg:w-1/2 bg-white   mx-auto max-sm:mx-4 ">
-          <h2 className="md:text-[48px]  leading-10   text-xl font-bold mb-2 ">
-            Welcome to EasyDine
-          </h2>
-          <p className="text-[#585858] font-medium mb-8 md:text-[18px] text-[14px] ">
-            Please enter your login details below!
-          </p>
+        <div
+          style={{
+            backgroundImage: `url(${Images.loginGroup})`,
+            backgroundSize: "cover",
+            
+           
 
-          {/* Form */}
-          <form className=" w-full">
-            <div className="mb-6 relative">
-              <InputField
-                type="email"
-                placeholder="Enter your username or email here"
-                label={"Email Address"}
-                PaddingX={"px-12"}
-                firstIcon={
-                  <Icons.MdOutlineEmail
-                    size={18}
-                    className="absolute left-3 top-[44px] "
-                  />
-                }
-                borderColor={"border-[#CCCCCC]"}
-                borderShape={"rounded-xl"}
-                placeholderColor={"placeholder:text-primaryGray"}
-                name={"email"}
-                // value={formik.values.email}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-              />
-              {/* {formik.touched.email && formik.errors.email ? (
+            transition: "background-image 1s ease-in-out",
+          }}
+          className="flex flex-col items-start justify-center  "
+        >
+          <div className="mx-auto max-sm:mx-4">
+            <h2 className="md:text-[48px]  leading-10   text-xl font-bold mb-2 ">
+              Welcome to EasyDine
+            </h2>
+            <p className="text-[#585858] font-medium mb-8 md:text-[16px] text-[14px] ">
+              Please enter your login details below!
+            </p>
+            <form className=" w-full">
+              <div className="">
+                {/* {formik.touched.email && formik.errors.email ? (
                 <p className="text-xs text-left mt-1 text-red-500">
                   {formik.errors.email}
                 </p>
               ) : null} */}
-            </div>
-            <div className="mb-6 relative">
-              <InputField
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password here"
-                label={"Password"}
-                PaddingX={"px-12"}
-                borderColor={"border-[#CCCCCC]"}
-                firstIcon={
-                  <Icons.RiLockLine
-                    size={20}
-                    className="absolute left-3 top-[42px]"
+                <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3 ">
+                  <Icons.MdOutlineEmail size={22} color="black" />
+                  <input
+                    type="email"
+                    name="email"
+                    className="w-full outline-none text-base text-black placeholder:text-[#bdbdbd]"
+                    placeholder="Enter your username or email here"
                   />
-                }
-                borderShape={"rounded-xl"}
-                placeholderColor={"placeholder:text-primaryGray"}
-                name={"password"}
-                // value={formik.values.password}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-              />
-              {/* {formik.touched.password && formik.errors.password ? (
+                </div>
+              </div>
+              <div className="mt-6 relative">
+                <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3 ">
+                  <Icons.RiLockLine size={22} color="black" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="email"
+                    className="w-full outline-none text-base text-black placeholder:text-[#bdbdbd]"
+                    placeholder="Enter your password here"
+                  />
+                </div>
+                {/* {formik.touched.password && formik.errors.password ? (
                 <p className="text-xs text-left mt-1 text-red-500">
                   {formik.errors.password}
                 </p>
               ) : null} */}
-              <span
-                className="absolute right-3 top-[50px] transform -translate-y-1/2 cursor-pointer"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? (
-                  <Icons.FaRegEyeSlash size={20} />
-                ) : (
-                  <Icons.FaRegEye size={20} />
-                )}
-              </span>
-            </div>
+                <span
+                  className="absolute right-3 top-[25px] transform -translate-y-1/2 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <Icons.FaRegEyeSlash size={20} />
+                  ) : (
+                    <Icons.FaRegEye size={20} />
+                  )}
+                </span>
+              </div>
 
-            <Button
-              type="submit"
-              className="w-full p-6 bg-primaryBlue text-white rounded font-semibold text-base flex items-center justify-center gap-4"
-            >
-              {renderButtonContent(
-                loading,
-                "Next",
-                <Icons.MdOutlineEmail size={18} className="hidden" />
-              )}
-            </Button>
-          </form>
+              <button
+                type="submit"
+                className="w-full p-3 bg-primaryBlue text-white rounded-lg mt-10 font-semibold 2xl:text-xl text-base flex items-center justify-center gap-4"
+              >
+                {renderButtonContent(
+                  loading,
+                  "Next",
+                  <Icons.MdOutlineEmail size={18} className="hidden" />
+                )}
+              </button>
+            </form>
+          </div>
+
+          {/* Form */}
         </div>
       </div>
     </div>
