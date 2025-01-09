@@ -107,7 +107,7 @@ const RecentOrders = () => {
             <tr key={job.id} className=" hover:bg-gray-700 text-primaryBlue">
               {/* <td className="py-8 px-6">
                   <div className="flex items-center ">
-                    <img
+                    <img 
                       src={`https://via.placeholder.com/44`} // Replace with actual icons
                       alt="logo"
                       className="mr-3 w-11 h-11 rounded-full"
