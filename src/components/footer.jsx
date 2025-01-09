@@ -31,6 +31,10 @@ const Footer = () => {
             {" "}
             © 2024 easydine All Rights Reserved.
           </p>
+          <p className="flex justify-center pb-4 lg:pb-0  text-white">
+            {" "}
+            Terms and Conditions
+          </p>
           {/* ///////////////for desktop.//////////////// */}
           <div className="text-center">
             <div className="flex justify-evenly items-center xl:gap-15 gap-5 lg:flex-1 ">

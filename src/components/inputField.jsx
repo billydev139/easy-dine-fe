@@ -26,7 +26,8 @@ const InputField = ({
   labelWeight,
   rows,
   textSize,
-  PaddingX
+  PaddingX,
+  textColor
 }) => {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
@@ -37,7 +38,7 @@ const InputField = ({
   return (
     <div>
       <div className="flex flex-col ">
-        {label && (
+        {label ? (
           <>
             <div className="flex items-center justify-between">
               <label
@@ -65,7 +66,7 @@ const InputField = ({
                 )}
             </div>
           </>
-        )}
+        ) : null}
 
         {type === "textarea" ? (
           <textarea
@@ -104,7 +105,7 @@ const InputField = ({
               backgroundcolor ? `${backgroundcolor}` : "bg-white"
             } placeholder:text-[14px] ${
               placeholderColor ? placeholderColor : "placeholder:text-primaryGray"
-            } placeholder:font-medium placeholder:text-sm text-white`}
+            } placeholder:font-medium placeholder:text-sm ${textColor ? textColor : "text-white" } `}
             placeholder={placeholder}
             onChange={onChange}
             disabled={disabled}

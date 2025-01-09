@@ -61,7 +61,7 @@ const DashboardStats = () => {
               {card.value}
             </h3>
             <span
-              className={`text-xs ml-2 py-1 px-2 rounded  bg-[${card.chartColor}]`}
+              className={`text-xs ml-2 py-1 px-2 rounded   bg-[${card.chartColor}]`}
             >
               {card.percentage}
             </span>

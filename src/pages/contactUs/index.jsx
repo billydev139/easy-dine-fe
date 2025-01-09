@@ -8,6 +8,7 @@ import { renderButtonContent } from "../../components/renderLoader";
 import { navigationLinks } from "../../components/footer";
 import { Link } from "react-router-dom";
 import EasyDineMap from "../../components/googlemap";
+import Images from "../../assets/images";
 
 const ContactUs = () => {
   const [loading] = useState(false);
@@ -36,11 +37,12 @@ const ContactUs = () => {
       <HeroSection
         width={"max-w-3xl"}
         height={"min-h-[442px]"}
+        image={Images.contactus}
         heading="Contact us"
         para="We’d love to hear from you! Whether you have questions, need support, or want to share feedback, our team is here to assist. Reach out to us through the form below or via our provided contact details, and we’ll get back to you promptly."
       />
-      <div className="bg-black py-24 px-8">
-        <div className="bg-secondaryBlack container mx-auto text-white py-12 px-14 rounded-lg">
+      <div className="bg-black lg:py-24 lg:px-8">
+        <div className="bg-secondaryBlack container mx-auto text-white py-12 lg:px-14 px-2 rounded-lg">
           <p className="text-white text-center text-[38px] font-semibold pb-8">
             We’re Here to Help!
           </p>
@@ -95,11 +97,13 @@ const ContactUs = () => {
             </div>
 
             {/* Left Section - Contact Form */}
-            <div className="bg-white rounded-lg p-12 order-2 md:order-1">
+            <div className="bg-white rounded-lg lg:p-12 p-6 order-2 md:order-1">
               <form className="space-y-4">
                 <div className="grid grid-cols-2 gap-8 items-center w-full  bg-white  focus:outline-none  ">
                   <InputField
                     type="text"
+                    textColor={"text-black"}
+
                     placeholderColor="placeholder:text-primaryGray"
                     backgroundcolor={"bg-[#F6F6F6]"}
                     borderShape="rounded-[10px]"
@@ -113,6 +117,8 @@ const ContactUs = () => {
                   />
                   <InputField
                     type="text"
+                    textColor={"text-black"}
+
                     placeholderColor="placeholder:text-primaryGray"
                     backgroundcolor={"bg-[#F6F6F6]"}
                     borderShape="rounded-[10px]"
@@ -136,7 +142,9 @@ const ContactUs = () => {
                       backgroundcolor={"bg-[#F6F6F6]"}
                       borderShape="rounded-[10px]"
                       paddingY="py-3"
-                      placeholder="Email address"
+                      textColor={"text-black"}
+
+                      placeholder="Email address*"
                       className="border border-[#CCCCCC] w-full"
                       name="email"
                       // value={formik?.values?.email}
@@ -155,11 +163,12 @@ const ContactUs = () => {
                     {/* <Icons.MdLocalPhone size={21} className="text-primaryGray" /> */}
                     <InputField
                       type="text"
+                      textColor={"text-black"}
                       placeholderColor="placeholder:text-primaryGray"
                       backgroundcolor={"bg-[#F6F6F6]"}
                       borderShape="rounded-[10px]"
                       paddingY="py-3"
-                      placeholder="Phone number"
+                      placeholder="Phone number*"
                       className="w-full border  border-[#CCCCCC]"
                       name="phoneNumber"
                       // value={formik?.values?.phoneNumber}
@@ -183,7 +192,7 @@ const ContactUs = () => {
                     // paddingY="py-4"
                     placeholder="Write a message"
                     rows={5}
-                    className="border border-[#CCCCCC] pl-3  focus:outline-none pr-4  w-full placeholder:text-primaryGray bg-[#F6F6F6] rounded-[10px] py-3"
+                    className="border border-[#CCCCCC] pl-3 text-black focus:outline-none pr-4  w-full placeholder:text-primaryGray bg-[#F6F6F6] rounded-[10px] py-3"
                     name="message"
                     //   value={formik?.values?.message}
                     //   onChange={formik.handleChange}

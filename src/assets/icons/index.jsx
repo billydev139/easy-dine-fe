@@ -33,11 +33,14 @@ import {
   MdOutlinePhoneInTalk,
 } from "react-icons/md";
 import { PiBellSimpleBold } from "react-icons/pi";
+import { CiCalendar } from "react-icons/ci";
 import { RiDeleteBin6Line, RiLockLine, RiMenu3Fill } from "react-icons/ri";
 import { SiNginxproxymanager } from "react-icons/si";
 import { TfiWallet } from "react-icons/tfi";
 import { TiArrowSortedDown, TiMessages, TiSocialLinkedin } from "react-icons/ti";
-
+import { FaCheck } from "react-icons/fa";
+import { HiUsers } from "react-icons/hi2";
+import { MdMenu } from "react-icons/md";
 const Icons = {
   TiArrowSortedDown,
   LiaJediOrder,
@@ -89,5 +92,9 @@ const Icons = {
   FaSquareInstagram,
   FaFacebook,
   FaInstagram,
+  FaCheck,
+  CiCalendar,
+  HiUsers,
+  MdMenu
 };
 export default Icons;

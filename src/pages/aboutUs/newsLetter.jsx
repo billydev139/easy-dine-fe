@@ -4,7 +4,7 @@ import Images from "../../assets/images";
 const NewsletterSection = () => {
   return (
     // <div className="bg-black text-white py-12 px-4 md:px-16">
-      <div className=" bg-[#2F2F2F] container mx-auto rounded-lg shadow-lg py-12 px-4 md:px-16 flex flex-col md:flex-row items-center gap-8">
+      <div className=" bg-[#2F2F2F] container mx-auto rounded-lg mt-10 shadow-lg py-12 px-4 md:px-16 flex flex-col md:flex-row items-center gap-8">
         {/* Text and Form Section */}
         <div className="w-full ">
           <h2 className="text-2xl md:text-[38px] font-bold mb-4 leading-[47px]">

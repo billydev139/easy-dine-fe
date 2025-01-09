@@ -1,46 +1,83 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import Icons from "../../assets/icons";
-import InputField from "../../components/inputField";
-import Button from "../../components/button";
-import { renderButtonContent } from "../../components/renderLoader";
 import Images from "../../assets/images";
+import { renderButtonContent } from "../../components/renderLoader";
+import { LogInUserHandler } from "../../store/loginSlice/subAdminLoginSlice";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
-  //   const { loading } = useSelector((state) => state?.LoginSlice);
-  const [loading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading, error } = useSelector((state) => state);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  //   const formik = useFormik({
-  //     initialValues: loginValues,
-  //     validationSchema: loginSchema,
-  //     onSubmit: async (values) => {
-  //       try {
-  //         dispatch(LogInUserHandler(values)).then((res) => {
-  //           console.log("🚀 ~ dispatch ~ res:", res);
-  //           if(res?.success){
-  //             showSuccessAlert(res?.message, "You have successfully logged in.");
-  //             navigate('/')
-  //           }else{
-  //             showErrorAlert(res?.message,res?.response?.data?.message)
-  //           }
-  //         });
-  //       } catch (error) {
-  //         console.error("Signup failed:", error);
-  //       }
-  //     },
-  //   });
+  // Formik setup
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        const response = await dispatch(LogInUserHandler(values));
+        console.log("🚀 ~ onSubmit: ~ response:", response);
+        if (response?.status === 201) {
+          Swal.fire({
+            title: "Success!",
+            text:
+              response?.response?.data?.message ||
+              "You have successfully logged in!",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          navigate("/dashboard");
+          console.log("Login successful!");
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text:
+              response?.response?.data?.message ||
+              "Login failed. Please try again.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+      } catch (err) {
+        console.error("Error during login:", err);
+        Swal.fire({
+          title: "Error!",
+          text:
+            err?.message ||
+            "An unexpected error occurred. Please try again later.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    },
+  });
 
   return (
     <div className="">
-      <div className="flex lg:flex-row flex-col  min-h-screen ">
+      <div className="grid lg:grid-cols-2 min-h-screen">
         {/* Left Section */}
-        <div className=" lg:flex lg:w-1/2 bg-cover bg-center w-full signup-background">
+        <div className="lg:flex bg-cover bg-center w-full signup-background">
           <div
             className="signup-background w-full h-full flex flex-col items-center justify-center text-white"
             style={{
@@ -50,7 +87,7 @@ const Login = () => {
               transition: "background-image 1s ease-in-out",
             }}
           >
-            <div className="signup-content ">
+            <div className="signup-content">
               <img
                 src={Images.easydineWhiteLogo}
                 alt="Company Logo"
@@ -61,90 +98,88 @@ const Login = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col   items-start justify-center  xl:max-w-xl lg:max-w-md sm:max-w-[70%] max-w-[90%] w-full lg:w-1/2 bg-white   mx-auto max-sm:mx-4 ">
-          <h2 className="md:text-[48px]  leading-10   text-xl font-bold mb-2 ">
-            Welcome to EasyDine
-          </h2>
-          <p className="text-[#585858] font-medium mb-8 md:text-[18px] text-[14px] ">
-            Please enter your login details below!
-          </p>
-
-          {/* Form */}
-          <form className=" w-full">
-            <div className="mb-6 relative">
-              <InputField
-                type="email"
-                placeholder="Enter your username or email here"
-                label={"Email Address"}
-                PaddingX={"px-12"}
-                firstIcon={
-                  <Icons.MdOutlineEmail
-                    size={18}
-                    className="absolute left-3 top-[44px] "
+        <div
+          style={{
+            backgroundImage: `url(${Images.loginGroup})`,
+            backgroundSize: "cover",
+            transition: "background-image 1s ease-in-out",
+          }}
+          className="flex flex-col items-start justify-center"
+        >
+          <div className="mx-auto max-sm:mx-4">
+            <h2 className="md:text-[48px] leading-10 text-xl font-bold mb-2">
+              Welcome to EasyDine
+            </h2>
+            <p className="text-[#585858] font-medium mb-8 md:text-[16px] text-[14px]">
+              Please enter your login details below!
+            </p>
+            <form className="w-full" onSubmit={formik.handleSubmit}>
+              <div>
+                <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
+                  <Icons.MdOutlineEmail size={22} color="black" />
+                  <input
+                    type="email"
+                    name="email"
+                    className="w-full outline-none text-base text-black placeholder:text-[#bdbdbd]"
+                    placeholder="Enter your username or email here"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
-                }
-                borderColor={"border-[#CCCCCC]"}
-                borderShape={"rounded-xl"}
-                placeholderColor={"placeholder:text-primaryGray"}
-                name={"email"}
-                // value={formik.values.email}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-              />
-              {/* {formik.touched.email && formik.errors.email ? (
-                <p className="text-xs text-left mt-1 text-red-500">
-                  {formik.errors.email}
-                </p>
-              ) : null} */}
-            </div>
-            <div className="mb-6 relative">
-              <InputField
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password here"
-                label={"Password"}
-                PaddingX={"px-12"}
-                borderColor={"border-[#CCCCCC]"}
-                firstIcon={
-                  <Icons.RiLockLine
-                    size={20}
-                    className="absolute left-3 top-[42px]"
-                  />
-                }
-                borderShape={"rounded-xl"}
-                placeholderColor={"placeholder:text-primaryGray"}
-                name={"password"}
-                // value={formik.values.password}
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-              />
-              {/* {formik.touched.password && formik.errors.password ? (
-                <p className="text-xs text-left mt-1 text-red-500">
-                  {formik.errors.password}
-                </p>
-              ) : null} */}
-              <span
-                className="absolute right-3 top-[50px] transform -translate-y-1/2 cursor-pointer"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? (
-                  <Icons.FaRegEyeSlash size={20} />
-                ) : (
-                  <Icons.FaRegEye size={20} />
+                </div>
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-xs text-left mt-1 text-red-500">
+                    {formik.errors.email}
+                  </p>
                 )}
-              </span>
-            </div>
+              </div>
+              <div className="mt-6 relative">
+                <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
+                  <Icons.RiLockLine size={22} color="black" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    className="w-full outline-none text-base text-black placeholder:text-[#bdbdbd]"
+                    placeholder="Enter your password here"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </div>
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-xs text-left mt-1 text-red-500">
+                    {formik.errors.password}
+                  </p>
+                )}
+                <span
+                  className="absolute right-3 top-[25px] transform -translate-y-1/2 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <Icons.FaRegEyeSlash size={20} />
+                  ) : (
+                    <Icons.FaRegEye size={20} />
+                  )}
+                </span>
+              </div>
 
-            <Button
-              type="submit"
-              className="w-full p-6 bg-primaryBlue text-white rounded font-semibold text-base flex items-center justify-center gap-4"
-            >
-              {renderButtonContent(
-                loading,
-                "Next",
-                <Icons.MdOutlineEmail size={18} className="hidden" />
+              {error && (
+                <p className="text-xs text-left mt-1 text-red-500">{error}</p>
               )}
-            </Button>
-          </form>
+
+              <button
+                type="submit"
+                className="w-full p-3 bg-primaryBlue text-white rounded-lg mt-10 font-semibold 2xl:text-xl text-base flex items-center justify-center gap-4"
+                disabled={isLoading}
+              >
+                {renderButtonContent(
+                  isLoading,
+                  "Next",
+                  <Icons.MdOutlineEmail size={18} className="hidden" />
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -28,6 +28,8 @@ const AboutUs = () => {
   return (
     <DefaultLayout>
       <HeroSection
+      image={Images.aboutusbg}
+      height={"min-h-[442px]"}
         heading="Who we are and what we do"
         para="From preschool to pre-tertiary, our students enjoy fun, interactive and relevant lessons and are empowered to think beyond the confines of the classroom."
       />

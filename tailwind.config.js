@@ -10,6 +10,7 @@ export default {
         secondaryBlue:"#1A1347",
         primaryGrey:"#696969",
         headingBGColor:"#150F43",
+        headingSecondaryColor: "#7B68FF"
         // primary_linear_gradient:"linear-gradient(45deg, #1967D2, #004DB7)"
       },
     },
