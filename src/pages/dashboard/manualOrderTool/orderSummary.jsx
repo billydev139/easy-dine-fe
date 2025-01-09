@@ -3,7 +3,7 @@ import Images from "../../../assets/images";
 
 const OrderSummary = () => {
   return (
-    <div className="bg-primaryBlue text-white py-5 rounded-lg shadow-md h-max">
+    <div className="bg-white text-white py-5 rounded-lg shadow-md h-max">
         <div className="bg-headingBGColor py-2 px-4 ">
       <h2 className="text-lg font-medium">Orders Summary</h2>
       <p className="text-sm mb-4">Track the Placed Orders</p>

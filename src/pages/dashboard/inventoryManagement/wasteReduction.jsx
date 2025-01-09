@@ -29,11 +29,11 @@ const WasteReduction = () => {
   };
 
   return (
-    <div className="bg-primaryBlue text-white p-6 rounded-lg shadow-lg">
+    <div className="bg-white text-secondaryBlue p-6 rounded-lg shadow-lg">
           <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-white text-lg font-medium">Waste Reduction</h2>
-          <p className="text-white text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
+          <h2 className="text-secondaryBlue text-lg font-medium">Waste Reduction</h2>
+          <p className="text-secondaryBlue text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
         </div>
         <select className="text-primaryBlack bg-white px-3 py-1 rounded-md outline-none font-medium">
           <option>Monthly</option>
@@ -54,7 +54,7 @@ const WasteReduction = () => {
       {/* Table Section */}
       <table className="w-full text-left text-sm ">
         <thead className="">
-          <tr className="text-sm border  text-white">
+          <tr className="text-sm border  text-secondaryBlue">
             <th className="px-4 py-2">Items</th>
             <th className="px-4 py-2 text-right">Percentage</th>
           </tr>

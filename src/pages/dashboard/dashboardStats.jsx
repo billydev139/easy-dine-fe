@@ -49,7 +49,7 @@ const DashboardStats = () => {
       {cardData.map((card, index) => (
         <div
           key={index}
-          className="bg-primaryBlue text-white p-4 rounded-lg w-1/3 shadow-md"
+          className="bg-white text-primaryBlue p-4 rounded-lg w-1/3 shadow-md"
         >
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-sm font-semibold">{card.title}</h2>

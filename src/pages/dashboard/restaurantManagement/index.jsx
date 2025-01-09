@@ -30,7 +30,7 @@ const RestaurantManagement = () => {
   });
   return (
     <DashboardLayout>
-      <div className="container mx-auto bg-primaryBlue  rounded-md shadow-md mb-20 mt-8">
+      <div className="container mx-auto bg-white  rounded-md shadow-md mb-20 mt-8">
         <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Add Restaurant"}
@@ -52,9 +52,9 @@ const RestaurantManagement = () => {
               label={"Restaurant Name"}
               
               placeholder="Restaurant Name"
-              borderColor={"border-white"}
+              // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -65,7 +65,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="Type your Address...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -78,7 +78,7 @@ const RestaurantManagement = () => {
               label={"Phone Number"}
               placeholder="031XXXXXXXX"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -88,7 +88,7 @@ const RestaurantManagement = () => {
               label={"Email Address"}
               placeholder="Type your Address...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -98,9 +98,9 @@ const RestaurantManagement = () => {
               type="text"
               label={"Website"}
               placeholder="pizzaplanetxyz.com"
-              borderColor={"border-white"}
+              // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -111,7 +111,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="24 hours"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -122,7 +122,7 @@ const RestaurantManagement = () => {
               label={"Type of Cuisine"}
               placeholder="Chinese"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -133,7 +133,7 @@ const RestaurantManagement = () => {
               label={"Delivery Available"}
               placeholder="Yes/No"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -143,7 +143,7 @@ const RestaurantManagement = () => {
               label={"Manager Name"}
               placeholder="Enter your name...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -153,9 +153,9 @@ const RestaurantManagement = () => {
               type="text"
               label={"Manager Contact"}
               placeholder="031XXXXXXXX"
-              borderColor={"border-white"}
+              // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -166,7 +166,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="24 hours"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -177,7 +177,7 @@ const RestaurantManagement = () => {
               label={"Seating Capacity"}
               placeholder="Type your Capacity"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-[#7B68FF1A]"}
+              backgroundcolor={"bg-white"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -186,7 +186,7 @@ const RestaurantManagement = () => {
       <label className="block mb-2 text-white font-medium">Upload Logo</label>
       <div
         {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-[#151239] hover:border-blue-500 transition-all"
+        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-white hover:border-blue-500 transition-all"
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center text-gray-400">
@@ -219,7 +219,7 @@ const RestaurantManagement = () => {
           <div className="col-span-2 flex justify-end gap-2 py-12">
           <button
               type="submit"
-              className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-white font-medium rounded-md  "
+              className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-secondaryBlue font-medium rounded-md  "
             >
               Back
             </button>

@@ -84,7 +84,7 @@ const PopularItems = () => {
   };
   const [open, setOpen] = useState(false);
   return (
-    <div className="bg-primaryBlue text-white py-5 rounded-lg shadow-md">
+    <div className="bg-white text-white py-5 rounded-lg shadow-md">
       <Dialog open={open} onClose={setOpen} className="relative z-10">
         <DialogBackdrop
           transition
@@ -95,7 +95,7 @@ const PopularItems = () => {
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-[80%]   data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-[80%]   data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
             >
               <div>
                 <div>
@@ -214,7 +214,7 @@ const PopularItems = () => {
             <button
               key={tab}
               className={`relative px-3 py-1 font-bold ${
-                selectedTab === tab ? "  text-[#1EB564]" : "text-white"
+                selectedTab === tab ? "  text-[#1EB564]" : "text-secondaryBlue"
               }`}
               onClick={() => setSelectedTab(tab)}
             >
@@ -252,7 +252,7 @@ const PopularItems = () => {
                   alt={item.name}
                   className="w-28 h-20 rounded-md "
                 />
-                <button className="absolute  bottom-0 right-0 text-black bg-white  py-0.5 px-2 rounded  hover:bg-primaryBlue hover:text-white ">
+                <button className="absolute  bottom-0 right-0 text-black bg-white  py-0.5 px-2 rounded  hover:bg-white hover:text-white ">
                   +
                 </button>
               </div>

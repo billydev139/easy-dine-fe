@@ -179,11 +179,11 @@ const OrderManagement = () => {
             alt="Trash Bin" 
             class="w-20 h-24 "
           />
-          <h2 class="text-white text-center text-base font-semibold mb-5">
+          <h2 class="text-primaryBlue text-center text-base font-semibold mb-5">
             Are you sure you want to Delete <br />
             the Restaurant in the Bin?
           </h2>
-          <p class="text-white text-center text-sm mb-6">
+          <p class="text-primaryBlue text-center text-sm mb-6">
             You can’t undo this action.
           </p>
         </div>
@@ -197,7 +197,7 @@ const OrderManagement = () => {
         popup: "rounded-lg p-6",
 
         cancelButton:
-          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-white",
+          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-primaryBlue",
         confirmButton: "px-6 py-2  text-black bg-white rounded-md mr-4 ",
       },
     }).then((result) => {
@@ -233,7 +233,7 @@ const OrderManagement = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
             >
               <div className="flex justify-between items-center px-6 bg-[#150F43] ">
                 <SectionHeading
@@ -275,11 +275,11 @@ const OrderManagement = () => {
                 </div>
                 {/* Time Dropdown */}
                 <div className="relative">
-                  <label className="  text-sm font-semibold text-white">
+                  <label className="  text-sm font-semibold text-primaryBlue">
                     Select Time
                   </label>
                   <button
-                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-white rounded-md "
+                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-primaryBlue rounded-md "
                     onClick={() => setIsTimeDropdownOpen(!isTimeDropdownOpen)}
                     type="button"
                   >
@@ -291,7 +291,7 @@ const OrderManagement = () => {
                       {times.map((time, index) => (
                         <div
                           key={index}
-                          className="px-4 py-2 hover:bg-[#1A1448] hover:text-white cursor-pointer border-b"
+                          className="px-4 py-2 hover:bg-[#1A1448] hover:text-primaryBlue cursor-pointer border-b"
                           onClick={() => {
                             setSelectedTime(time);
                             setIsTimeDropdownOpen(false);
@@ -310,7 +310,7 @@ const OrderManagement = () => {
                     placeholder="Date"
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full p-2 border rounded-md text-sm text-white"
+                    className="w-full p-2 border rounded-md text-sm text-primaryBlue"
                   />
                 </div>
                 <div>
@@ -334,13 +334,13 @@ const OrderManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="  text-sm font-semibold text-white">
+                  <label className="  text-sm font-semibold text-primaryBlue">
                     Payment Methods
                   </label>
                   <select
                     name="gender"
                     id="gender"
-                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-white rounded-md shadow-md outline-none w-full"
+                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-primaryBlue rounded-md shadow-md outline-none w-full"
                   >
                     <option className="online">Online</option>
                     <option className="cash">Cash</option>
@@ -349,7 +349,7 @@ const OrderManagement = () => {
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
-                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-white font-medium rounded-md  "
+                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-primaryBlue font-medium rounded-md  "
                   >
                     Back
                   </button>
@@ -368,7 +368,7 @@ const OrderManagement = () => {
 
       <DashboardStats />
       {/* ////////////////////////////////////order management///////////////////////// */}
-      <div className="bg-primaryBlue  text-white mb-12 rounded-md shadow-xl">
+      <div className="bg-white  text-primaryBlue mb-12 rounded-md shadow-xl">
         <SectionHeading
           heading={"Manage Orders"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -384,7 +384,7 @@ const OrderManagement = () => {
               <option>Cash</option>
               <option>Express</option>
             </select>
-            <select className="border rounded bg-secondaryGray text-sm font-medium text-primaryBlack px-3 py-2 focus:outline-none">
+            <select className="border rounded bg-secondaryGray text-sm font-medium text-primaryBlue px-3 py-2 focus:outline-none">
               <option>Order Status</option>
               <option>New Order</option>
               <option>Pending</option>
@@ -413,8 +413,8 @@ const OrderManagement = () => {
                 <td className="py-4 px-6 font-semibold">59217</td>
 
                 <td className="py-6 px-6 font-semibold">#5552375</td>
-                <td className="py-4 px-6 text-white text-sm">0{index + 1}</td>
-                <td className="py-4 px-6 text-white text-sm">{job.server}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">0{index + 1}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">{job.server}</td>
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td className="py-4 px-6 text-sm ">
                   <span
@@ -436,8 +436,8 @@ const OrderManagement = () => {
                     {job.status}{" "}
                   </span>
                 </td>
-                <td className="py-4 px-6 text-white text-sm">94001001</td>
-                <td className="py-4 px-6 text-white text-sm">
+                <td className="py-4 px-6 text-primaryBlue text-sm">94001001</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">
                   {" "}
                   <span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>
                   {job.payment}
@@ -464,7 +464,7 @@ const OrderManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-white text-sm">
+          <div className="text-primaryBlue text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -477,7 +477,7 @@ const OrderManagement = () => {
             </select>
           </div>
 
-          <div className="text-white">
+          <div className="text-primaryBlue">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">
@@ -488,7 +488,7 @@ const OrderManagement = () => {
       </div>
       {/* ////////////////////////////////////Seating Assignment///////////////////////// */}
 
-      <div className="bg-primaryBlue  text-white mb-12 rounded-md shadow-xl">
+      <div className="bg-white  text-primaryBlue mb-12 rounded-md shadow-xl">
         <SectionHeading
           heading={"Seating Assignment"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -538,7 +538,7 @@ const OrderManagement = () => {
               <th className="py-4 px-6">Time Seated</th>
 
               <th className="py-4 px-6"></th>
-              {/* <th className="py-4 px-6">Action</th> */}
+              {/* <th className="py-4 px-6 text-white">Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -546,9 +546,9 @@ const OrderManagement = () => {
               <tr key={index} className="border-b border-[#1F1565] ">
                 <td className="py-4 px-6 text-sm">59217</td>
 
-                <td className="py-4 px-6 text-white text-sm">0{index + 1}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">0{index + 1}</td>
                 <td className="py-6 px-6 text-sm">#5552375</td>
-                <td className="py-4 px-6 text-white text-sm">{job.server}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">{job.server}</td>
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td className="py-4 px-6 text-sm ">
                   <span
@@ -570,11 +570,11 @@ const OrderManagement = () => {
                     {job.status}{" "}
                   </span>
                 </td>
-                <td className="py-4 px-6 text-white text-sm">
+                <td className="py-4 px-6 text-primaryBlue text-sm">
                   <span className="w-2 h-2 rounded-full bg-[#17EFA0] inline-block mr-2"></span>
                   Assigned
                 </td>
-                <td className="py-4 px-6 text-white text-sm"> 4:30 PM</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm"> 4:30 PM</td>
 
                 <td className="px-4 py-2 space-x-2">
                   {/* /////////////////////menu////////////////////////// */}
@@ -625,7 +625,7 @@ const OrderManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-white text-sm">
+          <div className="text-primaryBlue text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -638,7 +638,7 @@ const OrderManagement = () => {
             </select>
           </div>
 
-          <div className="text-white">
+          <div className="text-primaryBlue">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

@@ -106,11 +106,11 @@ const UserManagement = () => {
             alt="Trash Bin" 
             class="w-20 h-24 "
           />
-          <h2 class="text-white text-center text-base font-semibold mb-5">
+          <h2 class="text-primaryBlue text-center text-base font-semibold mb-5">
             Are you sure you want to Delete <br />
             the Restaurant in the Bin?
           </h2>
-          <p class="text-white text-center text-sm mb-6">
+          <p class="text-primaryBlue text-center text-sm mb-6">
             You can’t undo this action.
           </p>
         </div>
@@ -124,7 +124,7 @@ const UserManagement = () => {
         popup: "rounded-lg p-6",
 
         cancelButton:
-          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-white",
+          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-primaryBlue",
         confirmButton: "px-6 py-2  text-black bg-white rounded-md mr-4 ",
       },
     }).then((result) => {
@@ -161,7 +161,7 @@ const UserManagement = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
             >
               <div className="flex justify-between items-center px-6 bg-[#150F43] ">
                 <SectionHeading
@@ -225,13 +225,13 @@ const UserManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="  text-sm font-semibold text-white">
+                  <label className="  text-sm font-semibold text-primaryBlue">
                     Gender
                   </label>
                   <select
                     name="gender"
                     id="gender"
-                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-white rounded-md shadow-md outline-none w-full"
+                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-primaryBlue rounded-md shadow-md outline-none w-full"
                   >
                     <option className=" ">Select Gender</option>
                     <option className=" ">Male</option>
@@ -251,7 +251,7 @@ const UserManagement = () => {
                 </div>
              {/* ////////////////////////drop zone /////////////////////////// */}
           <div className="col-span-2">
-      <label className="block mb-2 text-white font-medium">Upload Picture</label>
+      <label className="block mb-2 text-primaryBlue font-medium">Upload Picture</label>
       <div
         {...getRootProps()}
         className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-[#151239] hover:border-blue-500 transition-all"
@@ -278,7 +278,7 @@ const UserManagement = () => {
 
       {/* Display Uploaded File Name */}
       {uploadedFile && (
-        <div className="mt-2 text-sm text-white">
+        <div className="mt-2 text-sm text-primaryBlue">
           File Uploaded: <strong>{uploadedFile.name}</strong>
         </div>
       )}
@@ -287,7 +287,7 @@ const UserManagement = () => {
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
-                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-white font-medium rounded-md  "
+                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-primaryBlue font-medium rounded-md  "
                   >
                     Back
                   </button>
@@ -304,7 +304,7 @@ const UserManagement = () => {
         </div>
       </Dialog>
 
-      <div className="bg-primaryBlue  text-white my-12 rounded-md shadow-xl">
+      <div className="bg-white  text-primaryBlue my-12 rounded-md shadow-xl">
         <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Staff User List"}
@@ -325,7 +325,7 @@ const UserManagement = () => {
           </div>
         </div>
         <table className="w-full text-left ">
-          <thead className="bg-[#150F43] font-semibold text-white ">
+          <thead className="font-semibold text-white bg-primaryBlue ">
             <tr>
               <th className="py-4 px-6">ID</th>
               <th className="py-4 px-6">Profile</th>
@@ -351,7 +351,7 @@ const UserManagement = () => {
                       className="mr-3 w-8 h-8 rounded-full"
                     />
                     <div>
-                      <p className="font-semibold text-sm text-white">
+                      <p className="font-semibold text-sm text-primaryBlue">
                         {job.name}
                       </p>
 
@@ -361,9 +361,9 @@ const UserManagement = () => {
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-6 text-white text-sm">{job.lastName}</td>
-                <td className="py-4 px-6 text-white text-sm">{job.gender}</td>
-                <td className="py-4 px-6 text-white text-sm">{job.email}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">{job.lastName}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">{job.gender}</td>
+                <td className="py-4 px-6 text-primaryBlue text-sm">{job.email}</td>
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td
                   className={`px-4 py-2 ${
@@ -393,7 +393,7 @@ const UserManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-white text-sm">
+          <div className="text-primaryBlue text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -406,7 +406,7 @@ const UserManagement = () => {
             </select>
           </div>
 
-          <div className="text-white">
+          <div className="text-primaryBlue">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

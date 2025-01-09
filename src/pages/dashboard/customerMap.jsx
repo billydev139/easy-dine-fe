@@ -53,23 +53,23 @@ const CustomerMap = () => {
   ];
 
   return (
-    <div className="bg-primaryBlue p-4 rounded-md shadow-lg w-full">
+    <div className="bg-white p-4 rounded-md shadow-lg w-full">
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h2 className="text-white text-lg font-semibold">Customer Map</h2>
-          <p className="text-white text-sm">Lorem ipsum dolor</p>
+          <h2 className="text-primaryBlue text-lg font-semibold">Customer Map</h2>
+          <p className="text-primaryBlue text-sm">Lorem ipsum dolor</p>
         </div>
         <div className="flex gap-2">
           <button className="px-3 py-1 rounded-md bg-white text-primaryBlack">Monthly</button>
-          <button className="px-3 py-1 rounded-md bg-[#00AFEC] text-white">Weekly</button>
+          <button className="px-3 py-1 rounded-md bg-[#00AFEC] text-primaryBlue">Weekly</button>
           <button className="px-3 py-1 rounded-md bg-white text-primaryBlack">Today</button>
         </div>
       </div>
       <div className='flex items-center gap-1'>
         <Icons.FaUserTie color='#00AFEC' size={30} />
       <div>
-      <div className="text-white ">Clients</div>
-      <strong className='text-white'>41,512k</strong>
+      <div className="text-primaryBlue ">Clients</div>
+      <strong className='text-primaryBlue'>41,512k</strong>
       </div>
       </div>
       <ReactApexChart options={chartOptions} series={chartSeries} type="bar" height={300} />

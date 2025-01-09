@@ -76,7 +76,7 @@ const RecentOrders = () => {
   //   };
 
   return (
-    <div className="bg-primaryBlue text-white shadow rounded-lg mt-8">
+    <div className="bg-white text-primaryBlue shadow rounded-lg mt-8">
       <div className="flex justify-between items-center ">
         <SectionHeading
           heading={"Recent Orders"}
@@ -92,7 +92,7 @@ const RecentOrders = () => {
         </div>
       </div>
       <table className="w-full text-left ">
-        <thead className="bg-[#150F43] text-white ">
+        <thead className=" text-white bg-secondaryBlue ">
           <tr>
             <th className="py-2 px-6 font-medium">Product Name</th>
             <th className="py-2 px-6 font-medium">OrderID</th>
@@ -104,7 +104,7 @@ const RecentOrders = () => {
         </thead>
         <tbody>
           {jobsData.map((job) => (
-            <tr key={job.id} className=" hover:bg-gray-700 text-white">
+            <tr key={job.id} className=" hover:bg-gray-700 text-primaryBlue">
               {/* <td className="py-8 px-6">
                   <div className="flex items-center ">
                     <img
@@ -227,7 +227,7 @@ const RecentOrders = () => {
         <p className="text-sm text-gray-500">Showing 1 to 7 of 28 results</p>
         <div className="flex space-x-1">
           <button className="p-2 rounded border hover:bg-gray-100">&lt;</button>
-          <button className="p-2 rounded border bg-blue-500 text-white">1</button>
+          <button className="p-2 rounded border bg-blue-500 text-primaryBlue">1</button>
           <button className="p-2 rounded border hover:bg-gray-100">2</button>
           <button className="p-2 rounded border hover:bg-gray-100">3</button>
           <button className="p-2 rounded border hover:bg-gray-100">4</button>

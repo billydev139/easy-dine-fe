@@ -19,7 +19,7 @@ const SelectField = ({ label, options, defaultValue, name }) => {
           id={name}
           name={name}
           defaultValue={defaultValue}
-          className="col-start-1 row-start-1 text-sm w-full border border-white appearance-none rounded-md bg-[#1A1347] py-3  pl-3 pr-8  text-primaryGrey   "
+          className="col-start-1 row-start-1 text-sm w-full border border-white appearance-none rounded-md  py-3  pl-3 pr-8  text-primaryGrey   "
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>
