@@ -60,12 +60,12 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute  shadow-2xl left-0 top-0 z-9999 flex min-h-screen min-w-[20rem] flex-col overflow-y-hidden bg-primaryBlue mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute  shadow-2xl left-0 top-0 z-9999 flex min-h-screen min-w-[20rem] flex-col overflow-y-hidden bg-white  mr-5  rounded-md  duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className=" items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 border-b">
+      <div className=" items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5 border-b ">
       <Link to="/dashboard" className="flex items-center px-5 ">
               <img
                 alt="Logo"
@@ -106,7 +106,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               MENU
             </h3> */}
 
-            <ul className="mb-6 flex flex-col gap-1.5 text-base text-white">
+            <ul className="mb-6 flex flex-col gap-1.5 text-base !text-black">
               {/* <!-- Menu Item Dashboard --> */}
 
               <React.Fragment>
@@ -114,7 +114,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to="/dashboard"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("dashboard")) &&
-                    "bg-[#F4F9FF] text-primaryBlue "
+                    "bg-secondaryBlue text-white "
                   }`}
                 >
                   <Icons.MdOutlineDashboard size={22} />
@@ -126,7 +126,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <NavLink
                   // to="/post-a-job"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-6 py-2.5 font-medium text-bodydark1 duration-300 ease-in-out  ${
-                    pathname.includes("/post-a-job") && "bg-[#F4F9FF] text-primaryBlue"
+                    pathname.includes("/post-a-job") && "bg-secondaryBlue text-white"
                   }`}
                 >
                   <Icons.HiOutlineBuildingStorefront size={22} />
@@ -140,7 +140,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   onClick={toggleDropdown}
                   className={`flex items-center w-full font-medium outline-none  text-base  px-8 py-2.5  transition duration-75 rounded-lg group  ${
                     pathname.includes("/restaurant-management") &&
-                    "bg-[#F4F9FF] text-primaryBlue"
+                    "bg-secondaryBlue text-white"
                   }`}
                   aria-expanded={isOpen}
                 >
@@ -202,7 +202,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to="/user-management"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("user-management")) &&
-                    "bg-[#F4F9FF] text-primaryBlue "
+                    "bg-secondaryBlue text-white "
                   }`}
                 >
                   <Icons.SiNginxproxymanager size={22} />
@@ -215,7 +215,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to="/order-management"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("order-management")) &&
-                    "bg-[#F4F9FF] text-primaryBlue "
+                    "bg-secondaryBlue text-white "
                   }`}
                 >
                   <Icons.GoChecklist size={22} />
@@ -227,7 +227,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to="/manual-order"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("manual-order")) &&
-                    "bg-[#F4F9FF] text-primaryBlue "
+                    "bg-secondaryBlue text-white "
                   }`}
                 >
                  <Icons.LiaJediOrder size={22} />
@@ -239,7 +239,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to="/inventory-management"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-8 py-2.5  font-medium  duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     (pathname === "/" || pathname.includes("inventory-management")) &&
-                    "bg-[#F4F9FF] text-primaryBlue "
+                    "bg-secondaryBlue  text-white "
                   }`}
                 >
                  <Icons.MdOutlineInventory2 size={22} />

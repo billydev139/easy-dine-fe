@@ -7,7 +7,7 @@ const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="bg-[#07051B] p-8">
+    <div className="bg-[#f2f7ff] p-8">
       <div className="flex min-h-screen ">
         <DashboardSidebar
           sidebarOpen={sidebarOpen}

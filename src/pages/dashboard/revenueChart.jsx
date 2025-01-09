@@ -52,11 +52,11 @@ const RevenueChart = ({heading}) => {
   ];
 
   return (
-    <div className="bg-primaryBlue p-4 rounded-md w-full ">
+    <div className="bg-white p-4 rounded-md w-full ">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-white text-lg font-medium">{heading || "Revenue"}</h2>
-          <p className="text-white text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
+          <h2 className="text-primaryBlue text-lg font-medium">{heading || "Revenue"}</h2>
+          <p className="text-primaryBlue text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
         </div>
         <select className="text-primaryBlack bg-white px-3 py-1 rounded-md outline-none font-medium">
           <option>Monthly</option>
@@ -65,8 +65,8 @@ const RevenueChart = ({heading}) => {
       <div className='flex items-center mb-8'>
         <Icons.BiBarChart color='#1EB564' size={40} />
       <div>
-      <div className="text-white ">Income</div>
-      <strong className='text-white'>41,512k</strong>
+      <div className="text-primaryBlue ">Income</div>
+      <strong className='text-primaryBlue'>41,512k</strong>
       </div>
       </div>
       <ReactApexChart options={chartOptions} series={chartSeries} type="area" height={300} />

@@ -43,7 +43,7 @@ const InputField = ({
             <div className="flex items-center justify-between">
               <label
                 htmlFor={id}
-                className={`flex justify-start items-center gap-2 text-white mb-2 ${textSize? textSize:"text-[14px]"} ${labelWeight?labelWeight: "font-semibold"}`}
+                className={`flex justify-start items-center gap-2 text-primaryBlue mb-2 ${textSize? textSize:"text-[14px]"} ${labelWeight?labelWeight: "font-semibold"}`}
               >
                 {firstIcon}
                 {label}

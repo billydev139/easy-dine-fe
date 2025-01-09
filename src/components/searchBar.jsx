@@ -9,11 +9,11 @@ const SearchBar=({placeholder})=>{
                 className="w-4 h-4 text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="primaryBlue"
                 viewBox="0 0 20 20"
               >
                 <path
-                  stroke="currentColor"
+                  stroke="primaryBlue"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
@@ -24,7 +24,7 @@ const SearchBar=({placeholder})=>{
             <input
               type="search"
               id="default-search"
-              className="block w-full px-4 py-2 pe-10 text-sm  text-white outline-none rounded-lg bg-[#1F1565] placeholder:text-white "
+              className="block w-full px-4 py-2 pe-10 text-sm  text-primaryBlue outline-none rounded-lg bg-white placeholder:text-primaryBlue border-primaryBlue border "
               placeholder={placeholder || "Search here ..."}
               required
             />

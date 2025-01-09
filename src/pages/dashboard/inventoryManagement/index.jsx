@@ -99,11 +99,11 @@ const InventoryManagement = () => {
             alt="Trash Bin" 
             class="w-20 h-24 "
           />
-          <h2 class="text-white text-center text-base font-semibold mb-5">
+          <h2 class="text-secondaryBlue text-center text-base font-semibold mb-5">
             Are you sure you want to Delete <br />
             the Restaurant in the Bin?
           </h2>
-          <p class="text-white text-center text-sm mb-6">
+          <p class="text-secondaryBlue text-center text-sm mb-6">
             You can’t undo this action.
           </p>
         </div>
@@ -117,7 +117,7 @@ const InventoryManagement = () => {
         popup: "rounded-lg p-6",
 
         cancelButton:
-          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-white",
+          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-secondaryBlue",
         confirmButton: "px-6 py-2  text-black bg-white rounded-md mr-4 ",
       },
     }).then((result) => {
@@ -162,7 +162,7 @@ const InventoryManagement = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
             >
               <div className="flex justify-between items-center px-6 bg-[#150F43] ">
                 <SectionHeading
@@ -192,11 +192,11 @@ const InventoryManagement = () => {
                   />
                 </div>
                 <div className="relative">
-                  <label className="  text-sm font-semibold text-white">
+                  <label className="  text-sm font-semibold text-secondaryBlue">
                     Category
                   </label>
                   <button
-                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-white rounded-md "
+                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-secondaryBlue rounded-md "
                     onClick={() => setIsCategoryOpen(!categoryOpen)}
                     type="button"
                   >
@@ -255,11 +255,11 @@ const InventoryManagement = () => {
                 </div>
                 {/* Time Dropdown */}
                 {/* <div className="relative">
-                  <label className="  text-sm font-semibold text-white">
+                  <label className="  text-sm font-semibold text-secondaryBlue">
                     Select Time
                   </label>
                   <button
-                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-white rounded-md "
+                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-secondaryBlue rounded-md "
                     onClick={() => setIsTimeDropdownOpen(!isTimeDropdownOpen)}
                     type="button"
                   >
@@ -271,7 +271,7 @@ const InventoryManagement = () => {
                       {times.map((time, index) => (
                         <div
                           key={index}
-                          className="px-4 py-2 hover:bg-[#1A1448] hover:text-white cursor-pointer border-b"
+                          className="px-4 py-2 hover:bg-[#1A1448] hover:text-secondaryBlue cursor-pointer border-b"
                           onClick={() => {
                             setSelectedTime(time);
                             setIsTimeDropdownOpen(false);
@@ -290,7 +290,7 @@ const InventoryManagement = () => {
                     placeholder="select Date"
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full p-2 border rounded-md text-sm text-white"
+                    className="w-full p-2 border rounded-md text-sm text-secondaryBlue"
                   />
                 </div>
                 <div className="col-span-2">
@@ -300,14 +300,14 @@ const InventoryManagement = () => {
                     placeholder="Type your comments......"
                     placeholderColor={"placeholder:text-primaryGray"}
                     backgroundcolor={"bg-[#7B68FF1A]"}
-                    className="w-full p-2 ps-7 border-dashed hover:border-[#C4C0E1] rounded-md text-sm text-white"
+                    className="w-full p-2 ps-7 border-dashed hover:border-[#C4C0E1] rounded-md text-sm text-secondaryBlue"
                   />
                 </div>
            
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
-                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-white font-medium rounded-md  "
+                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-secondaryBlue font-medium rounded-md  "
                   >
                     Back
                   </button>
@@ -330,7 +330,7 @@ const InventoryManagement = () => {
         <WasteReduction/>
         </div>
       {/* ////////////////////////////////////order management///////////////////////// */}
-      <div className="bg-primaryBlue  text-white mb-12 rounded-md shadow-xl">
+      <div className="bg-white  text-secondaryBlue mb-12 rounded-md shadow-xl">
         <SectionHeading
           heading={"Inventory List"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -382,8 +382,8 @@ const InventoryManagement = () => {
                 <td className="py-4 px-6 text-sm">59217</td>
 
                 <td className="py-6 px-6 text-sm">{job.server}</td>
-                <td className="py-4 px-6 text-white text-sm">Category A</td>
-                <td className="py-4 px-6 text-white text-sm">{job.server}</td>
+                <td className="py-4 px-6 text-secondaryBlue text-sm">Category A</td>
+                <td className="py-4 px-6 text-secondaryBlue text-sm">{job.server}</td>
 
                 <td className="py-4 px-6 text-sm">
                   {" "}
@@ -391,8 +391,8 @@ const InventoryManagement = () => {
                  In Stock
                 </td>
            
-                <td className="py-4 px-6 text-white text-sm">€ 1500</td>
-                <td className="py-4 px-6 text-white text-sm">
+                <td className="py-4 px-6 text-secondaryBlue text-sm">€ 1500</td>
+                <td className="py-4 px-6 text-secondaryBlue text-sm">
                  
                 10-08-2020
                 </td>
@@ -448,7 +448,7 @@ const InventoryManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-white text-sm">
+          <div className="text-secondaryBlue text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -461,7 +461,7 @@ const InventoryManagement = () => {
             </select>
           </div>
 
-          <div className="text-white">
+          <div className="text-secondaryBlue">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

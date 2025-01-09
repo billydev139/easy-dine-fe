@@ -18,6 +18,9 @@ const OrderSummary = () => {
   // Function to decrement the count
   const decrement = () => setCount(count - 1);
   return (
+<<<<<<< HEAD
+    <div className="bg-white text-white py-5 rounded-lg shadow-md h-max">
+=======
     <>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
         <DialogBackdrop
@@ -81,6 +84,7 @@ const OrderSummary = () => {
         </div>
       </Dialog>
       <div className="bg-primaryBlue text-white py-5 rounded-lg shadow-md h-max">
+>>>>>>> e859be440cbd069b847a952e8f43ebd95789b43a
         <div className="bg-headingBGColor py-2 px-4 ">
           <h2 className="text-lg font-medium">Orders Summary</h2>
           <p className="text-sm mb-4">Track the Placed Orders</p>
