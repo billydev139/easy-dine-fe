@@ -20,6 +20,7 @@ import DashboardStats from "../dashboardStats";
 import Button from "../../../components/button";
 import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const OrderManagement = () => {
   //   const [data] = useState([
@@ -221,6 +222,7 @@ const OrderManagement = () => {
     "2:00:00 AM", // Add all time slots
     "11:30:00 PM",
   ];
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
     <DashboardLayout>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -368,7 +370,9 @@ const OrderManagement = () => {
 
       <DashboardStats />
       {/* ////////////////////////////////////order management///////////////////////// */}
-      <div className="bg-white  text-primaryBlue mb-12 rounded-md shadow-xl">
+      <div
+       className={`bg-white  text-primaryBlue mb-12 rounded-md shadow-xl ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}
+      >
         <SectionHeading
           heading={"Manage Orders"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -488,7 +492,7 @@ const OrderManagement = () => {
       </div>
       {/* ////////////////////////////////////Seating Assignment///////////////////////// */}
 
-      <div className="bg-white  text-primaryBlue mb-12 rounded-md shadow-xl">
+      <div className={`bg-white  text-primaryBlue mb-12 rounded-md shadow-xl ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}>
         <SectionHeading
           heading={"Seating Assignment"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -625,7 +629,7 @@ const OrderManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-primaryBlue text-sm">
+          <div className=" text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -638,7 +642,7 @@ const OrderManagement = () => {
             </select>
           </div>
 
-          <div className="text-primaryBlue">
+          <div className="">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

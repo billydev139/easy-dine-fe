@@ -1,6 +1,7 @@
 
 import ReactApexChart from 'react-apexcharts';
 import Icons from '../../assets/icons';
+import { useSelector } from 'react-redux';
 
 const CustomerMap = () => {
   const chartOptions = {
@@ -51,13 +52,13 @@ const CustomerMap = () => {
     //   data: [70, 50, 80, 40, 30, 20, 60],
     // },
   ];
-
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
-    <div className="bg-white p-4 rounded-md shadow-lg w-full">
+    <div className={` p-4 rounded-md shadow-lg w-full ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}>
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h2 className="text-primaryBlue text-lg font-semibold">Customer Map</h2>
-          <p className="text-primaryBlue text-sm">Lorem ipsum dolor</p>
+          <h2 className="text-lg font-semibold">Customer Map</h2>
+          <p className=" text-sm">Lorem ipsum dolor</p>
         </div>
         <div className="flex gap-2">
           <button className="px-3 py-1 rounded-md bg-white text-primaryBlack">Monthly</button>
@@ -68,8 +69,8 @@ const CustomerMap = () => {
       <div className='flex items-center gap-1'>
         <Icons.FaUserTie color='#00AFEC' size={30} />
       <div>
-      <div className="text-primaryBlue ">Clients</div>
-      <strong className='text-primaryBlue'>41,512k</strong>
+      <div className="">Clients</div>
+      <strong className=''>41,512k</strong>
       </div>
       </div>
       <ReactApexChart options={chartOptions} series={chartSeries} type="bar" height={300} />

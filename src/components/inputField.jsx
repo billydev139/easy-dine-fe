@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import Icons from "../assets/icons";
-
+import { useSelector } from "react-redux";
 
 const InputField = ({
   className,
@@ -27,10 +27,10 @@ const InputField = ({
   rows,
   textSize,
   PaddingX,
-  textColor
+  textColor,
 }) => {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
-
+  const theme = useSelector((state) => state?.theme?.theme);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); // Toggle password visibility state
   };
@@ -43,7 +43,11 @@ const InputField = ({
             <div className="flex items-center justify-between">
               <label
                 htmlFor={id}
-                className={`flex justify-start items-center gap-2 text-primaryBlue mb-2 ${textSize? textSize:"text-[14px]"} ${labelWeight?labelWeight: "font-semibold"}`}
+                className={`flex justify-start items-center gap-2 ${
+                  theme === "dark" ? " text-white " : " text-primaryBlue "
+                } mb-2 ${textSize ? textSize : "text-[14px]"} ${
+                  labelWeight ? labelWeight : "font-semibold"
+                }`}
               >
                 {firstIcon}
                 {label}
@@ -75,7 +79,7 @@ const InputField = ({
             rows={rows || 5}
             className={` ${className} ${
               paddingRight ? `pr-${paddingRight}` : "pr-0"
-            } ${borderShape? borderShape:"rounded-lg" } border-[1px]  ${
+            } ${borderShape ? borderShape : "rounded-lg"} border-[1px]  ${
               type === "textarea" ? " placeholder:top-[-50px]" : ""
             } ${paddingY ? paddingY : "py-[10px]"} px-2  outline-none ${
               backgroundcolor ? `${backgroundcolor}` : "bg-white"
@@ -101,11 +105,15 @@ const InputField = ({
               borderColor ? borderColor : " border-[#CCCCCC]"
             }${type === "textarea" ? "h-[85px] placeholder:top-[-50px]" : ""} ${
               paddingY ? `${paddingY}` : "py-[10px]"
-            } ${PaddingX?PaddingX: "px-7"}  outline-none ${
+            } ${PaddingX ? PaddingX : "px-7"}  outline-none ${
               backgroundcolor ? `${backgroundcolor}` : "bg-white"
             } placeholder:text-[14px] ${
-              placeholderColor ? placeholderColor : "placeholder:text-primaryGray"
-            } placeholder:font-medium placeholder:text-sm ${textColor ? textColor : "text-white" } `}
+              placeholderColor
+                ? placeholderColor
+                : "placeholder:text-primaryGray"
+            } placeholder:font-medium placeholder:text-sm ${
+              textColor ? textColor : "text-white"
+            } `}
             placeholder={placeholder}
             onChange={onChange}
             disabled={disabled}
@@ -142,11 +150,6 @@ InputField.propTypes = {
   labelWeight: PropTypes.any,
   rows: PropTypes.any,
   PaddingX: PropTypes.any,
-
-
-
 };
 
 export default InputField;
-
-

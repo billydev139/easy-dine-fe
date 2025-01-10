@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import RevenueChart from "../revenueChart";
 import CustomerMap from "../customerMap";
 import WasteReduction from "./wasteReduction";
+import { useSelector } from "react-redux";
 
 const InventoryManagement = () => {
   const data = [
@@ -150,6 +151,7 @@ const InventoryManagement = () => {
     "2:00:00 AM", // Add all time slots
     "11:30:00 PM",
   ];
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
     <DashboardLayout>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -330,7 +332,7 @@ const InventoryManagement = () => {
         <WasteReduction/>
         </div>
       {/* ////////////////////////////////////order management///////////////////////// */}
-      <div className="bg-white  text-secondaryBlue mb-12 rounded-md shadow-xl">
+      <div className={`mb-12 rounded-md shadow-xl ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}>
         <SectionHeading
           heading={"Inventory List"}
           para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -382,8 +384,8 @@ const InventoryManagement = () => {
                 <td className="py-4 px-6 text-sm">59217</td>
 
                 <td className="py-6 px-6 text-sm">{job.server}</td>
-                <td className="py-4 px-6 text-secondaryBlue text-sm">Category A</td>
-                <td className="py-4 px-6 text-secondaryBlue text-sm">{job.server}</td>
+                <td className="py-4 px-6  text-sm">Category A</td>
+                <td className="py-4 px-6  text-sm">{job.server}</td>
 
                 <td className="py-4 px-6 text-sm">
                   {" "}
@@ -391,8 +393,8 @@ const InventoryManagement = () => {
                  In Stock
                 </td>
            
-                <td className="py-4 px-6 text-secondaryBlue text-sm">€ 1500</td>
-                <td className="py-4 px-6 text-secondaryBlue text-sm">
+                <td className="py-4 px-6  text-sm">€ 1500</td>
+                <td className="py-4 px-6  text-sm">
                  
                 10-08-2020
                 </td>
@@ -448,7 +450,7 @@ const InventoryManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-secondaryBlue text-sm">
+          <div className=" text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -461,7 +463,7 @@ const InventoryManagement = () => {
             </select>
           </div>
 
-          <div className="text-secondaryBlue">
+          <div className="">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

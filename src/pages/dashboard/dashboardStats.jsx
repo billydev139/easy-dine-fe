@@ -1,5 +1,6 @@
 import Chart from "react-apexcharts";
 import Icons from "../../assets/icons";
+import { useSelector } from "react-redux";
 
 const DashboardStats = () => {
   const cardData = [
@@ -43,13 +44,14 @@ const DashboardStats = () => {
   const chartSeries = [
     { data: [10, 30, 25, 40, 35, 50, 45] }, // Sample data
   ];
+  const theme = useSelector((state) => state?.theme?.theme);
 
   return (
     <div className="flex gap-4 py-8 ">
       {cardData.map((card, index) => (
         <div
           key={index}
-          className="bg-white text-primaryBlue p-4 rounded-lg w-1/3 shadow-md"
+          className={`${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '} p-4 rounded-lg w-1/3 shadow-md`}
         >
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-sm font-semibold">{card.title}</h2>
