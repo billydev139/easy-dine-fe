@@ -1,5 +1,6 @@
 import  { useState } from "react";
 import SelectField from "../../../components/selectField";
+import { useSelector } from "react-redux";
 
 const SeatingArea = () => {
   const [selectedTab, setSelectedTab] = useState("Floor 1");
@@ -13,9 +14,10 @@ const SeatingArea = () => {
     { label: "Table 5", value: "5" },
 
   ];
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
-    <div className="bg-white text-secondaryBlue py-5 rounded-lg shadow-md">
-   <div className="bg-slate-100 py-2 px-4 ">
+    <div className={`${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '} py-5 rounded-lg shadow-md`}>
+   <div className=" py-2 px-4 ">
       <h2 className="text-lg font-medium">Select Seating Area</h2>
       <p className="text-sm mb-4">Track the top-performing menu items</p>
       </div>
@@ -25,7 +27,7 @@ const SeatingArea = () => {
           <button
             key={tab}
             className={`relative px-3 py-1 font-bold ${
-              selectedTab === tab ? "  text-[#1EB564]" : "text-secondaryBlue"
+              selectedTab === tab ? "  text-[#1EB564]" : ""
             }`}
             onClick={() => setSelectedTab(tab)}
           >

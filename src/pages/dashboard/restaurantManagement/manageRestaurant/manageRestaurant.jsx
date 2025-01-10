@@ -6,8 +6,10 @@ import InputField from "../../../../components/inputField";
 import SectionHeading from "../../../../components/sectionHeading";
 import Swal from "sweetalert2";
 import Images from "../../../../assets/images";
+import { useSelector } from "react-redux";
 
 const ManageRestaurants = () => {
+  const theme = useSelector((state) => state?.theme?.theme);
   const [data2] = useState([
     {
       contact: "7025556960",
@@ -162,11 +164,11 @@ const ManageRestaurants = () => {
             alt="Trash Bin" 
             class="w-20 h-24 "
           />
-          <h2 class="text-white text-center text-base font-semibold mb-5">
+          <h2 class="text-center text-base font-semibold mb-5">
             Are you sure you want to Delete <br />
             the Restaurant in the Bin?
           </h2>
-          <p class="text-white text-center text-sm mb-6">
+          <p class=" text-center text-sm mb-6">
             You can’t undo this action.
           </p>
         </div>
@@ -180,7 +182,7 @@ const ManageRestaurants = () => {
         popup: "rounded-lg p-6",
 
         cancelButton:
-          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-white",
+          "px-6 py-2 border border-blue-500 text-blue-500 rounded-md  hover:text-secondaryBlue",
         confirmButton: "px-6 py-2  text-black bg-white rounded-md mr-4 ",
       },
     }).then((result) => {
@@ -204,9 +206,9 @@ const ManageRestaurants = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-primaryBlue  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className={`relative transform overflow-hidden rounded-lg  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '} `}
             >
-              <div className="flex justify-between items-center px-6 bg-[#150F43] ">
+              <div className="flex justify-between items-center px-6  ">
                 <SectionHeading
                   heading={"Edit Restaurant"}
                   para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -215,7 +217,7 @@ const ManageRestaurants = () => {
                   {/* <Button>View All</Button> */}
                   <Icons.FaRegTimesCircle
                     onClick={() => setOpen(false)}
-                    color="white"
+                    
                     size={27}
                   />
                 </div>
@@ -356,7 +358,7 @@ const ManageRestaurants = () => {
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
-                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-white font-medium rounded-md  "
+                    className=" px-4 py-2 bg-inherit border border-[#7B68FF]  font-medium rounded-md  "
                   >
                     Back
                   </button>
@@ -372,9 +374,9 @@ const ManageRestaurants = () => {
           </div>
         </div>
       </Dialog>
-      <div className="bg-primaryBlue my-8 text-white  rounded-lg">
+      <div className=" my-8   rounded-lg">
         <div className="relative overflow-x-auto shadow-md ">
-          <table className="w-max  text-sm text-left border-b bg-primaryBlue border-gray-700   ">
+          <table className={`w-max  text-sm text-left border-b  border-gray-700 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}   >
             <thead className="bg-[#150F43] font-semibold text-gray-300 ">
               <tr>
                 <th className="px-4 py-2">Restaurant Name</th>

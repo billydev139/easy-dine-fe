@@ -8,6 +8,7 @@ import { Menu, MenuButton } from "@headlessui/react";
 import Icons from "../../assets/icons";
 import SectionHeading from "../../components/sectionHeading";
 import Button from "../../components/button";
+import { useSelector } from "react-redux";
 
 const jobsData = [
   {
@@ -74,9 +75,9 @@ const RecentOrders = () => {
   //   const toggleActions = (id) => {
   //     setActionId(actionId === id ? null : id);
   //   };
-
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
-    <div className="bg-white text-primaryBlue shadow rounded-lg mt-8">
+    <div className={` shadow rounded-lg mt-8 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}>
       <div className="flex justify-between items-center ">
         <SectionHeading
           heading={"Recent Orders"}
@@ -104,7 +105,7 @@ const RecentOrders = () => {
         </thead>
         <tbody>
           {jobsData.map((job) => (
-            <tr key={job.id} className=" hover:bg-gray-700 text-primaryBlue">
+            <tr key={job.id} className=" hover:bg-gray-700">
               {/* <td className="py-8 px-6">
                   <div className="flex items-center ">
                     <img 

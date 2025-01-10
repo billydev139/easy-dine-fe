@@ -1,5 +1,6 @@
 
 import Chart from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 const WasteReduction = () => {
   const chartData = {
@@ -27,13 +28,13 @@ const WasteReduction = () => {
       
     },
   };
-
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
-    <div className="bg-white text-secondaryBlue p-6 rounded-lg shadow-lg">
+    <div className={`${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '} p-6 rounded-lg shadow-lg`}>
           <div className="flex justify-between items-center mb-8">
         <div>
-          <h2 className="text-secondaryBlue text-lg font-medium">Waste Reduction</h2>
-          <p className="text-secondaryBlue text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
+          <h2 className=" text-lg font-medium">Waste Reduction</h2>
+          <p className=" text-sm ">Lorem ipsum dolor sit amet,consecteture</p>
         </div>
         <select className="text-primaryBlack bg-white px-3 py-1 rounded-md outline-none font-medium">
           <option>Monthly</option>
@@ -54,7 +55,7 @@ const WasteReduction = () => {
       {/* Table Section */}
       <table className="w-full text-left text-sm ">
         <thead className="">
-          <tr className="text-sm border  text-secondaryBlue">
+          <tr className="text-sm border  ">
             <th className="px-4 py-2">Items</th>
             <th className="px-4 py-2 text-right">Percentage</th>
           </tr>

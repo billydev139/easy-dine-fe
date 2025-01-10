@@ -9,6 +9,7 @@ import Images from "../../../assets/images";
 import Button from "../../../components/button";
 import SearchBar from "../../../components/searchBar";
 import { useDropzone } from "react-dropzone";
+import { useSelector } from "react-redux";
 
 const UserManagement = () => {
   const [data] = useState([
@@ -149,6 +150,7 @@ const UserManagement = () => {
     accept: "image/*",
     multiple: false,
   });
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
     <DashboardLayout>
       <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -161,9 +163,9 @@ const UserManagement = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className={`relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}
             >
-              <div className="flex justify-between items-center px-6 bg-[#150F43] ">
+              <div className={`flex justify-between items-center px-6 bg-[#150F43] ${theme === 'dark' ? '!bg-[#150F43] text-white ' : '!bg-white text-primaryBlue '} `}>
                 <SectionHeading
                   heading={"Edit Restaurant"}
                   para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -225,13 +227,13 @@ const UserManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="  text-sm font-semibold text-primaryBlue">
+                  <label className="  text-sm font-semibold ">
                     Gender
                   </label>
                   <select
                     name="gender"
                     id="gender"
-                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-primaryBlue rounded-md shadow-md outline-none w-full"
+                    className=" bg-transparent px-4 py-3 border  mt-1  rounded-md shadow-md outline-none w-full"
                   >
                     <option className=" ">Select Gender</option>
                     <option className=" ">Male</option>
@@ -251,10 +253,10 @@ const UserManagement = () => {
                 </div>
              {/* ////////////////////////drop zone /////////////////////////// */}
           <div className="col-span-2">
-      <label className="block mb-2 text-primaryBlue font-medium">Upload Picture</label>
+      <label className="block mb-2  font-medium">Upload Picture</label>
       <div
         {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-[#151239] hover:border-blue-500 transition-all"
+        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer  hover:border-blue-500 transition-all"
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center text-gray-400">
@@ -304,7 +306,7 @@ const UserManagement = () => {
         </div>
       </Dialog>
 
-      <div className="bg-white  text-primaryBlue my-12 rounded-md shadow-xl">
+      <div className={ `my-12 rounded-md shadow-xl ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}>
         <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Staff User List"}
@@ -351,7 +353,7 @@ const UserManagement = () => {
                       className="mr-3 w-8 h-8 rounded-full"
                     />
                     <div>
-                      <p className="font-semibold text-sm text-primaryBlue">
+                      <p className="font-semibold text-sm ">
                         {job.name}
                       </p>
 
@@ -361,9 +363,9 @@ const UserManagement = () => {
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-6 text-primaryBlue text-sm">{job.lastName}</td>
-                <td className="py-4 px-6 text-primaryBlue text-sm">{job.gender}</td>
-                <td className="py-4 px-6 text-primaryBlue text-sm">{job.email}</td>
+                <td className="py-4 px-6 text-sm">{job.lastName}</td>
+                <td className="py-4 px-6 text-sm">{job.gender}</td>
+                <td className="py-4 px-6  text-sm">{job.email}</td>
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td
                   className={`px-4 py-2 ${
@@ -393,7 +395,7 @@ const UserManagement = () => {
         </table>
 
         <div className="flex justify-end items-center gap-4 py-8 mr-4">
-          <div className="text-primaryBlue text-sm">
+          <div className=" text-sm">
             Results Per Page:
             <select
               value={perPage}
@@ -406,7 +408,7 @@ const UserManagement = () => {
             </select>
           </div>
 
-          <div className="text-primaryBlue">
+          <div className="">
             Showing 1-{perPage} of {data.length}
           </div>
           <div className="flex gap-2 ">

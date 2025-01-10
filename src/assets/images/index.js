@@ -23,8 +23,9 @@ import chicken1 from './chicken1.png'
 import aboutusbg from "./about-us-bg.png"
 import contactus from "./contact-us.png"
 import loginGroup from './loginGroup.png'
-
-
+import lightLogo from './lightLogo.png'
+import cloud from "./cloud.png"
+import nightCloud from './nightCloud.png'
 
 const Images={
     chicken1:chicken1,
@@ -52,5 +53,8 @@ const Images={
     aboutusbg:aboutusbg,
     contactus:contactus,
     loginGroup: loginGroup,
+    lightLogo:lightLogo,
+    cloud:cloud,
+    nightCloud:nightCloud
 }
 export default Images;
