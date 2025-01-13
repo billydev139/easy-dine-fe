@@ -16,8 +16,8 @@ const navigationItems = [
     label: "Restaurant Management",
     icon: <Icons.HiOutlineBuildingStorefront size={22} />,
     submenu: [
-      { path: "#", label: "Add Restaurant" },
-      { path: "/restaurant-management/manage-restaurant", label: "Manage Restaurant" },
+      { path: "/restaurant-management/add-restaurant", label: "Add Restaurant" },
+      { path: "/restaurant-management/list-restaurant", label: "Manage Restaurant" },
     ],
   },
   {
@@ -124,8 +124,10 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   const renderNavItem = (item) => {
-    const isActive = location.pathname.includes(item.path);
-    
+    const isParentActive = location.pathname === item.path; // Exact match for parent
+    const isAnyChildActive = item.submenu?.some(subItem => location.pathname.startsWith(subItem.path)); // Starts with for children
+    const isActive = isParentActive || isAnyChildActive;
+  
     if (item.submenu) {
       return (
         <li key={item.path}>
@@ -154,24 +156,26 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           
           {expandedItems[item.path] && (
             <ul className="py-2 space-y-2 !list-none">
-              {item.submenu.map((subItem) => (
-                <li key={subItem.path} className="list-none">
-                  <Link
-                    className={getNavLinkStyles(isActive)}
-                    to={subItem.path}
-                    // className="flex items-center w-full p-2 font-medium transition duration-75 rounded-lg pl-11 group hover:bg-gray-700"
-                  >
-                    <span className="inline-block w-2 h-2 bg-white rounded-full mr-2 " />
-                    {subItem.label}
-                  </Link>
-                </li>
-              ))}
+              {item.submenu.map((subItem) => {
+                const isSubItemActive = location.pathname.startsWith(subItem.path); // Match submenu path
+                return (
+                  <li key={subItem.path} className="list-none">
+                    <Link
+                      to={subItem.path}
+                      className={getNavLinkStyles(isSubItemActive)}
+                    >
+                      <span className="inline-block w-2 h-2 bg-white rounded-full mr-2 " />
+                      {subItem.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </li>
       );
     }
-
+  
     return (
       <li key={item.path}>
         <NavLink
@@ -184,6 +188,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </li>
     );
   };
+  
 
   return (
     <aside

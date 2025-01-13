@@ -40,9 +40,9 @@ const AppRoutes = () => {
     {path:'/order-management',component:<OrderManagement/>},
     {path:'/inventory-management',component:<InventoryManagement/>},
     {path:'/manual-order',component:<ManualOrderTool/>},
-
-    {path:'/restaurant-management',component:<RestaurantManagement/>},
-    {path:'/restaurant-management/manage-restaurant',component:<ManageRestaurants/>},
+    {path:'/restaurant-management/',component:<RestaurantManagement/>},
+    {path:'/restaurant-management/add-restaurant',component:<RestaurantManagement/>},
+    {path:'/restaurant-management/list-restaurant',component:<ManageRestaurants/>},
     {path:'/menu-management',component:<MenuManagement/>}
 
 

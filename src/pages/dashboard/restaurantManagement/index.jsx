@@ -7,6 +7,7 @@ import SectionHeading from "../../../components/sectionHeading";
 import Button from "../../../components/button";
 import { useDropzone } from "react-dropzone";
 import Icons from "../../../assets/icons";
+import { useSelector } from "react-redux";
 
 const RestaurantManagement = () => {
   const [newInterest, setNewInterest] = useState("");
@@ -28,9 +29,10 @@ const RestaurantManagement = () => {
     accept: "image/*",
     multiple: false,
   });
+  const theme = useSelector((state) => state?.theme?.theme);
   return (
     <DashboardLayout>
-      <div className="container mx-auto bg-white  rounded-md shadow-md mb-20 mt-8">
+      <div className={`container mx-auto ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}  rounded-md shadow-md mb-20 mt-8`}>
         <div className="flex justify-between items-center ">
           <SectionHeading
             heading={"Add Restaurant"}
@@ -54,7 +56,7 @@ const RestaurantManagement = () => {
               placeholder="Restaurant Name"
               // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -65,7 +67,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="Type your Address...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -78,7 +80,7 @@ const RestaurantManagement = () => {
               label={"Phone Number"}
               placeholder="031XXXXXXXX"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -88,7 +90,7 @@ const RestaurantManagement = () => {
               label={"Email Address"}
               placeholder="Type your Address...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -100,7 +102,7 @@ const RestaurantManagement = () => {
               placeholder="pizzaplanetxyz.com"
               // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -111,7 +113,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="24 hours"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -122,7 +124,7 @@ const RestaurantManagement = () => {
               label={"Type of Cuisine"}
               placeholder="Chinese"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -133,7 +135,7 @@ const RestaurantManagement = () => {
               label={"Delivery Available"}
               placeholder="Yes/No"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -143,7 +145,7 @@ const RestaurantManagement = () => {
               label={"Manager Name"}
               placeholder="Enter your name...."
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -155,7 +157,7 @@ const RestaurantManagement = () => {
               placeholder="031XXXXXXXX"
               // borderColor={"border-white"}
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -166,7 +168,7 @@ const RestaurantManagement = () => {
               labelstyle={""}
               placeholder="24 hours"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full  border rounded-md "
             />
           </div>
@@ -177,7 +179,7 @@ const RestaurantManagement = () => {
               label={"Seating Capacity"}
               placeholder="Type your Capacity"
               placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-white"}
+              backgroundcolor={"bg-transparent"}
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
@@ -186,7 +188,7 @@ const RestaurantManagement = () => {
       <label className="block mb-2 text-white font-medium">Upload Logo</label>
       <div
         {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-white hover:border-blue-500 transition-all"
+        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer  hover:border-blue-500 transition-all"
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center text-gray-400">
