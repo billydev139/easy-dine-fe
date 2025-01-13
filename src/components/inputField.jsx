@@ -111,9 +111,7 @@ const InputField = ({
               placeholderColor
                 ? placeholderColor
                 : "placeholder:text-primaryGray"
-            } placeholder:font-medium placeholder:text-sm ${
-              textColor ? textColor : "text-white"
-            } `}
+            } placeholder:font-medium placeholder:text-sm  `}
             placeholder={placeholder}
             onChange={onChange}
             disabled={disabled}
