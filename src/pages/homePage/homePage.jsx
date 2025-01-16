@@ -13,6 +13,7 @@ const HomePage = () => {
     <div>
       <DefaultLayout>
       <HeroSection heroBar={true} image={Images.heroImage} />
+      
         <WhyChoose/>
         <EasyDineWorks />
         <EasyDineTransformation/>

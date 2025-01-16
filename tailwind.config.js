@@ -27,7 +27,7 @@ export default {
         primaryBlack: "#171717",
         secondaryBlack: "#434343",
         primaryBlue: "#222630",
-        secondaryBlue: "#0F0A33",
+        secondaryBlue: "#0f172a",
         primaryGrey: "#696969",
         headingBGColor: "#150F43",
         headingSecondaryColor: "#7B68FF",

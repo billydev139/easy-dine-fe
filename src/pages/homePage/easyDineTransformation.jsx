@@ -1,5 +1,5 @@
+import { motion } from "framer-motion";
 import Images from "../../assets/images";
-
 
 const EasyDineTransformation = () => {
   // Bullet points data
@@ -12,38 +12,64 @@ const EasyDineTransformation = () => {
   ];
 
   return (
-    <div className="bg-primaryBlack text-white  px-6">
-          <h2 className="text-[38px] font-semibold mb-6 pt-24 text-center ">
-          Transform Your Restaurant with EasyDine
-          </h2>
-          <div className=" flex items-center justify-center">
-      <div className="container mx-auto grid md:grid-cols-2 gap-2 items-center justify-center">
-        {/* Left Section - Heading and Bullet Points */}
-        <div>
-         
-          <ul className="space-y-4 ">
+    <div className="bg-primaryBlack text-white px-6 py-16">
+      {/* Heading */}
+      <motion.h2
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-[38px] font-extrabold text-center mb-10"
+      >
+        Transform Your Restaurant with EasyDine
+      </motion.h2>
+
+      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+        {/* Left Section - Bullet Points */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <ul className="space-y-6">
             {bulletPoints.map((point, index) => (
-              <li
+              <motion.li
                 key={index}
-                className="flex items-start space-x-3 text-white text-[20px] font-medium"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="flex items-start space-x-4 text-[20px] font-medium"
               >
-                <span className="h-2 w-2 mt-4 bg-white rounded-full"></span>
+                <span className="h-3 w-3 mt-2 bg-blue-950 rounded-full"></span>
                 <p>{point}</p>
-              </li>
+              </motion.li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
         {/* Right Section - Image */}
-        <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
           <img
-            src={Images.transformation} // Replace with your image path
+            src={Images.transformation}
             alt="Restaurant Interior"
-            className="rounded-xl shadow-lg"
+            className="rounded-xl shadow-xl border-4 border-lime-400"
           />
-          <div className=" w-full h-full  rounded-xl pointer-events-none"></div>
-        </div>
-      </div>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="absolute inset-0 bg-gradient-to-t from-[#00000080] to-transparent rounded-xl pointer-events-none"
+          ></motion.div>
+        </motion.div>
       </div>
     </div>
   );

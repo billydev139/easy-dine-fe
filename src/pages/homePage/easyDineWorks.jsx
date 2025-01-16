@@ -1,8 +1,7 @@
+import { motion } from "framer-motion";
 import Images from "../../assets/images";
 
-
 const EasyDineWorks = () => {
-  // Features Data
   const features = [
     {
       title: "Set Up Your Dashboard",
@@ -23,37 +22,57 @@ const EasyDineWorks = () => {
   ];
 
   return (
-    <div className="bg-primaryBlue text-white py-16 flex items-center justify-center px-6">
-      {/* Main Container */}
-      <div className="container mx-auto gap-8 grid md:grid-cols-2  justify-between items-center">
+    <div className="bg-gradient-to-bl from-[#242424] via-[#242424] to-secondaryBlue text-white py-16 px-6">
+      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Left Section - Dashboard Mockup */}
-        <div className="">
-          {/* Mockup Image */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative"
+        >
           <img
-            src={Images.stats} // Replace with the correct path
+            src={Images.stats}
             alt="Dashboard Mockup"
-            className="w-full h-full object-contain"
+            className="w-full h-auto rounded-lg shadow-lg"
           />
-        </div>
+        </motion.div>
 
         {/* Right Section - How EasyDine Works */}
-        <div className="max-w-xl mx-auto">
-          <h2 className="text-[38px] font-semibold mb-6 text-center md:text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-xl mx-auto"
+        >
+          <h2 className="text-[38px] font-extrabold mb-8 text-center md:text-center text-white">
             How EasyDine Works
           </h2>
-          <div className="grid gap-6 md:grid-cols-2 ">
-            {/* Map through features */}
+          <div className="grid gap-6 md:grid-cols-2">
             {features.map((feature, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white text-black p-5 rounded-lg shadow-md hover:shadow-lg transition"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.2,
+                }}
+                viewport={{ once: false }}
+                className="bg-white text-black p-6 rounded-lg shadow-md hover:shadow-lime-400/50 transform transition"
               >
-                <h3 className="text-xl font-semibold mb-2 text-center">{feature.title}</h3>
-                <p className="text-center">{feature.description}</p>
-              </div>
+                <h3 className="text-lg font-semibold mb-2 text-center text-secondaryBlack">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-center text-gray-600">
+                  {feature.description}
+                </p>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

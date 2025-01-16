@@ -6,22 +6,37 @@ import { useSelector } from "react-redux";
 
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const theme = useSelector((state) => state?.theme?.theme);
+
   return (
-    <div className={` transition duration-150 p-8 ${theme === 'dark' ? 'bg-[#07051b]' : 'bg-[#f2f7ff] '}`}>
-      <div className="flex min-h-screen ">
+    <div
+      className={`transition duration-150 min-h-screen ${
+        theme === "dark" ? "bg-[#07051b]" : "bg-[#f2f7ff]"
+      }`}
+    >
+      <div className="flex min-h-screen relative overflow-hidden">
+        {/* Sidebar */}
         <DashboardSidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
         />
-        <div className="relative flex flex-1 flex-col overflow-auto">
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col w-full">
+          {/* Header */}
           <DashboardHeader
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
           />
-          <main>
-            <div className="mx-auto min-w-screen-2xl">{children}</div>
+
+          {/* Main Content */}
+          <main className="flex-grow px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto w-full">{children}</div>
           </main>
+
+          {/* Footer (optional) */}
+          {/* Uncomment if needed */}
           {/* <DashboardFooter /> */}
         </div>
       </div>
