@@ -8,10 +8,11 @@
     background-repeat: no-repeat; /* Prevents tiling */
   }
   .contact-bg {
-    background-image: url('/src/assets/images/contact-bg.png'); /* Path to your custom image */
+    background-image: url('/src/assets/images/VectorLines.png'); /* Path to your custom image */
     background-size: cover; /* Ensures the image covers the entire container */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents tiling */
+    
   }
 
 

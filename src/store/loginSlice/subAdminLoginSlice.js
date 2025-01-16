@@ -1,38 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "../../components/auth/authenticateAPi/authenticateApi";
-import { SUB_ADMIN_LOGIN } from "../../utils/baseUrl";
+
+import { axiosWithoutToken } from "../../utils/axiosInstance";
+import { config } from "../../utils/EndPoints";
+
+const initialState = {
+  user: null,
+  isLoading: false,
+  error: null,
+};
 
 const LoginSlice = createSlice({
   name: "LoginSlice",
-  initialState: {
-    user: null,
-    isLoading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
+    // Action to start the login process
     LoginStart: (state) => {
       state.isLoading = true;
       state.error = null;
     },
+    // Action for successful login
     LoginSuccess: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
       state.error = null;
-      localStorage.setItem(
-        "accessToken",
-        action?.payload?.data.results.token.access.token
-      );
     },
+    // Action for login failure
     LoginFailure: (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
+      state.user = null;
       state.error = action.payload;
     },
+    // Action for logging out
     LogoutReducer: (state) => {
       state.isLoading = false;
       state.user = null;
       state.error = null;
-      localStorage.clear();
     },
   },
 });
@@ -40,21 +42,34 @@ const LoginSlice = createSlice({
 export const { LoginStart, LoginSuccess, LoginFailure, LogoutReducer } =
   LoginSlice.actions;
 
+// Thunk for logging in the user
 export const LogInUserHandler = (userData) => async (dispatch) => {
   dispatch(LoginStart());
   try {
-    const response = await axios.post(SUB_ADMIN_LOGIN, userData);
-    if (response) {
-      await dispatch(LoginSuccess(response));
+    const response = await axiosWithoutToken.post(config.endPoints.SUB_ADMIN.LOGIN, userData);
+    const token = response?.data?.results?.token?.access?.token;
+
+    if (response && token) {
+      // Store token in localStorage as a side effect
+      localStorage.setItem("accessToken", token);
+      dispatch(LoginSuccess(response.data));
       console.log("🚀 ~ LogInUserHandler ~ response:", response);
-      return response?.data;
+      return response.data;
     } else {
-      return response;
+      throw new Error("Invalid response");
     }
   } catch (error) {
-    dispatch(LoginFailure(error));
-    return error;
+    const errorMessage = error?.response?.data?.message || "Login failed.";
+    dispatch(LoginFailure(errorMessage));
+    return { error: errorMessage };
   }
+};
+
+// Thunk for logging out the user
+export const LogOutUserHandler = () => async (dispatch) => {
+  // Clear local storage as a side effect
+  localStorage.clear();
+  dispatch(LogoutReducer());
 };
 
 export default LoginSlice.reducer;

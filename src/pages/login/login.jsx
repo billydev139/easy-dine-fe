@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, error } = useSelector((state) => state);
+  const { isLoading, error } = useSelector((state) => state?.login);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -37,7 +37,6 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const response = await dispatch(LogInUserHandler(values));
-        console.log("🚀 ~ onSubmit: ~ response:", response);
         if (response?.status === 201) {
           Swal.fire({
             title: "Success!",
@@ -53,7 +52,7 @@ const Login = () => {
           Swal.fire({
             title: "Error!",
             text:
-              response?.response?.data?.message ||
+              error||
               "Login failed. Please try again.",
             icon: "error",
             confirmButtonText: "OK",
@@ -163,21 +162,16 @@ const Login = () => {
                 </span>
               </div>
 
-              {error && (
-                <p className="text-xs text-left mt-1 text-red-500">{error}</p>
-              )}
+          
 
               <button
-                type="submit"
-                className="w-full p-3 bg-primaryBlue text-white rounded-lg mt-10 font-semibold 2xl:text-xl text-base flex items-center justify-center gap-4"
-                disabled={isLoading}
-              >
-                {renderButtonContent(
-                  isLoading,
-                  "Next",
-                  <Icons.MdOutlineEmail size={18} className="hidden" />
-                )}
-              </button>
+  type="submit"
+  className="w-full p-3 bg-primaryBlue text-white rounded-lg mt-10 font-semibold 2xl:text-xl text-base flex items-center justify-center gap-4"
+  disabled={isLoading}
+>
+  {isLoading ? "Loading..." : "Submit"}
+</button>
+
             </form>
           </div>
         </div>

@@ -45,26 +45,26 @@ const navigationItems = [
     label: "Menu Customization",
     icon: <Icons.MdMenu size={22} />,
   },
-  {
-    path: "/financials",
-    label: "Financials & Reporting",
-    icon: <Icons.BsCoin size={22} />,
-  },
-  {
-    path: "/loyalty",
-    label: "Loyalty & Marketing",
-    icon: <Icons.BiBadgeCheck size={22} />,
-  },
-  {
-    path: "/analytics",
-    label: "Analytics & Insights",
-    icon: <Icons.MdOutlineAnalytics size={22} />,
-  },
-  {
-    path: "/settings",
-    label: "Settings",
-    icon: <Icons.IoSettingsOutline size={22} />,
-  },
+  // {
+  //   path: "#",
+  //   label: "Financials & Reporting",
+  //   icon: <Icons.BsCoin size={22} />,
+  // },
+  // {
+  //   path: "#",
+  //   label: "Loyalty & Marketing",
+  //   icon: <Icons.BiBadgeCheck size={22} />,
+  // },
+  // {
+  //   path: "#",
+  //   label: "Analytics & Insights",
+  //   icon: <Icons.MdOutlineAnalytics size={22} />,
+  // },
+  // {
+  //   path: "#",
+  //   label: "Settings",
+  //   icon: <Icons.IoSettingsOutline size={22} />,
+  // },
 ];
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -193,7 +193,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute shadow-2xl left-0 top-0 z-9999 flex min-h-screen min-w-[20rem] flex-col overflow-y-hidden ${
+      className={`absolute shadow-2xl left-0 top-0 z-50 flex min-h-screen min-w-[20rem] flex-col overflow-y-hidden ${
         theme === 'dark' ? '!bg-primaryBlue !text-white' : '!bg-white text-primaryBlue'
       } mr-5 rounded-md duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"

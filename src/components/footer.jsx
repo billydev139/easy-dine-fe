@@ -1,79 +1,83 @@
 import { Link } from "react-router-dom";
 import Icons from "../assets/icons";
 
-
 export const navigationLinks = [
-  { name: "Follow us", href: "#", id: 1 },
-  { name: <Icons.TiSocialLinkedin />, href: "#", id: 2 },
+  { name: <Icons.TiSocialLinkedin size={24}/>, href: "#", id: 1 },
   {
-    name: <Icons.FaSquareInstagram size={34} color="white" />,
+    name: <Icons.FaInstagram size={24} color="white" />,
     href: "#",
-    id: 3,
+    id: 2,
   },
-  { name: <Icons.FaFacebook />, href: "#", id: 4 },
-  { name: <Icons.FaXTwitter />, href: "#", id: 5 },
+  { name: <Icons.FaFacebook size={24} />, href: "#", id: 3 },
+  { name: <Icons.FaXTwitter size={24}/>, href: "#", id: 4 },
 ];
-// const staticLinks = [
-//   { name: "FAQs", href: "/faq" },
-//   { name: "Privacy Policy", href: "/privacy-policy" },
-//   { name: "Terms & Conditions", href: "/terms-of-services" },
-// ];
+
 const Footer = () => {
   return (
-    // <header className="bg-primaryBlack   ">
-    //   <nav
-    //     aria-label="Global"
-    //     className="flex  items-center container  justify-between mx-auto  border-[#9BB7FF]   lg:pb-6 pb-8 pt-2 lg:pt-6"
-    //   >
-    <div className="bg-primaryBlack px-4 border-t-2">
-        <div className="lg:flex  container mx-auto   justify-between items-center  gap-12 lg:pb-6 pb-8 pt-2 lg:pt-6">
-          <p className="flex justify-center pb-4 lg:pb-0  text-white">
-            {" "}
-            © 2024 easydine All Rights Reserved.
-          </p>
-          <p className="flex justify-center pb-4 lg:pb-0  text-white">
-            {" "}
-            Terms and Conditions
-          </p>
-          {/* ///////////////for desktop.//////////////// */}
-          <div className="text-center">
-            <div className="flex justify-evenly items-center xl:gap-15 gap-5 lg:flex-1 ">
-              <div className=" flex items-center xl:gap-x-13 gap-4">
-                {navigationLinks.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.href}
-                    className={`text-[16px] font-bold  font-inter ${
-                      item.name === "Follow us"
-                        ? "text-white"
-                        : ` ${item.id === 3 ? "" : "bg-white text-primaryBlack"}`
-                    }  ${item.id === 3 ? "" : "p-2"} rounded-full`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
+    <footer className="bg-primaryBlack text-white py-10">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-16">
+          {/* Left Section */}
+          <div className="text-center lg:text-left">
+            <p className="text-sm lg:text-base">
+              © 2025 Easydine. All Rights Reserved.
+            </p>
+            <p className="text-sm lg:text-base mt-2 lg:mt-0">
+              <Link
+                to="/terms-and-conditions"
+                className="text-gray-400 hover:text-white transition"
+              >
+                Terms and Conditions
+              </Link>
+            </p>
           </div>
-          {/* <div className="flex justify-center items-center max-lg:mt-4 ">
-            <div className="flex flex-wrap justify-center w-full lg:gap-x-4 gap-x-8 ">
-              {staticLinks?.map((item, index) => (
+
+          {/* Center Section - Social Links */}
+          <div className="flex flex-col items-center">
+            <p className="text-sm lg:text-base font-semibold mb-4 text-gray-400">
+              Connect with us:
+            </p>
+            <div className="flex justify-center items-center gap-6">
+              {navigationLinks.map((item, index) => (
                 <Link
                   key={index}
                   to={item.href}
-                  className={` text-[16px] font-semibold  ${
-                    index === 2 ? "" : "border-r-2"
-                  }  pr-4 border-[#2E2E2E]`}
+                  className={`
+                  `}
                 >
                   {item.name}
                 </Link>
               ))}
             </div>
-          </div> */}
+          </div>
+
+          {/* Right Section */}
+          <div className="text-center lg:text-right">
+            <p className="text-sm lg:text-base text-gray-400">
+              <Link
+                to="/privacy-policy"
+                className="hover:text-white transition"
+              >
+                Privacy Policy
+              </Link>
+            </p>
+            <p className="text-sm lg:text-base mt-2 lg:mt-0 text-gray-400">
+              <Link
+                to="/faq"
+                className="hover:text-white transition"
+              >
+                FAQs
+              </Link>
+            </p>
+          </div>
         </div>
+
+        {/* Bottom Line */}
+        <div className="mt-8 border-t border-gray-700 pt-4 text-center">
+         
         </div>
-    //   </nav>
-    // </header>
+      </div>
+    </footer>
   );
 };
 

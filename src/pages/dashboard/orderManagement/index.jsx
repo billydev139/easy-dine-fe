@@ -235,9 +235,9 @@ const OrderManagement = () => {
           <div className="flex min-h-full  items-end justify-center  text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-white  pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+              className={`relative transform overflow-hidden rounded-lg   pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-5xl  data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`}
             >
-              <div className="flex justify-between items-center px-6 bg-[#150F43] ">
+              <div className={`flex justify-between items-center px-6 ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '} `}>
                 <SectionHeading
                   heading={"Add Seating"}
                   para={"Lorem ipsum dolor sit amet,consecteture"}
@@ -277,11 +277,11 @@ const OrderManagement = () => {
                 </div>
                 {/* Time Dropdown */}
                 <div className="relative">
-                  <label className="  text-sm font-semibold text-primaryBlue">
+                  <label className="  text-sm font-semibold ">
                     Select Time
                   </label>
                   <button
-                    className="flex items-center justify-between w-full mt-1 px-4 py-3 bg-[#1A1448] text-sm border text-primaryBlue rounded-md "
+                    className="flex items-center justify-between w-full mt-1 px-4 py-3  text-sm border  rounded-md "
                     onClick={() => setIsTimeDropdownOpen(!isTimeDropdownOpen)}
                     type="button"
                   >
@@ -289,7 +289,7 @@ const OrderManagement = () => {
                     <Icons.FaCaretDown />
                   </button>
                   {isTimeDropdownOpen && (
-                    <div className="absolute z-10 w-full mt-2 bg-white text-black rounded-md text-center  ">
+                    <div className="absolute z-10 w-full mt-2  rounded-md text-center  ">
                       {times.map((time, index) => (
                         <div
                           key={index}
@@ -336,13 +336,13 @@ const OrderManagement = () => {
                   />
                 </div>
                 <div>
-                  <label className="  text-sm font-semibold text-primaryBlue">
+                  <label className="  text-sm font-semibold ">
                     Payment Methods
                   </label>
                   <select
                     name="gender"
                     id="gender"
-                    className="bg-[#1A1448] px-4 py-3 border  mt-1 text-primaryBlue rounded-md shadow-md outline-none w-full"
+                    className=" px-4 py-3 border bg-transparent  mt-1  rounded-md shadow-md outline-none w-full"
                   >
                     <option className="online">Online</option>
                     <option className="cash">Cash</option>
@@ -351,7 +351,7 @@ const OrderManagement = () => {
                 <div className="col-span-2 flex justify-end gap-2 pt-8">
                   <button
                     type="submit"
-                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-primaryBlue font-medium rounded-md  "
+                    className=" px-4 py-2 bg-inherit border border-[#7B68FF] font-medium rounded-md  "
                   >
                     Back
                   </button>
@@ -422,7 +422,7 @@ const OrderManagement = () => {
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td className="py-4 px-6 text-sm ">
                   <span
-                    className={`${
+                    className={`flex text-center ${
                       job.status === "New Order"
                         ? "text-[#FF625F] border-[#FF625F]"
                         : `${
@@ -556,7 +556,7 @@ const OrderManagement = () => {
                 {/* <td className="py-4 px-6 font-semibold">{job.date}</td> */}
                 <td className="py-4 px-6 text-sm ">
                   <span
-                    className={`${
+                    className={`flex text-center ${
                       job.status === "New Order"
                         ? "text-[#FF625F] border-[#FF625F]"
                         : `${

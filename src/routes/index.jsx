@@ -1,76 +1,89 @@
+import PropTypes from "prop-types";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import CustomLoader from "../components/CustomLoader";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "../pages/homePage/homePage";
-import AboutUs from "../pages/aboutUs";
-import ContactUs from "../pages/contactUs";
-import TermsofServices from "../pages/terms/terms";
-import Login from "../pages/login/login";
-import Dashboard from "../pages/dashboard";
-import RestaurantManagement from "../pages/dashboard/restaurantManagement";
-import ManageRestaurants from "../pages/dashboard/restaurantManagement/manageRestaurant/manageRestaurant";
-import UserManagement from "../pages/dashboard/userManagement";
-import OrderManagement from "../pages/dashboard/orderManagement";
-import InventoryManagement from "../pages/dashboard/inventoryManagement";
-import ManualOrderTool from "../pages/dashboard/manualOrderTool";
-import MenuManagement from "../pages/dashboard/menuManagement";
+// Lazy-loaded components
+const HomePage = lazy(() => import("../pages/homePage/homePage"));
+const AboutUs = lazy(() => import("../pages/aboutUs"));
+const ContactUs = lazy(() => import("../pages/contactUs"));
+const TermsofServices = lazy(() => import("../pages/terms/terms"));
+const Login = lazy(() => import("../pages/login/login"));
+const Dashboard = lazy(() => import("../pages/dashboard"));
+const RestaurantManagement = lazy(() =>
+  import("../pages/dashboard/restaurantManagement")
+);
+const ManageRestaurants = lazy(() =>
+  import("../pages/dashboard/restaurantManagement/manageRestaurant/manageRestaurant")
+);
+const UserManagement = lazy(() => import("../pages/dashboard/userManagement"));
+const OrderManagement = lazy(() => import("../pages/dashboard/orderManagement"));
+const InventoryManagement = lazy(() =>
+  import("../pages/dashboard/inventoryManagement")
+);
+const ManualOrderTool = lazy(() => import("../pages/dashboard/manualOrderTool"));
+const MenuManagement = lazy(() => import("../pages/dashboard/menuManagement"));
 
+// Mock authentication function
+const isAuthenticated = () => {
+  return localStorage.getItem("accessToken") !== null;
+};
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  return isAuthenticated() ? children : <Navigate to="/login" />;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node,
+};
 
 const AppRoutes = () => {
-  // Check if the user is authenticated
-
-  // Define protected routes in an array
-  //   const protectedRoutes = [
-  //     { path: "/user-home", component: <UserHome /> },
-  //     { path: "/saved-jobs", component: <SavedJobs /> },
-  //     { path: "/profile", component: <UserProfile /> },
-  //     { path: "/my-applications", component: <MyApplications /> },
-  //     { path: "/application-details", component: <ApplicationDetails /> },
-  //     { path: "/my-companies", component: <MyCompanies /> },
-  //   ];
-
-  // Define public routes in an array
+  // Public Routes Configuration
   const publicRoutes = [
     { path: "/", component: <HomePage /> },
     { path: "/about-us", component: <AboutUs /> },
-    {path:'/contact-us',component:<ContactUs/>},
-    {path:'/terms',component:<TermsofServices/>},
-    {path:'/login',component:<Login/>},
-    {path:'/dashboard',component:<Dashboard/>},
-    {path:'/user-management',component:<UserManagement/>},
-    {path:'/order-management',component:<OrderManagement/>},
-    {path:'/inventory-management',component:<InventoryManagement/>},
-    {path:'/manual-order',component:<ManualOrderTool/>},
-    {path:'/restaurant-management/',component:<RestaurantManagement/>},
-    {path:'/restaurant-management/add-restaurant',component:<RestaurantManagement/>},
-    {path:'/restaurant-management/list-restaurant',component:<ManageRestaurants/>},
-    {path:'/menu-management',component:<MenuManagement/>}
+    { path: "/contact-us", component: <ContactUs /> },
+    { path: "/terms", component: <TermsofServices /> },
+    { path: "/login", component: <Login /> },
+  ];
 
-
-
+  // Protected Routes Configuration
+  const protectedRoutes = [
+    { path: "/dashboard", component: <Dashboard /> },
+    { path: "/user-management", component: <UserManagement /> },
+    { path: "/order-management", component: <OrderManagement /> },
+    { path: "/inventory-management", component: <InventoryManagement /> },
+    { path: "/manual-order", component: <ManualOrderTool /> },
+    {
+      path: "/restaurant-management/add-restaurant",
+      component: <RestaurantManagement />,
+    },
+    {
+      path: "/restaurant-management/list-restaurant",
+      component: <ManageRestaurants />,
+    },
+    { path: "/menu-management", component: <MenuManagement /> },
   ];
 
   return (
-    <Router>
+    <Suspense fallback={<CustomLoader />}>
       <Routes>
-        {/* Map over public routes */}
+        {/* Render Public Routes */}
         {publicRoutes.map(({ path, component }, index) => (
           <Route key={index} path={path} element={component} />
         ))}
 
-        {/* Map over protected routes */}
-        {/* {protectedRoutes.map(({ path, component }, index) => (
+        {/* Render Protected Routes */}
+        {protectedRoutes.map(({ path, component }, index) => (
           <Route
             key={index}
             path={path}
-            element={
-              <ProtectedRoute >
-                {component}
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute>{component}</ProtectedRoute>}
           />
-        ))} */}
+        ))}
       </Routes>
-    </Router>
+    </Suspense>
   );
 };
 
