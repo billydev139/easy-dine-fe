@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import CustomLoader from "../components/CustomLoader";
+import Pricing from "../pages/pricing/Pricing";
 
 // Lazy-loaded components
 const HomePage = lazy(() => import("../pages/homePage/homePage"));
@@ -46,6 +47,7 @@ const AppRoutes = () => {
     { path: "/contact-us", component: <ContactUs /> },
     { path: "/terms", component: <TermsofServices /> },
     { path: "/login", component: <Login /> },
+    { path: "/pricing", component: <Pricing/> },
   ];
 
   // Protected Routes Configuration
