@@ -42,7 +42,8 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={item.href}
-                  className={`
+                  className={` p-2
+                  hover:bg-blue-900 hover:rounded-full
                   `}
                 >
                   {item.name}
