@@ -26,7 +26,10 @@ import loginGroup from './loginGroup.png'
 import lightLogo from './lightLogo.png'
 import cloud from "./cloud.png"
 import nightCloud from './nightCloud.png'
-
+import loginBg from "./lgoinBg.png"
+import work1 from './work1.png'
+import work2 from './work2.png'
+import work3 from './work3.png'
 const Images={
     chicken1:chicken1,
     empty:empty,
@@ -55,6 +58,10 @@ const Images={
     loginGroup: loginGroup,
     lightLogo:lightLogo,
     cloud:cloud,
-    nightCloud:nightCloud
+    loginBg:loginBg,
+    nightCloud:nightCloud,
+    work1:work1,
+    work2:work2,
+    work3:work3,
 }
 export default Images;

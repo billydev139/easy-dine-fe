@@ -14,10 +14,22 @@
     background-repeat: no-repeat; /* Prevents tiling */
     
   }
+  .vector-bg {
+    
+    background-image: url('/src/assets/images/VectorLine.png'); /* Path to your custom image */
+    background-size:auto ; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    
+  }
 
 
-
-
+  
+  /* .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  } */
+  
 
 
   ::-webkit-scrollbar {
