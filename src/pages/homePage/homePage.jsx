@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <div>
       <DefaultLayout>
-      <HeroSection heroBar={true} image={Images.heroImage} />
+      {/* <HeroSection heroBar={true} image={Images.heroImage} /> */}
       
         <WhyChoose/>
         <EasyDineWorks />

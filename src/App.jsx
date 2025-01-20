@@ -30,7 +30,7 @@ innerSize={8}
     border: '3px solid white'
   }}
     />
-      <div>
+      <div className="bg-primaryBlack">
         <AppRoutes />
       </div>
     </>

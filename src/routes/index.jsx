@@ -24,6 +24,7 @@ const InventoryManagement = lazy(() =>
 );
 const ManualOrderTool = lazy(() => import("../pages/dashboard/manualOrderTool"));
 const MenuManagement = lazy(() => import("../pages/dashboard/menuManagement"));
+const Features = lazy(() => import("../pages/features/Features"));
 
 // Mock authentication function
 const isAuthenticated = () => {
@@ -45,9 +46,11 @@ const AppRoutes = () => {
     { path: "/", component: <HomePage /> },
     { path: "/about-us", component: <AboutUs /> },
     { path: "/contact-us", component: <ContactUs /> },
-    { path: "/terms", component: <TermsofServices /> },
+    { path: "/terms-and-conditions", component: <TermsofServices /> },
     { path: "/login", component: <Login /> },
     { path: "/pricing", component: <Pricing/> },
+    { path: "/features", component: <Features/> },
+    
   ];
 
   // Protected Routes Configuration

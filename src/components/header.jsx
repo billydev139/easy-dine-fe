@@ -4,9 +4,11 @@ import Images from "../assets/images";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about-us" },
-  { name: "Contact Us", href: "/contact-us" },
+  { name: "About us", href: "/about-us" },
+  { name: "Contact us", href: "/contact-us" },
+  { name: "Features", href: "/features" },
   { name: "Pricing", href: "/pricing" },
+  
 ];
 
 const Header = () => {
