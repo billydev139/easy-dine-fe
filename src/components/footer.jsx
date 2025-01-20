@@ -52,25 +52,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Right Section */}
-          <div className="text-center lg:text-right">
-            <p className="text-sm lg:text-base text-gray-400">
-              <Link
-                to="/privacy-policy"
-                className="hover:text-white transition"
-              >
-                Privacy Policy
-              </Link>
-            </p>
-            <p className="text-sm lg:text-base mt-2 lg:mt-0 text-gray-400">
-              <Link
-                to="/faq"
-                className="hover:text-white transition"
-              >
-                FAQs
-              </Link>
-            </p>
-          </div>
+         
+        
         </div>
 
         {/* Bottom Line */}

@@ -30,6 +30,13 @@ import loginBg from "./lgoinBg.png"
 import work1 from './work1.png'
 import work2 from './work2.png'
 import work3 from './work3.png'
+import heroVector from './heroVector.png'
+import feature1 from './feature1.png'
+import feature2 from './feature2.png'
+import feature3 from './feature3.png'
+import feature4 from './feature4.png'
+import feature5 from './feature5.png'
+import feature6 from './feature6.png'
 const Images={
     chicken1:chicken1,
     empty:empty,
@@ -63,5 +70,12 @@ const Images={
     work1:work1,
     work2:work2,
     work3:work3,
+    heroVector:heroVector,
+    feature1:feature1,
+    feature2:feature2,
+    feature3:feature3,
+    feature4:feature4,
+    feature5:feature5,
+    feature6:feature6,
 }
 export default Images;
