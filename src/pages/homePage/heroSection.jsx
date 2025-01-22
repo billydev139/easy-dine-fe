@@ -65,10 +65,14 @@ const HeroSection = ({ heroBar, width, height, videoSrc }) => {
             <Header />
 
             <div className="flex flex-col justify-center items-center my-[10%]">
-              <div className="max-w-3xl text-white mx-auto text-center">
+              <div className="max-w-3xl text-white mx-auto text-center ">
                 <h1 className="lg:text-[50px] text-3xl font-extrabold leading-[65px]">
                   {heading}
                 </h1>
+                <div className="flex justify-center m-2">
+                <img src={Images.heroVector} className="max-w-[500px]"/>
+                </div>
+                
                 <p
                   className={`${
                     width || "max-w-xl"
