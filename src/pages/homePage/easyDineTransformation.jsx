@@ -60,7 +60,7 @@ const EasyDineTransformation = () => {
           <img
             src={Images.transformation}
             alt="Restaurant Interior"
-            className="rounded-xl shadow-xl border-4 border-lime-400"
+            className="rounded-xl shadow-xl"
           />
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
