@@ -34,12 +34,10 @@ const Features = lazy(() => import("../pages/features/Features"));
 const Register = lazy(() => import("../pages/register/Register"));
 const Pricing = lazy(() => import("../pages/pricing/Pricing"));
 
-// Mock authentication function
 const isAuthenticated = () => {
   return localStorage.getItem("accessToken") !== null;
 };
 
-// Protected Route Component
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
 };
@@ -50,9 +48,9 @@ ProtectedRoute.propTypes = {
 
 const AppRoutes = () => {
   const location = useLocation();
-  const [cursorVisible, setCursorVisible] = useState(true); // Default cursor visibility is true
+  const [cursorVisible, setCursorVisible] = useState(false); // Default hidden
 
-  // Public Routes Configuration
+  // Routes definition
   const publicRoutes = [
     { path: "/", component: <HomePage /> },
     { path: "/about-us", component: <AboutUs /> },
@@ -67,32 +65,35 @@ const AppRoutes = () => {
     { path: "/register", component: <Register /> },
   ];
 
-  // Protected Routes Configuration
   const protectedRoutes = [
     { path: "/dashboard", component: <Dashboard /> },
     { path: "/user-management", component: <UserManagement /> },
     { path: "/order-management", component: <OrderManagement /> },
     { path: "/inventory-management", component: <InventoryManagement /> },
     { path: "/manual-order", component: <ManualOrderTool /> },
-    {
-      path: "/restaurant-management/add-restaurant",
-      component: <RestaurantManagement />,
-    },
-    {
-      path: "/restaurant-management/list-restaurant",
-      component: <ManageRestaurants />,
-    },
+    { path: "/restaurant-management/add-restaurant", component: <RestaurantManagement /> },
+    { path: "/restaurant-management/list-restaurant", component: <ManageRestaurants /> },
     { path: "/menu-management", component: <MenuManagement /> },
   ];
 
-  useEffect(() => {
-    // Check if the current route is a public route
-    const isPublicRoute = publicRoutes.some(
-      (route) => route.path === location.pathname
-    );
+  const updateCursorVisibility = () => {
+    const isPublicRoute = publicRoutes.some((route) => route.path === location.pathname);
+    const isAuthRoute = authRoutes.some((route) => route.path === location.pathname);
+    const isProtectedRoute = protectedRoutes.some((route) => route.path === location.pathname);
 
-    setCursorVisible(isPublicRoute); // Set cursor visibility based on the route
-  }, [location.pathname]);
+    // Set cursor visibility based on route type
+    if (isPublicRoute) {
+      setCursorVisible(true);
+    } else if (isAuthRoute || isProtectedRoute) {
+      setCursorVisible(false);
+    } else {
+      setCursorVisible(false); // Fallback, ideally shouldn't hit this due to defined routes
+    }
+  };
+
+  useEffect(() => {
+    updateCursorVisibility(); // Check on mount and when the location changes
+  }, [location]); // Depend on the location
 
   return (
     <>
@@ -104,12 +105,8 @@ const AppRoutes = () => {
           outerScale={2}
           outerAlpha={0}
           hasBlendMode={true}
-          innerStyle={{
-            backgroundColor: "white",
-          }}
-          outerStyle={{
-            border: "3px solid white",
-          }}
+          innerStyle={{ backgroundColor: "white" }}
+          outerStyle={{ border: "3px solid white" }}
         />
       )}
       <Suspense fallback={<CustomLoader />}>
@@ -117,13 +114,9 @@ const AppRoutes = () => {
           {authRoutes.map(({ path, component }, index) => (
             <Route key={index} path={path} element={component} />
           ))}
-
-          {/* Render Public Routes */}
           {publicRoutes.map(({ path, component }, index) => (
             <Route key={index} path={path} element={component} />
           ))}
-
-          {/* Render Protected Routes */}
           {protectedRoutes.map(({ path, component }, index) => (
             <Route
               key={index}
