@@ -51,6 +51,23 @@ const AppRoutes = () => {
   const [cursorVisible, setCursorVisible] = useState(false); // Default hidden
 
   // Routes definition
+
+  const protectedRoutes = [
+    { path: "/dashboard", component: <Dashboard /> },
+    { path: "/user-management", component: <UserManagement /> },
+    { path: "/order-management", component: <OrderManagement /> },
+    { path: "/inventory-management", component: <InventoryManagement /> },
+    { path: "/manual-order", component: <ManualOrderTool /> },
+    {
+      path: "/restaurant-management/add-restaurant",
+      component: <RestaurantManagement />,
+    },
+    {
+      path: "/restaurant-management/list-restaurant",
+      component: <ManageRestaurants />,
+    },
+    { path: "/menu-management", component: <MenuManagement /> },
+  ];
   const publicRoutes = [
     { path: "/", component: <HomePage /> },
     { path: "/about-us", component: <AboutUs /> },
@@ -59,27 +76,21 @@ const AppRoutes = () => {
     { path: "/pricing", component: <Pricing /> },
     { path: "/features", component: <Features /> },
   ];
-
   const authRoutes = [
+    ...protectedRoutes,
     { path: "/login", component: <Login /> },
     { path: "/register", component: <Register /> },
   ];
-
-  const protectedRoutes = [
-    { path: "/dashboard", component: <Dashboard /> },
-    { path: "/user-management", component: <UserManagement /> },
-    { path: "/order-management", component: <OrderManagement /> },
-    { path: "/inventory-management", component: <InventoryManagement /> },
-    { path: "/manual-order", component: <ManualOrderTool /> },
-    { path: "/restaurant-management/add-restaurant", component: <RestaurantManagement /> },
-    { path: "/restaurant-management/list-restaurant", component: <ManageRestaurants /> },
-    { path: "/menu-management", component: <MenuManagement /> },
-  ];
-
   const updateCursorVisibility = () => {
-    const isPublicRoute = publicRoutes.some((route) => route.path === location.pathname);
-    const isAuthRoute = authRoutes.some((route) => route.path === location.pathname);
-    const isProtectedRoute = protectedRoutes.some((route) => route.path === location.pathname);
+    const isPublicRoute = publicRoutes.some(
+      (route) => route.path === location.pathname
+    );
+    const isAuthRoute = authRoutes.some(
+      (route) => route.path === location.pathname
+    );
+    const isProtectedRoute = protectedRoutes.some(
+      (route) => route.path === location.pathname
+    );
 
     // Set cursor visibility based on route type
     if (isPublicRoute) {
