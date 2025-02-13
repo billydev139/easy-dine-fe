@@ -8,6 +8,7 @@ const navigation = [
   { name: "Contact us", href: "/contact-us" },
   { name: "Features", href: "/features" },
   { name: "Pricing", href: "/pricing" },
+  { name: "FAQs", href: "/faqs" },
   
 ];
 
@@ -78,6 +79,13 @@ const Header = () => {
                     onClick={() => setDropdownOpen(false)}
                   >
                     Pricing
+                  </Link>
+                  <Link
+                    to="/faqs"
+                    className="block px-4 py-2 text-[16px] font-semibold text-[#2E2E2E] hover:bg-gray-100 hover:rounded-md"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    FAQs
                   </Link>
                 </div>
               )}

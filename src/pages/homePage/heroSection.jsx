@@ -37,10 +37,11 @@ const HeroSection = ({ heroBar, width, height, videoSrc }) => {
 
   // Check if the current route is "terms and conditions"
   const isTermsAndConditions = location.pathname === "/terms-and-conditions";
+  const isFaqs = location.pathname === "/faqs";
 
   return (
     <>
-      {!isTermsAndConditions ? (
+      {!isTermsAndConditions && !isFaqs  ? (
         <div
           style={{
             position: "relative",
