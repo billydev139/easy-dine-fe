@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import AppRoutes from "./routes";
 
 function App() {
+  console.log("14 feb debug");
   const theme = useSelector((state) => state?.theme?.theme);
 
   useEffect(() => {
