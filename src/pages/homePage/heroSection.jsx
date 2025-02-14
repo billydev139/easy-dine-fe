@@ -28,6 +28,10 @@ const HeroSection = ({ heroBar, width, height, videoSrc }) => {
     "/pricing":{
       heading: "Discover Our Plans",
       para: "Choose the right plan for your restaurant based on your needs, preferences, and budget. Our pricing plans include everything you need to get started with EasyDine, plus unlimited features and support."
+    },
+    "/blogs":{
+      heading: "Blogs",
+      para: "How much does it cost to build an app? It’s an urgent question on any tech project. Check out the article to learn what factors influence app development costs and how to determine the final sum."
     }
 
   };

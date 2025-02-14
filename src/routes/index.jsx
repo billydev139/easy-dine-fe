@@ -12,6 +12,7 @@ const TermsofServices = lazy(() => import("../pages/terms/terms"));
 const Login = lazy(() => import("../pages/login/login"));
 const Dashboard = lazy(() => import("../pages/dashboard"));
 const Faqs = lazy(() => import("../pages/faqs/faqs"));
+const Blogs = lazy(() => import("../pages/blogs/blogs"));
 const RestaurantManagement = lazy(() =>
   import("../pages/dashboard/restaurantManagement")
 );
@@ -77,6 +78,7 @@ const AppRoutes = () => {
     { path: "/pricing", component: <Pricing /> },
     { path: "/features", component: <Features /> },
     { path: "/faqs", component: <Faqs/> },
+    { path: "/blogs", component: <Blogs/> },
   ];
   const authRoutes = [
     // ...protectedRoutes,
