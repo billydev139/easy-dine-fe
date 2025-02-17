@@ -13,6 +13,7 @@ const Login = lazy(() => import("../pages/login/login"));
 const Dashboard = lazy(() => import("../pages/dashboard"));
 const Faqs = lazy(() => import("../pages/faqs/faqs"));
 const Blogs = lazy(() => import("../pages/blogs/blogs"));
+const SupportFAQ = lazy(() => import("../pages/support/Support"));
 const RestaurantManagement = lazy(() =>
   import("../pages/dashboard/restaurantManagement")
 );
@@ -79,6 +80,7 @@ const AppRoutes = () => {
     { path: "/features", component: <Features /> },
     { path: "/faqs", component: <Faqs/> },
     { path: "/blogs", component: <Blogs/> },
+    { path: "/support", component: <SupportFAQ/> },
   ];
   const authRoutes = [
     // ...protectedRoutes,

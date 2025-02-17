@@ -41,6 +41,7 @@ import { TiArrowSortedDown, TiMessages, TiSocialLinkedin } from "react-icons/ti"
 import { FaCheck } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi2";
 import { MdMenu } from "react-icons/md";
+import emails from "./emails.svg"
 const Icons = {
   TiArrowSortedDown,
   LiaJediOrder,
@@ -95,6 +96,7 @@ const Icons = {
   FaCheck,
   CiCalendar,
   HiUsers,
-  MdMenu
+  MdMenu,
+  emails
 };
 export default Icons;
