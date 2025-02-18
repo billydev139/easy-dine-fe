@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Defaults to localStorage for web
 import LoginSlice from "./loginSlice/subAdminLoginSlice";
+import ContacSlice from "./contactSlice/contactUsSlice";
 import themeReducer from "./themeSlice";
 
 // Persist configuration for themeSlice
@@ -26,6 +27,7 @@ const persistedThemeReducer = persistReducer(themePersistConfig, themeReducer);
 const store = configureStore({
   reducer: {
     login: LoginSlice, // Reducer for handling login state
+    contactUs: ContacSlice, // Reducer for handling contact form state
     theme: persistedThemeReducer, // Persisted theme reducer
   },
   middleware: (getDefaultMiddleware) =>

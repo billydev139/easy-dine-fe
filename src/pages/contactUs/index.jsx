@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import DefaultLayout from "../../layouts/defaultLayout";
-import HeroSection from "../homePage/heroSection";
 import Icons from "../../assets/icons";
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
@@ -9,9 +11,31 @@ import { renderButtonContent } from "../../components/renderLoader";
 import { navigationLinks } from "../../components/footer";
 import { Link } from "react-router-dom";
 import EasyDineMap from "../../components/googlemap";
+import { submitContactForm } from "../../store/contactSlice/contactUsSlice";
 
 const ContactUs = () => {
-  const [loading] = useState(false);
+  const dispatch = useDispatch();
+  const { isLoading, success, error } = useSelector((state) => state?.contactUs);
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      message: "",
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Last Name is required"),
+      email: Yup.string().email("Invalid email format").required("Email is required"),
+      phoneNumber: Yup.string().required("Phone number is required"),
+      message: Yup.string().required("Message is required"),
+    }),
+    onSubmit: (values) => {
+      dispatch(submitContactForm(values));
+    },
+  });
 
   return (
     <DefaultLayout>
@@ -79,7 +103,7 @@ const ContactUs = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={formik.handleSubmit}>
                 <div className="grid grid-cols-2 gap-8 items-center">
                   <InputField
                     type="text"
@@ -91,7 +115,15 @@ const ContactUs = () => {
                     placeholder="First Name*"
                     className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50"
                     name="firstName"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.firstName && formik.errors.firstName && (
+                    <p className="text-xs text-left mt-1 text-red-500">
+                      {formik.errors.firstName}
+                    </p>
+                  )}
                   <InputField
                     type="text"
                     textColor="text-black"
@@ -102,7 +134,15 @@ const ContactUs = () => {
                     placeholder="Last Name*"
                     className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50"
                     name="lastName"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.touched.lastName && formik.errors.lastName && (
+                    <p className="text-xs text-left mt-1 text-red-500">
+                      {formik.errors.lastName}
+                    </p>
+                  )}
                 </div>
                 <InputField
                   type="text"
@@ -114,7 +154,15 @@ const ContactUs = () => {
                   placeholder="Email address*"
                   className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full"
                   name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-xs text-left mt-1 text-red-500">
+                    {formik.errors.email}
+                  </p>
+                )}
                 <InputField
                   type="text"
                   textColor="text-black"
@@ -125,24 +173,41 @@ const ContactUs = () => {
                   placeholder="Phone number*"
                   className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full"
                   name="phoneNumber"
+                  value={formik.values.phoneNumber}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+                  <p className="text-xs text-left mt-1 text-red-500">
+                    {formik.errors.phoneNumber}
+                  </p>
+                )}
                 <textarea
                   placeholder="Write a message"
                   rows={5}
                   className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 pl-3 text-black focus:outline-none pr-4 w-full placeholder:text-primaryGray bg-[#F6F6F6] rounded-[10px] py-3"
                   name="message"
+                  value={formik.values.message}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.touched.message && formik.errors.message && (
+                  <p className="text-xs text-left mt-1 text-red-500">
+                    {formik.errors.message}
+                  </p>
+                )}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button
-                    type="button"
+                    type="submit"
                     background="bg-primaryBlue"
                     className="text-white py-3 px-4 w-full rounded font-semibold hover:bg-white border hover:border hover:border-primaryBlue hover:text-primaryBlue transition-all"
+                    disabled={isLoading}
                   >
                     {renderButtonContent(
-                      loading,
+                      isLoading,
                       "Send message",
                       <Icons.MdLocalPhone
                         size={21}
@@ -152,6 +217,8 @@ const ContactUs = () => {
                   </Button>
                 </motion.div>
               </form>
+              {success && <p className="text-green-500 mt-4">Message sent successfully!</p>}
+              {error && <p className="text-red-500 mt-4">{error}</p>}
             </motion.div>
           </div>
         </motion.div>

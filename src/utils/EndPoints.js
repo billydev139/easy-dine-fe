@@ -6,6 +6,10 @@ const config = {
         LOGIN: "/auth/login",
 
       },
+      CONTACT_US: {
+        SUBMIT: "/contact/contact",
+
+      },
     },
   };
   
