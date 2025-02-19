@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 import DefaultLayout from "../../layouts/defaultLayout";
 import Icons from "../../assets/icons";
 import InputField from "../../components/inputField";
 import Button from "../../components/button";
-import { renderButtonContent } from "../../components/renderLoader";
 import { navigationLinks } from "../../components/footer";
 import { Link } from "react-router-dom";
 import EasyDineMap from "../../components/googlemap";
@@ -15,7 +15,8 @@ import { submitContactForm } from "../../store/contactSlice/contactUsSlice";
 
 const ContactUs = () => {
   const dispatch = useDispatch();
-  const { isLoading, success, error } = useSelector((state) => state?.contactUs);
+  const { isLoading, success, error } = useSelector((state) => state.contactUs);
+  console.log(success,"success")
 
   const formik = useFormik({
     initialValues: {
@@ -32,8 +33,23 @@ const ContactUs = () => {
       phoneNumber: Yup.string().required("Phone number is required"),
       message: Yup.string().required("Message is required"),
     }),
-    onSubmit: (values) => {
-      dispatch(submitContactForm(values));
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        console.log(values, "values for contactus form");
+        const response = await dispatch(submitContactForm(values));
+        console.log(response, "response for contactus form");
+        if (response) {
+          Swal.fire({
+            title: "Success!",
+            text: response.message,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          resetForm();
+        }
+      } catch (error) {
+        console.error("Error submitting contact form:", error);
+      }
     },
   });
 
@@ -206,18 +222,11 @@ const ContactUs = () => {
                     className="text-white py-3 px-4 w-full rounded font-semibold hover:bg-white border hover:border hover:border-primaryBlue hover:text-primaryBlue transition-all"
                     disabled={isLoading}
                   >
-                    {renderButtonContent(
-                      isLoading,
-                      "Send message",
-                      <Icons.MdLocalPhone
-                        size={21}
-                        className="text-primaryGray hidden"
-                      />
-                    )}
+                    {isLoading ? "Sending..." : "Send message"}
                   </Button>
                 </motion.div>
               </form>
-              {success && <p className="text-green-500 mt-4">Message sent successfully!</p>}
+              {/* {success && <p className="text-green-500 mt-4">{success.message}</p>} */}
               {error && <p className="text-red-500 mt-4">{error}</p>}
             </motion.div>
           </div>

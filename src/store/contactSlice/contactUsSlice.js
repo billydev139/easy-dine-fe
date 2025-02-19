@@ -38,8 +38,9 @@ export const submitContactForm = (formData) => async (dispatch) => {
   dispatch(ContactUsStart());
   try {
     const response = await axiosWithoutToken.post(config.endPoints.CONTACT_US.SUBMIT, formData);
+    console.log("🚀 ~ submitContactForm ~ response", response);
 
-    if (response && response.status === 200) {
+    if (response && response.status === 201) {
       dispatch(ContactUsSuccess(response.data));
       console.log("🚀 ~ submitContactForm ~ response:", response);
       return response.data;
