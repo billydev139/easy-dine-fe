@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
 import { useFormik } from "formik";
+import Swal from "sweetalert2";
 import * as Yup from "yup";
 import {
   FaRegUser,
@@ -12,35 +14,44 @@ import { MdOutlineEmail } from "react-icons/md";
 import { RiLockLine } from "react-icons/ri";
 import Images from "../../assets/images";
 import RegisterVideo from "../../assets/video/1192-143842659.mp4";
+import { RegisterUserHandler } from "../../store/loginSlice/authSlice";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const products = [
-    { id: "restaurant", name: "Restaurant" },
-    { id: "bar", name: "Bar" },
-    { id: "cafe", name: "Cafe" },
-    { id: "pizza", name: "Pizza" },
-    { id: "bbq", name: "BBQ" },
+  const packages = [
+    { id: "basic", name: "Basic" },
+    { id: "business", name: "Business" },
+    { id: "enterprise", name: "Enterprise" },
+  ];
+
+  const paymentMethods = [
+    { id: "direct_debit", name: "Direct Debit" },
+    { id: "credit_card", name: "Credit Card" },
+    { id: "invoice", name: "Invoice" },
   ];
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      businessName: "",
+      address: "",
+      contactPerson: "",
       email: "",
       password: "",
       confirmPassword: "",
-      businessType: "",
+      package: "",
+      paymentMethod: "",
       termsAccepted: false,
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
+      businessName: Yup.string().required("Business name is required"),
+      address: Yup.string().required("Address is required"),
+      contactPerson: Yup.string().required("Contact person is required"),
       email: Yup.string()
         .email("Invalid email format")
         .required("Email is required"),
@@ -50,17 +61,19 @@ const Register = () => {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], "Passwords must match")
         .required("Confirm password is required"),
-      businessType: Yup.string().required("Business type is required"),
+      package: Yup.string().required("Package selection is required"),
+      paymentMethod: Yup.string().required("Payment method is required"),
       termsAccepted: Yup.boolean().oneOf([true], "You must accept the terms and conditions"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log('values: ', values);
       if (activeStep === 1) {
         // Validate step 1
         const errors = formik.validateForm();
         
         formik.setTouched({
-          businessType: true,
+          package: true,
+          paymentMethod: true,
           termsAccepted: true, // Make sure terms are also touched
         });
 
@@ -71,12 +84,30 @@ const Register = () => {
           console.log("Step 1 validation errors:", errors);
         }
       } else {
-        // Final submission logic
-        console.log("Final Submit values:", values); // Replace with your submission logic
-        setIsSuccess(true);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+        try {
+          const response = await dispatch(RegisterUserHandler(values));
+          if (!response.error) {
+            setIsSuccess(true);
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 2000);
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: response.error,
+              icon: "error",
+              confirmButtonText: "OK",
+            });
+          }
+        } catch (error) {
+          console.error("Error during registration:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "An unexpected error occurred. Please try again later.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
       }
     },
   });
@@ -135,37 +166,116 @@ const Register = () => {
           </div>
 
           <h2 className="md:text-[40px] leading-10 text-xl mb-2">
-            {activeStep === 1 ? "Choose Your Product" : "Create Your Account"}
+            {activeStep === 1 ? "Business Details" : "Create Your Account"}
           </h2>
           <p className="text-[#585858] font-medium mb-8 md:text-[16px] text-[14px] text-center mt-3">
-            {activeStep === 1 ? "Select your business type and plan" : "Setting up an account takes less than one minute"}
+            {activeStep === 1 ? "Enter your business details and select a package" : "Setting up an account takes less than one minute"}
           </p>
 
           <form className="w-full" onSubmit={formik.handleSubmit}>
             {activeStep === 1 ? (
-              // Step 1: Product Selection
+              // Step 1: Business Details and Package Selection
               <>
+                {/* Business Name */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
+                    <input
+                      type="text"
+                      name="businessName"
+                      className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
+                      placeholder="Business name"
+                      value={formik.values.businessName}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  </div>
+                  {formik.touched.businessName && formik.errors.businessName && (
+                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.businessName}</p>
+                  )}
+                </div>
+
+                {/* Address */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
+                    <input
+                      type="text"
+                      name="address"
+                      className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
+                      placeholder="Address"
+                      value={formik.values.address}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  </div>
+                  {formik.touched.address && formik.errors.address && (
+                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.address}</p>
+                  )}
+                </div>
+
+                {/* Contact Person */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
+                    <FaRegUser size={22} color="black" />
+                    <input
+                      type="number"
+                      name="contactPerson"
+                      className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
+                      placeholder="Contact person"
+                      value={formik.values.contactPerson}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                  </div>
+                  {formik.touched.contactPerson && formik.errors.contactPerson && (
+                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.contactPerson}</p>
+                  )}
+                </div>
+
+                {/* Package Selection */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Business type/service *</label>
+                  <label className="block text-sm font-medium mb-2">Package *</label>
                   <select
-                    name="businessType"
-                    value={formik.values.businessType}
+                    name="package"
+                    value={formik.values.package}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="">Select business type</option>
-                    {products.map((product) => (
-                      <option key={product.id} value={product.id}>
-                        {product.name}
+                    <option value="">Select package</option>
+                    {packages.map((pkg) => (
+                      <option key={pkg.id} value={pkg.id}>
+                        {pkg.name}
                       </option>
                     ))}
                   </select>
-                  {formik.touched.businessType && formik.errors.businessType && (
-                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.businessType}</p>
+                  {formik.touched.package && formik.errors.package && (
+                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.package}</p>
                   )}
                 </div>
 
+                {/* Payment Method */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium mb-2">Payment Method *</label>
+                  <select
+                    name="paymentMethod"
+                    value={formik.values.paymentMethod}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select payment method</option>
+                    {paymentMethods.map((method) => (
+                      <option key={method.id} value={method.id}>
+                        {method.name}
+                      </option>
+                    ))}
+                  </select>
+                  {formik.touched.paymentMethod && formik.errors.paymentMethod && (
+                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.paymentMethod}</p>
+                  )}
+                </div>
+
+                {/* Terms and Conditions */}
                 <div className="mb-6">
                   <label className="flex items-start gap-2 text-sm text-[#585858]">
                     <input
@@ -175,7 +285,7 @@ const Register = () => {
                       checked={formik.values.termsAccepted}
                       onChange={formik.handleChange}
                     />
-                    <span>I accept the Terms & Conditions</span>
+                    <span>I accept the Terms & Conditions and Privacy Policy</span>
                   </label>
                   {formik.touched.termsAccepted && formik.errors.termsAccepted && (
                     <p className="text-xs text-left mt-1 text-red-500">{formik.errors.termsAccepted}</p>
@@ -185,44 +295,6 @@ const Register = () => {
             ) : (
               // Step 2: Account Creation Form
               <>
-                {/* First Name */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
-                    <FaRegUser size={22} color="black" />
-                    <input
-                      type="text"
-                      name="firstName"
-                      className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
-                      placeholder="First name"
-                      value={formik.values.firstName}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                  </div>
-                  {formik.touched.firstName && formik.errors.firstName && (
-                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.firstName}</p>
-                  )}
-                </div>
-
-                {/* Last Name */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
-                    <FaRegUser size={22} color="black" />
-                    <input
-                      type="text"
-                      name="lastName"
-                      className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
-                      placeholder="Last name"
-                      value={formik.values.lastName}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                    />
-                  </div>
-                  {formik.touched.lastName && formik.errors.lastName && (
-                    <p className="text-xs text-left mt-1 text-red-500">{formik.errors.lastName}</p>
-                  )}
-                </div>
-
                 {/* Email */}
                 <div className="mb-4">
                   <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
@@ -299,8 +371,8 @@ const Register = () => {
                 </button>
               )}
               <button
-              onClick={()=>setActiveStep(2)}
-                // type="submit"
+                type={activeStep === 1 ? "button" : "submit"}
+                onClick={activeStep === 1 ? () => setActiveStep(2) : undefined}
                 className={`p-3 bg-primaryBlue text-white rounded-lg font-semibold ${
                   activeStep === 2 ? "w-1/2" : "w-full"
                 }`}
