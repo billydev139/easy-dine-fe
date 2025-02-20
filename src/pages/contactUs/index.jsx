@@ -16,7 +16,7 @@ import { submitContactForm } from "../../store/contactSlice/contactUsSlice";
 const ContactUs = () => {
   const dispatch = useDispatch();
   const { isLoading, success, error } = useSelector((state) => state.contactUs);
-  console.log(success,"success")
+  console.log(success, "success");
 
   const formik = useFormik({
     initialValues: {
@@ -35,20 +35,33 @@ const ContactUs = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log(values, "values for contactus form");
+        // console.log(values, "values for contactus form");
         const response = await dispatch(submitContactForm(values));
-        console.log(response, "response for contactus form");
-        if (response) {
+        // console.log(response, "response for contactus form");
+        if (!response.error) {
           Swal.fire({
             title: "Success!",
-            text: response.message,
+            text: "Your message has been sent successfully.",
             icon: "success",
             confirmButtonText: "OK",
           });
           resetForm();
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: response.error,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         }
       } catch (error) {
         console.error("Error submitting contact form:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "There was an error submitting your message. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
   });
@@ -226,8 +239,6 @@ const ContactUs = () => {
                   </Button>
                 </motion.div>
               </form>
-              {/* {success && <p className="text-green-500 mt-4">{success.message}</p>} */}
-              {error && <p className="text-red-500 mt-4">{error}</p>}
             </motion.div>
           </div>
         </motion.div>
