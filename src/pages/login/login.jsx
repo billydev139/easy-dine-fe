@@ -6,14 +6,14 @@ import loginVideo from "../../assets/video/126334-735976704_small.mp4";
 import Icons from "../../assets/icons";
 import Images from "../../assets/images";
 import { renderButtonContent } from "../../components/renderLoader";
-import { LogInUserHandler } from "../../store/loginSlice/subAdminLoginSlice";
+import { LogInUserHandler } from "../../store/loginSlice/authSlice";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, error } = useSelector((state) => state?.login);
+  const { isLoading, error } = useSelector((state) => state?.auth);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {

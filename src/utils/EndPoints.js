@@ -5,7 +5,7 @@ const config = {
     endPoints: {
       SUB_ADMIN: {
         LOGIN: "/auth/login",
-
+        SIGNUP:"/auth/register",
       },
       CONTACT_US: {
         SUBMIT: "/contact/contact",
@@ -13,6 +13,5 @@ const config = {
       },
     },
   };
-  
   export { config };
   

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
@@ -66,51 +66,71 @@ const Register = () => {
       termsAccepted: Yup.boolean().oneOf([true], "You must accept the terms and conditions"),
     }),
     onSubmit: async (values) => {
-      console.log('values: ', values);
-      if (activeStep === 1) {
-        // Validate step 1
-        const errors = formik.validateForm();
-        
-        formik.setTouched({
-          package: true,
-          paymentMethod: true,
-          termsAccepted: true, // Make sure terms are also touched
-        });
-
-        // If no errors, proceed to step 2
-        if (!Object.keys(errors).length) {
-          setActiveStep(2);
+      try {
+        const response = await dispatch(RegisterUserHandler(values));
+        if (!response.error) {
+          setIsSuccess(true);
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 2000);
         } else {
-          console.log("Step 1 validation errors:", errors);
-        }
-      } else {
-        try {
-          const response = await dispatch(RegisterUserHandler(values));
-          if (!response.error) {
-            setIsSuccess(true);
-            setTimeout(() => {
-              navigate("/dashboard");
-            }, 2000);
-          } else {
-            Swal.fire({
-              title: "Error!",
-              text: response.error,
-              icon: "error",
-              confirmButtonText: "OK",
-            });
-          }
-        } catch (error) {
-          console.error("Error during registration:", error);
           Swal.fire({
             title: "Error!",
-            text: "An unexpected error occurred. Please try again later.",
+            text: response.error,
             icon: "error",
             confirmButtonText: "OK",
           });
         }
+      } catch (error) {
+        console.error("Error during registration:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "An unexpected error occurred. Please try again later.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
   });
+
+  const handleButtonClick = async () => {
+    const errors = await formik.validateForm();
+    formik.setTouched({
+      businessName: true,
+      address: true,
+      contactPerson: true,
+      email: true,
+      password: true,
+      confirmPassword: true,
+      package: true,
+      paymentMethod: true,
+      termsAccepted: true,
+    });
+
+    if (activeStep === 1) {
+      if (errors.businessName || errors.address || errors.contactPerson || errors.package || errors.paymentMethod || errors.termsAccepted) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please fill in all required fields.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      } else {
+        setActiveStep(2);
+      }
+    } else if (activeStep === 2) {
+      if (errors.email || errors.password || errors.confirmPassword) {
+        Swal.fire({
+          title: "Error!",
+          text: "Please fill in all required fields.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      } else {
+        formik.handleSubmit();
+      }
+    }
+  };
 
   if (isSuccess) {
     return (
@@ -217,12 +237,15 @@ const Register = () => {
                   <div className="flex items-center gap-4 border border-[#CCCCCC] rounded-lg p-3">
                     <FaRegUser size={22} color="black" />
                     <input
-                      type="number"
+                      type="tel"
                       name="contactPerson"
                       className="w-full outline-none bg-transparent text-base text-black placeholder:text-[#bdbdbd]"
                       placeholder="Contact person"
                       value={formik.values.contactPerson}
-                      onChange={formik.handleChange}
+                      onChange={(e) => {
+                        const onlyNums = e.target.value.replace(/[^0-9]/g, ''); 
+                        formik.setFieldValue('contactPerson', onlyNums);
+                      }}
                       onBlur={formik.handleBlur}
                     />
                   </div>
@@ -372,7 +395,7 @@ const Register = () => {
               )}
               <button
                 type={activeStep === 1 ? "button" : "submit"}
-                onClick={activeStep === 1 ? () => setActiveStep(2) : undefined}
+                onClick={handleButtonClick}
                 className={`p-3 bg-primaryBlue text-white rounded-lg font-semibold ${
                   activeStep === 2 ? "w-1/2" : "w-full"
                 }`}
