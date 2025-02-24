@@ -49,14 +49,33 @@ const Register = () => {
       termsAccepted: false,
     },
     validationSchema: Yup.object({
-      businessName: Yup.string().required("Business name is required"),
-      address: Yup.string().required("Address is required"),
-      contactPerson: Yup.string().required("Contact person is required"),
+      businessName: Yup.string()
+      .required("Business name is required") // Check for empty input
+      .matches(
+        /^(?=.*[A-Za-z])[A-Za-z0-9\s!@#$%^&*(),.?":{}|<>_-]+$/,
+        "Business name must contain at least one alphabet"
+      ),
+      address: Yup.string()
+      .required("Address is required")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\s,.-/]+$/,
+        "Address must contain both letters and numbers"
+      ),
+      contactPerson: Yup.string()
+      .matches(
+        /^\+?[1-9]\d{9,14}$/,
+        "Enter a valid phone number (10-15 digits, optional '+' for country code)"
+      )
+     .required("Contact person is required"),
       email: Yup.string()
         .email("Invalid email format")
         .required("Email is required"),
-      password: Yup.string()
+        password: Yup.string()
         .min(6, "Password must be at least 6 characters")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/,
+          "Password must contain at least one uppercase letter, one lowercase letter, and one special character"
+        )
         .required("Password is required"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], "Passwords must match")
@@ -66,8 +85,10 @@ const Register = () => {
       termsAccepted: Yup.boolean().oneOf([true], "You must accept the terms and conditions"),
     }),
     onSubmit: async (values) => {
+      console.log("hello i am on submit function😎");
       try {
         const response = await dispatch(RegisterUserHandler(values));
+        console.log("Registration response:", response);
         if (!response.error) {
           setIsSuccess(true);
           setTimeout(() => {
@@ -93,7 +114,8 @@ const Register = () => {
     },
   });
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = async (e) => {
+    e.preventDefault();
     const errors = await formik.validateForm();
     formik.setTouched({
       businessName: true,
@@ -127,7 +149,7 @@ const Register = () => {
           confirmButtonText: "OK",
         });
       } else {
-        formik.handleSubmit();
+        formik.submitForm();  // Trigger form submission
       }
     }
   };

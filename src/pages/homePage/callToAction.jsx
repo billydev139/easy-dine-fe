@@ -4,7 +4,7 @@ import Images from "../../assets/images";
 const CallToAction = () => {
   return (
     <div className="bg-primaryBlack py-44">
-      <div className="container mx-auto px-6 bg-gradient-to-b from-[#0f172a] to-[#111621]">
+      <div className="container mx-auto px-6 bg-gradient-to-b rounded-2xl from-[#0f172a] to-[#111621]">
         <div className= " relative py-10 contact-bg text-white rounded-lg grid grid-cols-2 items-center lg:items-start p-8 space-y-6 lg:space-y-0 lg:space-x-8">
           {/* Text Content */}
           <div className="flex-1">

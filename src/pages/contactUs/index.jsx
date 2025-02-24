@@ -27,12 +27,19 @@ const ContactUs = () => {
       message: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name is required"),
-      lastName: Yup.string().required("Last Name is required"),
+      firstName: Yup.string()
+      .matches(/^[A-Za-z\s]+$/, "First Name should contain only alphabets")
+      .required("First Name is required"),
+    
+    lastName: Yup.string()
+      .matches(/^[A-Za-z\s]+$/, "Last Name should contain only alphabets")
+      .required("Last Name is required"),
       email: Yup.string().email("Invalid email format").required("Email is required"),
-      phoneNumber: Yup.string().required("Phone number is required"),
-      message: Yup.string().required("Message is required"),
-    }),
+      phoneNumber: Yup.string()
+      .matches(/^[0-9+\-]+$/, "Phone number can only contain numbers, '+' and '-'")
+      .required("Phone number is required"),
+          message: Yup.string().required("Message is required"),
+        }),
     onSubmit: async (values, { resetForm }) => {
       try {
         // console.log(values, "values for contactus form");
@@ -142,8 +149,8 @@ const ContactUs = () => {
                     borderShape="rounded-[10px]"
                     paddingY="py-3"
                     placeholder="First Name*"
-                    className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50"
-                    name="firstName"
+                    className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 text-black"
+                    name="firstName" 
                     value={formik.values.firstName}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -161,7 +168,7 @@ const ContactUs = () => {
                     borderShape="rounded-[10px]"
                     paddingY="py-3"
                     placeholder="Last Name*"
-                    className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50"
+                    className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 text-black"
                     name="lastName"
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
@@ -181,7 +188,7 @@ const ContactUs = () => {
                   borderShape="rounded-[10px]"
                   paddingY="py-3"
                   placeholder="Email address*"
-                  className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full"
+                  className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full text-black"
                   name="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -200,7 +207,7 @@ const ContactUs = () => {
                   borderShape="rounded-[10px]"
                   paddingY="py-3"
                   placeholder="Phone number*"
-                  className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full"
+                  className="border border-gray-300 focus:border-primary focus:ring focus:ring-primary/50 w-full text-black"
                   name="phoneNumber"
                   value={formik.values.phoneNumber}
                   onChange={formik.handleChange}

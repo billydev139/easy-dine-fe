@@ -42,7 +42,7 @@ const EasyDineTransformation = () => {
                 viewport={{ once: true }}
                 className="flex items-start space-x-4 text-[20px] font-medium"
               >
-                <span className="h-3 w-3 mt-2 bg-blue-950 rounded-full"></span>
+                <span className="h-3 w-3 mt-2 bg-white rounded-full"></span>
                 <p>{point}</p>
               </motion.li>
             ))}
