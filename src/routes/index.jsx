@@ -32,6 +32,9 @@ const InventoryManagement = lazy(() =>
 const ManualOrderTool = lazy(() =>
   import("../pages/dashboard/manualOrderTool")
 );
+const EditRestaurant = lazy(() =>
+  import("../pages/dashboard/settings/editRestaurant")
+);
 const MenuManagement = lazy(() => import("../pages/dashboard/menuManagement"));
 const Features = lazy(() => import("../pages/features/Features"));
 const Register = lazy(() => import("../pages/register/Register"));
@@ -64,6 +67,10 @@ const AppRoutes = () => {
     {
       path: "/restaurant-management/add-restaurant",
       component: <RestaurantManagement />,
+    },
+    {
+      path: "/edit-restaurant",
+      component: <EditRestaurant />,
     },
     {
       path: "/restaurant-management/list-restaurant",

@@ -60,11 +60,14 @@ const navigationItems = [
   //   label: "Analytics & Insights",
   //   icon: <Icons.MdOutlineAnalytics size={22} />,
   // },
-  // {
-  //   path: "#",
-  //   label: "Settings",
-  //   icon: <Icons.IoSettingsOutline size={22} />,
-  // },
+  {
+    path: "#",
+    label: "Settings",
+    icon: <Icons.IoSettingsOutline size={22} />,
+    submenu: [
+      { path: "/edit-restaurant", label: "Edit Restaurant" },
+    ],
+  },
 ];
 
 const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
