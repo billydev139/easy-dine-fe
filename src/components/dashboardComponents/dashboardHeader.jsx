@@ -1,11 +1,18 @@
 import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
 import Icons from "../../assets/icons";
 // import SearchBar from "../searchBar";
 import ThemeToggleButton from "../ThemeToggleButton";
+import SettingsPopup from "./settingsPopup";
+import NotificationPopup from "./notificationPopup";
 
 /* eslint-disable react/prop-types */
 const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
   const theme = useSelector((state) => state?.theme?.theme);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+  const popupRef = useRef(null);
+  const notificationRef = useRef(null);
 
   return (
     <div className={`transition duration-300 flex justify-between items-center  shadow p-3 rounded-md ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}`} >
@@ -22,7 +29,7 @@ const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
         </button>
         <h2 className="text-xl font-semibold">Dashboard</h2>
       </div>
-      <div className="flex items-center space-x-4 ">
+      <div className="flex items-center space-x-4 relative">
         {/* <select
           name=""
           id=""
@@ -34,9 +41,24 @@ const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="mx-2">
         <ThemeToggleButton/>
         </div>
+        <button
+          className="relative"
+          onClick={() => setPopupOpen((prev) => !prev)}
+        >
+          <Icons.IoSettingsOutline size={22} />
+        </button>
+        <div ref={popupRef}>
+          <SettingsPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+        </div>
+          {/* Notification Button */}
         <div className="flex items-center gap-2 relative py-2 border-r-2 border-white pr-4">
           <p className="h-2 w-2 bg-red-600 rounded-full absolute left-4 top-2"></p>
-          <Icons.PiBellSimpleBold  size={30} />
+          <button onClick={() => setNotificationOpen((prev) => !prev)}>
+            <Icons.PiBellSimpleBold size={30} />
+          </button>
+        </div>
+        <div ref={notificationRef}>
+          <NotificationPopup isOpen={notificationOpen} onClose={() => setNotificationOpen(false)} />
         </div>
         
         

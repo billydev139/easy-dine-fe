@@ -38,7 +38,7 @@ import { RiDeleteBin6Line, RiLockLine, RiMenu3Fill } from "react-icons/ri";
 import { SiNginxproxymanager } from "react-icons/si";
 import { TfiWallet } from "react-icons/tfi";
 import { TiArrowSortedDown, TiMessages, TiSocialLinkedin } from "react-icons/ti";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck,FaGlobe } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi2";
 import { MdMenu } from "react-icons/md";
 const Icons = {
@@ -47,6 +47,7 @@ const Icons = {
   AiOutlineEdit,
   FaCaretDown,
   FaEllipsisH,
+  FaGlobe,
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft,
   LuDownload,
