@@ -1,25 +1,22 @@
 import { useCallback, useState } from "react";
-
-// import SelectField from "../../../components/selectField";
+import { useDropzone } from "react-dropzone";
+import { useSelector, useDispatch } from "react-redux";
+//import { updateRestaurantDetails } from "../../../redux/slices/restaurantSlice";
 import DashboardLayout from "../../../layouts/dashboardLayout";
 import InputField from "../../../components/inputField";
 import SectionHeading from "../../../components/sectionHeading";
-import Button from "../../../components/button";
-import { useDropzone } from "react-dropzone";
 import Icons from "../../../assets/icons";
-import { useSelector } from "react-redux";
+import Button from "../../../components/button";
 
 const RestaurantManagement = () => {
-  const [newInterest, setNewInterest] = useState("");
-  const options = [
-    { value: "Muslim", label: "Muslim" },
-    { value: "Christian", label: "Christian" },
-  ];
+  const dispatch = useDispatch();
+  // const restaurantDetails = useSelector((state) => state.restaurant.details);
+  const theme = useSelector((state) => state.theme.theme);
 
   const [uploadedFile, setUploadedFile] = useState(null);
+  // const [formData, setFormData] = useState(restaurantDetails);
 
   const onDrop = useCallback((acceptedFiles) => {
-    // Handle file upload
     const file = acceptedFiles[0];
     setUploadedFile(file);
   }, []);
@@ -29,210 +26,232 @@ const RestaurantManagement = () => {
     accept: "image/*",
     multiple: false,
   });
-  const theme = useSelector((state) => state?.theme?.theme);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // const handleSubmit = () => {
+  //   dispatch(updateRestaurantDetails(formData));
+  // };
+
   return (
     <DashboardLayout>
-      <div className={`container mx-auto ${theme === 'dark' ? '!bg-primaryBlue text-white ' : '!bg-white text-primaryBlue '}  rounded-md shadow-md mb-20 mt-8`}>
-        <div className="flex justify-between items-center ">
-          <SectionHeading
-            heading={"Add Restaurant"}
-            para={"Lorem ipsum dolor sit amet,consecteture"}
-          />
-          <div>
-            <Button>View All</Button>
-            <select className="border rounded bg-secondaryGray font-medium text-primaryBlack px-3 py-2 focus:outline-none mx-4">
-              <option>Location</option>
-              <option>Yearly</option>
-            </select>
-          </div>
-        </div>
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6  p-6">
-          <div>
-            {/* <label className=" text-sm font-semibold text-primaryBlack">Company Name</label> */}
-            <InputField
-              type="text"
-              label={"Restaurant Name"}
-              
-              placeholder="Restaurant Name"
-              // borderColor={"border-white"}
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-            <InputField
-              type="text"
-              label={"Address"}
-              labelstyle={""}
-              placeholder="Type your Address...."
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-            {/* <label className="block text-sm font-medium text-gray-700">
-              Application Email/URL
-            </label> */}
-            <InputField
-              type="text"
-              label={"Phone Number"}
-              placeholder="031XXXXXXXX"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          <div>
-            <InputField
-              type="text"
-              label={"Email Address"}
-              placeholder="Type your Address...."
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          <div>
-            {/* <label className=" text-sm font-semibold text-primaryBlack">Company Name</label> */}
-            <InputField
-              type="text"
-              label={"Website"}
-              placeholder="pizzaplanetxyz.com"
-              // borderColor={"border-white"}
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-            <InputField
-              type="text"
-              label={"Operating Hours"}
-              labelstyle={""}
-              placeholder="24 hours"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-           
-            <InputField
-              type="text"
-              label={"Type of Cuisine"}
-              placeholder="Chinese"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          <div>
-           
-            <InputField
-              type="text"
-              label={"Delivery Available"}
-              placeholder="Yes/No"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          <div>
-            <InputField
-              type="text"
-              label={"Manager Name"}
-              placeholder="Enter your name...."
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          <div>
-         
-            <InputField
-              type="text"
-              label={"Manager Contact"}
-              placeholder="031XXXXXXXX"
-              // borderColor={"border-white"}
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-            <InputField
-              type="text"
-              label={"Status"}
-              labelstyle={""}
-              placeholder="24 hours"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full  border rounded-md "
-            />
-          </div>
-          <div>
-           
-            <InputField
-              type="text"
-              label={"Seating Capacity"}
-              placeholder="Type your Capacity"
-              placeholderColor={"placeholder:text-primaryGray"}
-              backgroundcolor={"bg-transparent"}
-              className="w-full mt-1 p-2 border rounded-md"
-            />
-          </div>
-          {/* ////////////////////////drop zone /////////////////////////// */}
-          <div className="col-span-2">
-      <label className="block mb-2 text-white font-medium">Upload Logo</label>
       <div
-        {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer  hover:border-blue-500 transition-all"
+        className={`container mx-auto rounded-md shadow-md mb-20 mt-8 p-6 ${
+          theme === "dark"
+            ? "!bg-primaryBlue text-white"
+            : "!bg-white text-primaryBlue"
+        }`}
       >
-        <input {...getInputProps()} />
-        <div className="flex flex-col items-center text-gray-400">
-            <Icons.IoMdCloudUpload size={60} />
-          {/* <svg
-            className="w-10 h-10 mb-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 3a1 1 0 011-1h12a1 1 0 011 1v6a1 1 0 102 0V3a3 3 0 00-3-3H4a3 3 0 00-3 3v10a1 1 0 102 0V3zm14 10a1 1 0 10-2 0v4H5v-4a1 1 0 10-2 0v4a3 3 0 003 3h8a3 3 0 003-3v-4z"
-              clipRule="evenodd"
+        <SectionHeading title="Restaurant Management" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div className="bg-white shadow-md rounded-md p-4 mb-6">
+            <h2 className="text-lg font-semibold mb-4">Restaurant Image</h2>
+            <img
+              src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg"
+              alt="Restaurant"
+              className="w-full h-60 object-cover rounded-3xl"
             />
-          </svg> */}
-          <p className="text-sm">Drag File to Upload</p>
-          <p className="text-xs">(or click to choose a file)</p>
-        </div>
-      </div>
-
-      {/* Display Uploaded File Name */}
-      {uploadedFile && (
-        <div className="mt-2 text-sm text-white">
-          File Uploaded: <strong>{uploadedFile.name}</strong>
-        </div>
-      )}
-    </div>
-     
-          <div className="col-span-2 flex justify-end gap-2 py-12">
-          <button
-              type="submit"
-              className=" px-4 py-2 bg-inherit border border-[#7B68FF] text-secondaryBlue font-medium rounded-md  "
-            >
-              Back
-            </button>
-            <button
-              type="submit"
-              className=" px-4 py-2 bg-[#EBEBEB] border border-[#EBEBEB] text-primaryBlack font-medium rounded-md  "
-            >
-              Add Restaurant
-            </button>
+            <div className="flex gap-4 mt-6">
+              <button 
+              onClick={() => {}} 
+              className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-black text-bold">
+                Edit
+              </button>
+              <button 
+              onClick={() => setUploadedFile(null)} 
+              className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-[#0075FF] text-bold">
+                Remove
+              </button>
+            </div>
           </div>
-        </form>
+          <div className="bg-white shadow-md rounded-md p-4 mb-6">
+            <img
+              src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg"
+              alt="Restaurant"
+             className="w-full h-60 object-cover rounded-3xl"
+            />
+            <div className="flex gap-4 mt-4">
+              <button onClick={() => {}} 
+              className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-black text-bold">
+                Edit
+              </button>
+              <button onClick={() => setUploadedFile(null)}
+               className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-[#0075FF] text-bold">
+                Remove
+              </button>
+            </div>
+          </div>
+          <div className="bg-white shadow-md rounded-md p-4 mb-6">
+            <img
+              src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg"
+              alt="Restaurant"
+              className="w-full h-60 object-cover rounded-3xl"
+            />
+            <div className="flex gap-4 mt-4">
+              <button onClick={() => {}} 
+             className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-black text-bold">
+                Edit
+              </button>
+              <button onClick={() => setUploadedFile(null)}
+               className="w-32 px-4 py-2 border border-[#7B68FF] text-white font-medium rounded-xl bg-[#0075FF] text-bold">
+                Remove
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <div className="shadow-md">
+            <InputField
+              type="text"
+              name="name"
+              label="Restaurant Name"
+              //value={formData.name}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="address"
+              label="Address"
+              //value={formData.address}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+              
+            />
+            <InputField
+              type="text"
+              name="phone"
+              label="Phone Number"
+              //value={formData.phone}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"            
+              />
+            <InputField
+              type="text"
+              name="email"
+              label="Email Address"
+              //value={formData.email}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="website"
+              label="Website"
+              //value={formData.website}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="operatingHours"
+              label="Operating Hours"
+              //value={formData.operatingHours}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="cuisine"
+              label="Type of Cuisine"
+              //value={formData.cuisine}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="delivery"
+              label="Delivery Available"
+             //value={formData.delivery}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="managerName"
+              label="Manager Name"
+              //value={formData.managerName}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="managerContact"
+              label="Manager Contact"
+              //value={formData.managerContact}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="status"
+              label="Status"
+              //value={formData.status}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+            <InputField
+              type="text"
+              name="seatingCapacity"
+              label="Seating Capacity"
+              //value={formData.seatingCapacity}
+              onChange={handleChange}
+              borderColor={"#9EC3FF"}
+              backgroundcolor="bg-[#EEF5FF]"
+              className="w-full border border-[#9EC3FF] rounded-md"
+            />
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <label className="block font-medium mb-2">Upload Logo</label>
+          <div
+            {...getRootProps()}
+            className="border-2 border-dashed p-6 rounded-lg text-center cursor-pointer"
+          >
+            <input {...getInputProps()} />
+            <Icons.IoMdCloudUpload
+              size={40}
+              className="mx-auto text-gray-400"
+            />
+            <p className="text-sm">Drag & drop or click to upload</p>
+          </div>
+          {uploadedFile && (
+            <p className="mt-2 text-sm">File: {uploadedFile.name}</p>
+          )}
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <Button 
+          //onClick={handleSubmit}
+          >Save Changes</Button>
+        </div>
       </div>
     </DashboardLayout>
   );

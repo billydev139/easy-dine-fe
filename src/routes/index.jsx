@@ -65,7 +65,7 @@ const AppRoutes = () => {
     { path: "/inventory-management", component: <InventoryManagement /> },
     { path: "/manual-order", component: <ManualOrderTool /> },
     {
-      path: "/restaurant-management/add-restaurant",
+      path: "/add-restaurant",
       component: <RestaurantManagement />,
     },
     {

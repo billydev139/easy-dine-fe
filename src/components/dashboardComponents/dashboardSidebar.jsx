@@ -12,14 +12,19 @@ const navigationItems = [
     icon: <Icons.MdOutlineDashboard size={22} />,
   },
   {
-    path: "/restaurant-management",
-    label: "Restaurant Management",
+    path: "/add-restaurant",
+    label: "Add Restaurant",
     icon: <Icons.HiOutlineBuildingStorefront size={22} />,
-    submenu: [
-      { path: "/restaurant-management/add-restaurant", label: "Add Restaurant" },
-      { path: "/restaurant-management/list-restaurant", label: "Manage Restaurant" },
-    ],
   },
+  // {
+  //   path: "/restaurant-management",
+  //   label: "Restaurant Management",
+  //   icon: <Icons.HiOutlineBuildingStorefront size={22} />,
+  //   // submenu: [
+  //   //   { path: "/restaurant-management/add-restaurant", label: "Add Restaurant" },
+  //   //   { path: "/restaurant-management/list-restaurant", label: "Manage Restaurant" },
+  //   // ],
+  // },
   {
     path: "/user-management",
     label: "User Management",
