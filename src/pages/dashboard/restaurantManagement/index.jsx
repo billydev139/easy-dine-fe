@@ -15,12 +15,36 @@ const modules = {
   toolbar: [
     [{ size: [] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
     ["link", "image", "video"],
     ["clean"],
   ],
 };
-
+const openingHoursOptions = [
+  { value: "06:00", label: "06:00 AM" },
+  { value: "07:00", label: "07:00 AM" },
+  { value: "08:00", label: "08:00 AM" },
+  { value: "09:00", label: "09:00 AM" },
+  { value: "10:00", label: "10:00 AM" },
+  { value: "11:00", label: "11:00 AM" },
+  { value: "12:00", label: "12:00 PM" },
+  { value: "13:00", label: "01:00 PM" },
+  { value: "14:00", label: "02:00 PM" },
+  { value: "15:00", label: "03:00 PM" },
+  { value: "16:00", label: "04:00 PM" },
+  { value: "17:00", label: "05:00 PM" },
+  { value: "18:00", label: "06:00 PM" },
+  { value: "19:00", label: "07:00 PM" },
+  { value: "20:00", label: "08:00 PM" },
+  { value: "21:00", label: "09:00 PM" },
+  { value: "22:00", label: "10:00 PM" },
+  { value: "23:00", label: "11:00 PM" },
+];
 const countryOptions = [
   { value: "AF", label: "Afghanistan" },
   { value: "AL", label: "Albania" },
@@ -38,6 +62,14 @@ const countryOptions = [
   { value: "AT", label: "Austria" },
   { value: "AZ", label: "Azerbaijan" },
   // Add more countries as needed
+];
+const discountOptions = [
+  { value: "5", label: "5%" },
+  { value: "10", label: "10%" },
+  { value: "15", label: "15%" },
+  { value: "20", label: "20%" },
+  { value: "25", label: "25%" },
+  { value: "30", label: "30%" },
 ];
 
 const RestaurantManagement = () => {
@@ -63,8 +95,28 @@ const RestaurantManagement = () => {
     discount: "",
     managingDirector: "",
     staffMembers: [],
+    paymentMethods: ["MasterCard", "Twint"],
+  });
+  const [settings, setSettings] = useState({
+    closed: false,
+    breakfast_Menu: true,
+    optional_Selection_Packages: true,
+    age_Requirement_18_1: true,
+    minimum_Order_Value: false,
+    orderValue: 250,
+    storage_System: true,
+    easy_Meet: false,
+    monthly_Product_Updates: false,
+    take_Away: true,
+    age_Requirement_18: true,
   });
 
+  const toggleSetting = (key) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     setUploadedFile(file);
@@ -165,6 +217,52 @@ const RestaurantManagement = () => {
                 </button>
               </div>
             </div>
+            <div className="bg-white shadow-md rounded-md p-4 mb-6">
+              <h2 className="text-lg font-semibold mb-4">Settings</h2>
+              <div className="space-y-4">
+                {Object.keys(settings).map((key) =>
+                  key !== "orderValue" ? (
+                    <div key={key} className="flex items-center">
+                      {/* Toggle Button */}
+                      <button
+                        onClick={() => toggleSetting(key)}
+                        className={`w-10 h-5 flex items-center rounded-full p-0.5 transition ${
+                          settings[key] ? "bg-blue-500" : "bg-black"
+                        }`}
+                      >
+                        <div
+                          className={`w-4 h-4 bg-white rounded-full shadow-md transform transition ${
+                            settings[key] ? "translate-x-5" : ""
+                          }`}
+                        ></div>
+                      </button>
+
+                      {/* Setting Label - Very Close to Toggle */}
+                      <span className="ml-4 text-sm">
+                        {key
+                          .replace(/_/g, " ") // Replace underscores with spaces
+                          .split(" ") // Split words into an array
+                          .map(
+                            (word) =>
+                              word.charAt(0).toUpperCase() + word.slice(1)
+                          ) // Capitalize first letter of each word
+                          .join(" ")}{" "}
+                        {/* Join words back into a single string */}
+                      </span>
+                    </div>
+                  ) : (
+                    <div key={key} className="flex flex-col items-start">
+                      <span className="text-sm">Minimum Order Value</span>
+                      <input
+                        type="text"
+                        value={`${settings.orderValue} CHF`}
+                        className="border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl px-2 py-1 w-40 text-center mt-1"
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="shadow-md p-4 mb-6 bg-white rounded-md">
@@ -197,31 +295,50 @@ const RestaurantManagement = () => {
               className="bg-[#EEF5FF] border border-[#9EC3FF] rounded-xl mb-4"
             />
             <label className="block mb-2 font-semibold">Country</label>
-            <Select
-              options={countryOptions}
-              value={countryOptions.find(option => option.value === formData.country)}
-              onChange={handleCountryChange}
-              classNamePrefix="react-select"
-              className="w-full border border-[#9EC3FF] rounded-xl mb-4 bg-[#EEF5FF] px-7 py-[10px]"
-            />
+            <select
+              value={formData.country}
+              onChange={(e) => handleCountryChange(e.target.value)}
+              className="w-full border border-[#9EC3FF] rounded-xl px-4 py-3 focus:outline-none bg-[#EEF5FF]"
+            >
+              {countryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
             {/* Opening Hours Section */}
-            <div className="mb-4">
+            <div className="mb-4 mt-6">
               <label className="block mb-2 font-semibold">Opening Hours</label>
               <div className="flex items-center space-x-4">
-                <Select
-                  // options={openingHoursOptions}
-                  // value={openingHoursOptions.find(option => option.value === formData.openingTime)}
-                  onChange={(selectedOption) => setFormData({ ...formData, openingTime: selectedOption.value })}
-                  classNamePrefix="react-select"
-                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px]"
-                />
-                <Select
-                  // options={openingHoursOptions}
-                  // value={openingHoursOptions.find(option => option.value === formData.closingTime)}
-                  onChange={(selectedOption) => setFormData({ ...formData, closingTime: selectedOption.value })}
-                  classNamePrefix="react-select"
-                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px]"
-                />
+                <select
+                  value={formData.openingTime}
+                  onChange={(e) =>
+                    setFormData({ ...formData, openingTime: e.target.value })
+                  }
+                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px] focus:outline-none"
+                >
+                  <option value="">Select Opening Time</option>
+                  {openingHoursOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={formData.closingTime}
+                  onChange={(e) =>
+                    setFormData({ ...formData, closingTime: e.target.value })
+                  }
+                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px] focus:outline-none"
+                >
+                  <option value="">Select Closing Time</option>
+                  {openingHoursOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 
@@ -229,40 +346,86 @@ const RestaurantManagement = () => {
             <div className="mb-4 flex items-center justify-between">
               {/* Left Side: Toggle and Label */}
               <div className="flex items-center space-x-3">
-                <div onClick={() => setFormData({ ...formData, notAvailable: !formData.notAvailable })} className="cursor-pointer text-2xl">
-                  {formData.notAvailable ? <IoToggleSharp className="text-black" /> : <IoToggleSharp className="text-gray-400 rotate-180" />}
+                <div
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      notAvailable: !formData.notAvailable,
+                    })
+                  }
+                  className="cursor-pointer text-2xl"
+                >
+                  {formData.notAvailable ? (
+                    <IoToggleSharp className="text-black text-4xl" />
+                  ) : (
+                    <IoToggleSharp className="text-blue-500 rotate-180 text-4xl" />
+                  )}
                 </div>
-                <span className="text-gray-700 text-sm font-medium">Not Available</span>
+                <span className="text-gray-700 text-sm font-medium">
+                  Not Available
+                </span>
               </div>
 
               {/* Right Side: Select Dropdown */}
               <div className="w-1/3 ml-3">
-                <Select
-                  onChange={(selectedOption) => setFormData({ ...formData, discount: selectedOption.value })}
-                  classNamePrefix="react-select"
+                <select
+                  value={formData.discount || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, discount: e.target.value })
+                  }
                   className="border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px]"
-                  isDisabled={!formData.discountEnabled}
-                />
+                  disabled={!formData.discountEnabled}
+                >
+                  <option value="">Select Discount</option>
+                  {discountOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             {/* Discount in % Section */}
             <div className="mb-4 flex items-center justify-between">
               {/* Left Side: Toggle and Label */}
               <div className="flex items-center space-x-3">
-                <div onClick={() => setFormData({ ...formData, discountEnabled: !formData.discountEnabled })} className="cursor-pointer text-2xl">
-                  {formData.discountEnabled ? <IoToggleSharp className="text-black" /> : <IoToggleSharp className="text-gray-400 rotate-180" />}
+                <div
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      discountEnabled: !formData.discountEnabled,
+                    })
+                  }
+                  className="cursor-pointer text-2xl"
+                >
+                  {formData.discountEnabled ? (
+                    <IoToggleSharp className="text-black text-4xl" />
+                  ) : (
+                    <IoToggleSharp className="text-blue-500 rotate-180 text-4xl" />
+                  )}
                 </div>
-                <span className="text-gray-700 text-sm font-medium">Discount in %</span>
+                <span className="text-gray-700 text-sm font-medium">
+                  Discount in %
+                </span>
               </div>
 
               {/* Right Side: Select Dropdown */}
               <div className="w-1/3 ml-3">
-                <Select
-                  onChange={(selectedOption) => setFormData({ ...formData, discount: selectedOption.value })}
-                  classNamePrefix="react-select"
+                <select
+                  value={formData.discount || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, discount: e.target.value })
+                  }
                   className="border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px]"
-                  isDisabled={!formData.discountEnabled}
-                />
+                  disabled={!formData.discountEnabled}
+                >
+                  <option value="">Select Discount</option>
+                  {discountOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             {/* Managing Director Field */}
@@ -276,55 +439,209 @@ const RestaurantManagement = () => {
               backgroundcolor="bg-[#EEF5FF]"
               className="w-full border border-[#9EC3FF] rounded-xl mb-4"
             />
-          {/* Staff Member Section */}
-          <div className="mb-4">
-            <label className="block mb-2 font-semibold">Staff Members</label>
-            <div className="flex flex-wrap gap-3">
-              {formData.staffMembers.map((member, index) => (
-                <div key={index} className="relative flex items-center bg-[#0075FF]  rounded-2xl px-3 py-2 text-white">
+            {/* Staff Member Section */}
+            <div className="mb-4 shadow-md p-4 bg-white rounded-xl mt-2 bg">
+              <label className="block mb-2 font-semibold">Staff Members</label>
+              <div className="flex flex-wrap gap-3">
+                {/* Add People Button (Always Fixed at the Start) */}
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      staffMembers: [...formData.staffMembers, ""],
+                    })
+                  }
+                  className="bg-gray-700 text-white px-4 py-2 rounded-xl text-sm order-first"
+                >
+                  + Add People
+                </button>
+
+                {/* Staff Members (Appear After the Button) */}
+                {formData.staffMembers.map((member, index) => (
+                  <div
+                    key={index}
+                    className="relative flex items-center bg-[#0075FF] rounded-2xl px-3 py-2 text-white"
+                  >
+                    <input
+                      type="text"
+                      name={`staffMember-${index}`}
+                      value={member}
+                      onChange={(e) => {
+                        const updatedStaff = [...formData.staffMembers];
+                        updatedStaff[index] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          staffMembers: updatedStaff,
+                        });
+                      }}
+                      className="bg-transparent outline-none border-none w-full pr-6"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updatedStaff = formData.staffMembers.filter(
+                          (_, i) => i !== index
+                        );
+                        setFormData({
+                          ...formData,
+                          staffMembers: updatedStaff,
+                        });
+                      }}
+                      className="absolute right-2 text-white hover:text-red-500 text-lg"
+                    >
+                      ✖
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mb-4 shadow-md p-4 bg-white rounded-xl mt-2">
+              <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
+
+              {/* Toggle Buttons */}
+              <div className="flex items-center gap-2 mb-4">
+                <button
+                  onClick={() => toggleSetting("easyDine")}
+                  className={`w-10 h-5 flex items-center rounded-full p-0.5 transition ${
+                    settings.easyDine ? "bg-blue-500" : "bg-black"
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 bg-white rounded-full shadow-md transform transition ${
+                      settings.easyDine ? "translate-x-5" : ""
+                    }`}
+                  ></div>
+                </button>
+                <span className="text-sm font-medium text-gray-400">
+                  EasyDine Zahlungsmethode
+                </span>
+
+                <button
+                  onClick={() => toggleSetting("andere")}
+                  className={`w-10 h-5 flex items-center rounded-full p-0.5 transition ${
+                    settings.andere ? "bg-blue-500" : "bg-black"
+                  }`}
+                >
+                  <div
+                    className={`w-4 h-4 bg-white rounded-full shadow-md transform transition ${
+                      settings.andere ? "translate-x-5" : ""
+                    }`}
+                  ></div>
+                </button>
+                <span className="text-sm font-medium text-gray-400">
+                  Andere
+                </span>
+              </div>
+
+              {/* Payment Method, Order Deadline, Calories, Currency */}
+              <div className="grid grid-cols-4 gap-4 mb-4 pt-4">
+                <div className="flex flex-col">
+                  <label className="text-sm font-medium mb-1">
+                    Payment Method
+                  </label>
+                  <select className="border border-[#9EC3FF] rounded-xl px-3 py-2 bg-[#EEF5FF]">
+                    <option>Wordline</option>
+                  </select>
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-sm font-medium mb-1">
+                    Order Deadline
+                  </label>
                   <input
                     type="text"
-                    name={`staffMember-${index}`}
-                    value={member}
-                    onChange={(e) => {
-                      const updatedStaff = [...formData.staffMembers];
-                      updatedStaff[index] = e.target.value;
-                      setFormData({ ...formData, staffMembers: updatedStaff });
-                    }}
-                    className="bg-transparent outline-none border-none w-full pr-6"
+                    value="Schnittstelle"
+                    className="border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl px-3 py-2"
+                    readOnly
                   />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-sm font-medium mb-1">Calories</label>
+                  <input
+                    type="text"
+                    value="Kalorien"
+                    className="border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl px-3 py-2"
+                    readOnly
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-sm font-medium mb-1">Currency</label>
+                  <input
+                    type="text"
+                    value="CHF"
+                    className="border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl px-3 py-2"
+                    readOnly
+                  />
+                </div>
+              </div>
+
+              {/* Payment Method Selection */}
+              <h3 className="text-sm font-bold mb-2 mt-8">Payment Method</h3>
+              <div className="bg-[#EEF5FF] border border-[#9EC3FF] rounded-xl p-4">
+                <div className="flex flex-wrap gap-3">
+                  {/* Add Payment Button (Always in Fixed Position) */}
                   <button
                     type="button"
-                    onClick={() => {
-                      const updatedStaff = formData.staffMembers.filter((_, i) => i !== index);
-                      setFormData({ ...formData, staffMembers: updatedStaff });
-                    }}
-                    className="absolute right-2 text-white hover:text-red-500 text-lg"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        paymentMethods: [...formData.paymentMethods, ""],
+                      })
+                    }
+                    className="bg-gray-700 text-white px-4 py-2 rounded-xl text-sm order-first"
                   >
-                    ✖
+                    + Add Payment
                   </button>
+
+                  {/* Render Payment Methods (Added after the button) */}
+                  {formData.paymentMethods.map((method, index) => (
+                    <div
+                      key={index}
+                      className="relative flex items-center bg-blue-500 rounded-2xl px-3 py-2 text-white"
+                    >
+                      <input
+                        type="text"
+                        name={`paymentMethod-${index}`}
+                        value={method}
+                        onChange={(e) => {
+                          const updatedMethods = [...formData.paymentMethods];
+                          updatedMethods[index] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            paymentMethods: updatedMethods,
+                          });
+                        }}
+                        className="bg-transparent outline-none border-none w-full pr-6"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updatedMethods = formData.paymentMethods.filter(
+                            (_, i) => i !== index
+                          );
+                          setFormData({
+                            ...formData,
+                            paymentMethods: updatedMethods,
+                          });
+                        }}
+                        className="absolute right-2 text-white hover:text-red-500 text-lg"
+                      >
+                        ✖
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, staffMembers: [...formData.staffMembers, ""] })}
-                className="bg-gray-700 text-white px-4 py-2 rounded-xl text-sm"
-              >
-                + Add People
+              </div>
+            </div>
+            <div className="mt-80 flex gap-4 justify-end">
+              <button className="px-10 py-2 text-white bg-blue-600 rounded-xl shadow-md hover:bg-blue-700">
+                Back
+              </button>
+              <button className="px-10 py-2 text-white bg-black rounded-xl shadow-md hover:bg-gray-900">
+                Save
               </button>
             </div>
           </div>
-
-
-          </div>
-        </div>
-        <div>
-          hello
-        </div>
-        <div className="mt-6 flex justify-end">
-          <Button 
-          // onClick={handleSubmit}
-          >Save Changes</Button>
         </div>
       </div>
     </DashboardLayout>
