@@ -50,7 +50,8 @@ const ContactUs = () => {
             title: "Success!",
             text: "Your message has been sent successfully.",
             icon: "success",
-            confirmButtonText: "OK",
+            timer: 2000,
+            showConfirmButton: false,
           });
           resetForm();
         } else {
@@ -58,7 +59,8 @@ const ContactUs = () => {
             title: "Error!",
             text: response.error,
             icon: "error",
-            confirmButtonText: "OK",
+            timer: 2000,
+            showConfirmButton: false,
           });
         }
       } catch (error) {
@@ -67,7 +69,8 @@ const ContactUs = () => {
           title: "Error!",
           text: "There was an error submitting your message. Please try again.",
           icon: "error",
-          confirmButtonText: "OK",
+          timer: 2000,
+          showConfirmButton: false,
         });
       }
     },

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import { useEffect } from "react";
 import AppRoutes from "./routes";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   console.log("14 feb debug");
@@ -18,6 +19,7 @@ function App() {
     <>
 
       <div className="bg-primaryBlack">
+        <ScrollToTop />
         <AppRoutes />
       </div>
     </>

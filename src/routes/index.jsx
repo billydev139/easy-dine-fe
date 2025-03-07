@@ -106,9 +106,9 @@ const AppRoutes = () => {
     );
 
     // Set cursor visibility based on route type
-    if (isPublicRoute) {
+    if (isPublicRoute || isAuthRoute) {
       setCursorVisible(true);
-    } else if (isAuthRoute || isProtectedRoute) {
+    } else if (isProtectedRoute) {
       setCursorVisible(false);
     } else {
       setCursorVisible(false); // Fallback, ideally shouldn't hit this due to defined routes

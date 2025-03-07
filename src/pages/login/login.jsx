@@ -44,9 +44,11 @@ const Login = () => {
               response?.response?.data?.message ||
               "You have successfully logged in!",
             icon: "success",
-            confirmButtonText: "OK",
-          });
+            timer: 2000,
+            showConfirmButton: false,
+          }).then(() => {
           navigate("/dashboard");
+          });``
           console.log("Login successful!");
         } else {
           Swal.fire({
@@ -106,7 +108,7 @@ const Login = () => {
           backgroundSize: "cover",
           transition: " 1s ease-in-out",
         }}
-        className="flex flex-col  items-start justify-center bg-gradient-to-b from-white via-white to-black"
+        className="flex flex-col  items-start justify-center bg-white"
       >
         <div className="mx-auto max-sm:mx-4">
           <h2 className="md:text-[48px] leading-10 text-xl  mb-2">
