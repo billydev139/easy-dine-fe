@@ -14,6 +14,7 @@ const Dashboard = lazy(() => import("../pages/dashboard"));
 const Faqs = lazy(() => import("../pages/faqs/faqs"));
 const Blogs = lazy(() => import("../pages/blogs/blogs"));
 const SupportFAQ = lazy(() => import("../pages/support/Support"));
+const Overview = lazy(() => import("../pages/dashboard/advancedStatistics/overview"));
 const RestaurantManagement = lazy(() =>
   import("../pages/dashboard/restaurantManagement")
 );
@@ -67,6 +68,10 @@ const AppRoutes = () => {
     {
       path: "/add-restaurant",
       component: <RestaurantManagement />,
+    },
+    {
+      path: "/advanced-statistics/overview",
+      component: <Overview />,
     },
     {
       path: "/edit-restaurant",

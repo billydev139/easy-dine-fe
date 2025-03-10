@@ -16,19 +16,20 @@ const navigationItems = [
     label: "Add Restaurant",
     icon: <Icons.HiOutlineBuildingStorefront size={22} />,
   },
-  // {
-  //   path: "/restaurant-management",
-  //   label: "Restaurant Management",
-  //   icon: <Icons.HiOutlineBuildingStorefront size={22} />,
-  //   // submenu: [
-  //   //   { path: "/restaurant-management/add-restaurant", label: "Add Restaurant" },
-  //   //   { path: "/restaurant-management/list-restaurant", label: "Manage Restaurant" },
-  //   // ],
-  // },
   {
     path: "/user-management",
     label: "User Management",
     icon: <Icons.SiNginxproxymanager size={22} />,
+  },
+  {
+    path: "/user-management",
+    label: "Advanced Statistics",
+    icon: <Icons.SiNginxproxymanager size={22} />,
+    submenu: [
+      { path: "/advanced-statistics/overview", label: "Overview" },
+      { path: "/user-management", label: "Revenue Reports & KPI" },
+      { path: "/user-management", label: "Optimization Suggestions" },
+    ],
   },
   {
     path: "/order-management",
@@ -50,28 +51,11 @@ const navigationItems = [
     label: "Menu Customization",
     icon: <Icons.MdMenu size={22} />,
   },
-  // {
-  //   path: "#",
-  //   label: "Financials & Reporting",
-  //   icon: <Icons.BsCoin size={22} />,
-  // },
-  // {
-  //   path: "#",
-  //   label: "Loyalty & Marketing",
-  //   icon: <Icons.BiBadgeCheck size={22} />,
-  // },
-  // {
-  //   path: "#",
-  //   label: "Analytics & Insights",
-  //   icon: <Icons.MdOutlineAnalytics size={22} />,
-  // },
   {
     path: "#",
     label: "Settings",
     icon: <Icons.IoSettingsOutline size={22} />,
-    submenu: [
-      { path: "/edit-restaurant", label: "Edit Restaurant" },
-    ],
+    submenu: [{ path: "/edit-restaurant", label: "Edit Restaurant" }],
   },
 ];
 
@@ -122,7 +106,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   // Common styles based on theme
   const getNavLinkStyles = (isActive) => {
-    const baseStyles = "group relative list-none	 flex items-center gap-2.5 rounded-sm px-8 py-2.5 font-medium duration-300 ease-in-out ";
+    const baseStyles = "group relative list-none flex items-center gap-2.5 rounded-sm px-8 py-2.5 font-medium duration-300 ease-in-out ";
     const activeStyles = theme === 'dark' 
       ? "bg-secondaryBlue !text-white"
       : "bg-[#F4F9FF] text-primaryBlue";
@@ -172,7 +156,7 @@ const DashboardSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       to={subItem.path}
                       className={getNavLinkStyles(isSubItemActive)}
                     >
-                      <span className="inline-block w-2 h-2 bg-white rounded-full mr-2 " />
+                      <span className="inline-block w-2 h-2 bg-black rounded-full mr-2 " /> {/* Highlighted line */}
                       {subItem.label}
                     </Link>
                   </li>
