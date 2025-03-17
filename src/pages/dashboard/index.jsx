@@ -1,8 +1,8 @@
-import DashboardLayout from "../../layouts/dashboardLayout";
-import CustomerMap from "./customerMap";
-import DashboardStats from "./dashboardStats";
-import RecentOrders from "./recentOrders";
-import RevenueChart from "./revenueChart";
+import DashboardLayout from '../../layouts/dashboardLayout';
+import CustomerMap from './customerMap';
+import DashboardStats from './dashboardStats';
+import RecentOrders from './recentOrders';
+import RevenueChart from './revenueChart';
 
 const Dashboard = () => {
   //   const stats = [
@@ -29,14 +29,14 @@ const Dashboard = () => {
   //   ];
   return (
     <DashboardLayout>
-      <div className="">
+      <div className=''>
         <DashboardStats />
-        <div className="grid grid-cols-2 gap-4">
-        <RevenueChart/>
-        <CustomerMap/>
+        <div className='grid grid-cols-2 gap-4'>
+          <RevenueChart />
+          <CustomerMap />
         </div>
-        <RecentOrders/>
-        <div className="grid grid-cols-12 w-full gap-2 "></div>
+        <RecentOrders />
+        <div className='grid grid-cols-12 w-full gap-2 '></div>
       </div>
     </DashboardLayout>
   );
