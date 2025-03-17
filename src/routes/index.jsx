@@ -74,6 +74,10 @@ const AppRoutes = () => {
       component: <Overview />,
     },
     {
+      path: "/advanced-statistics/revenue-reports",
+      component: <Overview />,
+    },
+    {
       path: "/edit-restaurant",
       component: <EditRestaurant />,
     },

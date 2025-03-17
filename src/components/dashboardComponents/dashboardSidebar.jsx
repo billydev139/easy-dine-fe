@@ -27,7 +27,7 @@ const navigationItems = [
     icon: <Icons.SiNginxproxymanager size={22} />,
     submenu: [
       { path: "/advanced-statistics/overview", label: "Overview" },
-      { path: "/user-management", label: "Revenue Reports & KPI" },
+      { path: "/advanced-statistics/revenue-reports", label: "Revenue Reports & KPI" },
       { path: "/user-management", label: "Optimization Suggestions" },
     ],
   },

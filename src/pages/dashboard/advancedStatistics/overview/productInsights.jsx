@@ -94,7 +94,7 @@ const ProductInsights = () => {
         </div>
       </div>
       <table className="w-full text-left ">
-        <thead className=" text-white bg-secondaryBlue ">
+        <thead className={`${theme === 'dark' ? 'bg-secondaryBlue' : 'bg-[#EEF5FF]'}`}>
           <tr>
             <th className="py-2 px-6 font-medium">Product Name</th>
             <th className="py-2 px-6 font-medium">Revenue Generated</th>
@@ -106,7 +106,7 @@ const ProductInsights = () => {
         </thead>
         <tbody>
           {jobsData.map((job) => (
-            <tr key={job.id} className=" hover:bg-gray-700">
+            <tr key={job.id} className={`${theme === 'dark' ? 'hover:bg-secondaryBlue' : 'hover:bg-[#EEF5FF]'}`}>
               {/* <td className="py-8 px-6">
                   <div className="flex items-center ">
                     <img 
@@ -156,7 +156,7 @@ const ProductInsights = () => {
                   {job.status}{" "}
                 </span>
               </td>
-              <td className="py-4 px-6 relative">
+              {/* <td className="py-4 px-6 relative"> */}
                 {/* /////////////////////menu////////////////////////// */}
                 {/* <Menu as="div" className="relative inline-block text-left">
                   <div>
@@ -213,7 +213,7 @@ const ProductInsights = () => {
                       </button>
                     </div>
                   )} */}
-              </td>
+              {/* </td> */}
             </tr>
           ))}
         </tbody>
