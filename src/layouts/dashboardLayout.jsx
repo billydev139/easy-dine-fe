@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }) => {
           <DashboardHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {/* Main Content */}
-          <main className='flex-grow px-4 sm:px-6 lg:px-8'>
+          <main className='flex-grow px-4 cursor-auto sm:px-6 lg:px-8'>
             <div className='max-w-7xl mx-auto w-full'>{children}</div>
           </main>
 
