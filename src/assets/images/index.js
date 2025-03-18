@@ -51,10 +51,12 @@ import google_icon from './google-icon.png';
 import linkedin_icon from './linkedin-icon.png';
 import facebook_icon from './facebook-icon.png';
 import x_icon from './x-icon.png';
-import right_icon from './right-icon.svg';
+import wine_bottle from './wine-bottle.png';
+import A_icon from './A-icon.png';
 
 const Images = {
-  right_icon,
+  A_icon,
+  wine_bottle,
   x_icon,
   facebook_icon,
   linkedin_icon,
