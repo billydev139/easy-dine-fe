@@ -7,6 +7,7 @@ const config = {
       SUB_ADMIN: {
         LOGIN: "/auth/login",
         SIGNUP:"/auth/register",
+        SOCIAL_LOGIN:"auth/google"
       },
       CONTACT_US: {
         SUBMIT: "/contact/contact",

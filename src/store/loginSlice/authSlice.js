@@ -86,4 +86,27 @@ export const LogOutUserHandler = () => async (dispatch) => {
   dispatch(LogoutReducer());
 };
 
+// Thunk for social media login
+export const SocialLoginHandler = (idToken) => async (dispatch) => {
+  dispatch(AuthStart());
+  try {
+    const response = await axiosWithoutToken.post(config.endPoints.SUB_ADMIN.SOCIAL_LOGIN, { idToken });
+    const token = response?.data?.results?.token?.access?.token;
+
+    if (response && token) {
+      localStorage.setItem("accessToken", token);
+      dispatch(AuthSuccess(response.data));
+      console.log("🚀 ~ SocialLoginHandler ~ response:", response);
+      return response.data;
+    } else {
+      throw new Error("Invalid response");
+    }
+  } catch (error) {
+    const errorMessage = error?.response?.data?.message || "Social login failed.";
+    dispatch(AuthFailure(errorMessage));
+    return { error: errorMessage };
+  }
+};
+
+
 export default authSlice.reducer;

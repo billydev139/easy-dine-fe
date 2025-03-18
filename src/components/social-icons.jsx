@@ -1,3 +1,6 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+
 const SocialIcons = () => {
   return (
     <div className='flex justify-center gap-x-[18px] mb-9'>
