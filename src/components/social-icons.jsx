@@ -1,6 +1,3 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-
 const SocialIcons = () => {
   const handleNavigation = url => {
     window.open(url, '_blank');
