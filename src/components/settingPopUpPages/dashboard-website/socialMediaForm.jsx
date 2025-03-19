@@ -71,13 +71,13 @@ const SocialMediaForm = () => {
   };
 
   return (
-    <div className='bg-white rounded-xl shadow-md p-7 my-5'>
-      <h2 className='text-lg font-semibold text-[#1A2042] mt-2 mb-6'>
+    <div className='bg-white dark:bg-[#222630] rounded-xl shadow-md p-7 my-5'>
+      <h2 className='text-lg font-semibold text-[#1A2042] dark:text-white mt-2 mb-6'>
         Social Media Links
       </h2>
 
       {submitted && (
-        <div className='mb-4 p-3 bg-green-100 text-green-700 rounded'>
+        <div className='mb-4 p-3 bg-green-100 text-green-600 rounded'>
           Your social media links have been saved successfully!
         </div>
       )}
@@ -87,7 +87,7 @@ const SocialMediaForm = () => {
           <div className='flex gap-x-28 items-center'>
             <label
               htmlFor='google'
-              className='block text-base font-medium whitespace-nowrap text-[#1A2042]'
+              className='block text-base font-medium whitespace-nowrap text-[#1A2042] dark:text-white'
             >
               Google URL
             </label>
@@ -108,7 +108,7 @@ const SocialMediaForm = () => {
           <div className='flex gap-x-[92px] items-center'>
             <label
               htmlFor='facebook'
-              className='block text-base font-medium whitespace-nowrap text-[#1A2042]'
+              className='block text-base font-medium whitespace-nowrap text-[#1A2042] dark:text-white'
             >
               Facebook URL
             </label>
@@ -129,7 +129,7 @@ const SocialMediaForm = () => {
           <div className='flex gap-x-[92px] items-center'>
             <label
               htmlFor='instagram'
-              className='block whitespace-nowrap text-base font-medium text-[#1A2042]'
+              className='block whitespace-nowrap text-base font-medium text-[#1A2042] dark:text-white'
             >
               Instagram URL
             </label>
@@ -150,7 +150,7 @@ const SocialMediaForm = () => {
           <div className='flex gap-x-[105px] items-center'>
             <label
               htmlFor='youtube'
-              className='block whitespace-nowrap text-base font-medium text-[#1A2042]'
+              className='block whitespace-nowrap text-base font-medium text-[#1A2042] dark:text-white'
             >
               Youtube URL
             </label>
@@ -171,7 +171,7 @@ const SocialMediaForm = () => {
           <div className='flex gap-x-[116px] items-center'>
             <label
               htmlFor='twitter'
-              className='block whitespace-nowrap text-base font-medium text-[#1A2042]'
+              className='block whitespace-nowrap text-base font-medium text-[#1A2042] dark:text-white'
             >
               Twitter URL
             </label>

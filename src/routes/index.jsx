@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import CustomLoader from '../components/CustomLoader';
 import AnimatedCursor from 'react-animated-cursor';
 import DashboardWebpage from '../components/settingPopUpPages/dashboard-website/dashboard-webpage';
+import RestaurantReservation from '../components/reservations';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -51,6 +52,7 @@ const AppRoutes = () => {
   // Routes definition
   const protectedRoutes = [
     { path: '/dashboard', component: <Dashboard /> },
+    { path: '/restaurant-reservation', component: <RestaurantReservation /> },
     { path: '/dashboard/webpage', component: <DashboardWebpage /> },
     { path: '/user-management', component: <UserManagement /> },
     { path: '/order-management', component: <OrderManagement /> },
@@ -65,7 +67,7 @@ const AppRoutes = () => {
       component: <Overview />,
     },
     {
-      path: "/advanced-statistics/revenue-reports",
+      path: '/advanced-statistics/revenue-reports',
       component: <Overview />,
     },
     {

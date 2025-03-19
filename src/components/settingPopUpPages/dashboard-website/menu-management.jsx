@@ -132,7 +132,7 @@ const RestaurantManagementApp = () => {
 
   return (
     <>
-      <div className='mt-5 px-9 py-6 bg-white rounded-xl shadow-md'>
+      <div className='mt-5 px-9 py-6 bg-white dark:bg-[#222630] rounded-xl shadow-md'>
         {/* Tab Navigation */}
         <div className='border-b mb-10'>
           <div className='flex'>
@@ -163,7 +163,9 @@ const RestaurantManagementApp = () => {
         {activeTab === 'menu' && (
           <>
             <div className='flex justify-between items-center mb-5'>
-              <h2 className='text-lg text-[#1A2042] font-semibold'>Add New Menu Item</h2>
+              <h2 className='text-lg text-[#1A2042] dark:text-white font-semibold'>
+                Add New Menu Item
+              </h2>
               <button
                 className='bg-[#0075FF] hover:bg-[#0055FF] text-white text-base font-medium rounded-full px-10 py-2'
                 onClick={handleAddMenuItem}
@@ -174,7 +176,7 @@ const RestaurantManagementApp = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-2 px-3 gap-6 mb-6'>
               <div>
-                <label className='block text-[#1A2042] text-lg font-medium mb-1'>
+                <label className='block text-[#1A2042] dark:text-white text-lg font-medium mb-1'>
                   Category
                 </label>
                 <select
@@ -191,7 +193,7 @@ const RestaurantManagementApp = () => {
               </div>
 
               <div>
-                <label className='block text-[#1A2042] text-lg font-medium mb-1'>
+                <label className='block text-[#1A2042] dark:text-white text-lg font-medium mb-1'>
                   Dish Name
                 </label>
                 <input
@@ -205,7 +207,7 @@ const RestaurantManagementApp = () => {
               </div>
 
               <div>
-                <label className='block text-[#1A2042] text-lg font-medium mb-1'>
+                <label className='block text-[#1A2042] dark:text-white text-lg font-medium mb-1'>
                   Description
                 </label>
                 <textarea
@@ -218,7 +220,7 @@ const RestaurantManagementApp = () => {
               </div>
 
               <div>
-                <label className='block text-[#1A2042] text-lg font-medium mb-1'>
+                <label className='block text-[#1A2042] dark:text-white text-lg font-medium mb-1'>
                   Upload Image
                 </label>
                 <div className='flex flex-col items-center w-full'>
@@ -317,9 +319,11 @@ const RestaurantManagementApp = () => {
                           )}
                         </div>
                       </td>
-                      <td className='py-3 px-6 text-sm'>{item.name}</td>
-                      <td className='py-3 px-6 text-sm'>{item.category}</td>
-                      <td className='py-3 px-6 text-sm'>{item.price}</td>
+                      <td className='py-3 px-6 dark:text-white text-sm'>{item.name}</td>
+                      <td className='py-3 px-6 dark:text-white text-sm'>
+                        {item.category}
+                      </td>
+                      <td className='py-3 px-6 dark:text-white text-sm'>{item.price}</td>
                       <td className='py-3 px-6 text-sm'>
                         <div className='flex space-x-2'>
                           <button className='text-blue-600'>

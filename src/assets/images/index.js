@@ -53,8 +53,12 @@ import facebook_icon from './facebook-icon.png';
 import x_icon from './x-icon.png';
 import wine_bottle from './wine-bottle.png';
 import A_icon from './A-icon.png';
+import main_page from './main-page.png';
+import wine from './wine.png';
 
 const Images = {
+  wine,
+  main_page,
   A_icon,
   wine_bottle,
   x_icon,
