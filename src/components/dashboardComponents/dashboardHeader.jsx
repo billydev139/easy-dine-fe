@@ -33,7 +33,7 @@ const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
         </button>
         <h2 className='text-xl font-semibold'>Dashboard</h2>
       </div>
-      <div className='flex cursor-auto items-center space-x-4 relative'>
+      <div className='flex cursor-pointer items-center space-x-4 relative'>
         {/* <select
           name=""
           id=""

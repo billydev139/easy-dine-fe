@@ -19,14 +19,6 @@ const RestaurantList = () => {
       status: 'Sold',
       isLive: false,
     },
-    {
-      id: 3,
-      name: 'The Nouveau Table',
-      address: 'An den Wulzen 7',
-      email: 'tgnz@gmel.com',
-      status: 'Sold',
-      isLive: false,
-    },
   ]);
 
   // Function to toggle the live status
@@ -55,10 +47,14 @@ const RestaurantList = () => {
   };
 
   return (
-    <div className='bg-white rounded-xl shadow-md'>
+    <div className='bg-white dark:bg-[#222630] rounded-xl shadow-md'>
       <div className=' px-5 py-6 mb-6'>
-        <h1 className='text-xl font-semibold text-[#131313]'>Restaurant list</h1>
-        <p className='text-gray-600'>Lorem ipsum dolor sit amet consectetue</p>
+        <h1 className='text-xl font-semibold text-[#131313] dark:text-white'>
+          Restaurant list
+        </h1>
+        <p className='text-[#131313] dark:text-white'>
+          Lorem ipsum dolor sit amet consectetue
+        </p>
       </div>
 
       <div className='overflow-x-auto'>
@@ -85,11 +81,15 @@ const RestaurantList = () => {
           <tbody>
             {restaurants.map(restaurant => (
               <tr key={restaurant.id} className='border-b'>
-                <td className='py-3.5 px-7 text-sm text-[#131313]'>{restaurant.name}</td>
-                <td className='py-3.5 px-7 text-sm text-[#131313]'>
+                <td className='py-3.5 px-7 text-sm text-[#131313] dark:text-white'>
+                  {restaurant.name}
+                </td>
+                <td className='py-3.5 px-7 text-sm text-[#131313] dark:text-white'>
                   {restaurant.address}
                 </td>
-                <td className='py-3.5 px-7 text-sm text-[#131313]'>{restaurant.email}</td>
+                <td className='py-3.5 px-7 text-sm text-[#131313] dark:text-white'>
+                  {restaurant.email}
+                </td>
                 <td className='py-3.5 px-7 text-sm'>
                   <span
                     className={`rounded-full text-base ${

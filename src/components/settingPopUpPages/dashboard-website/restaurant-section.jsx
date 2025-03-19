@@ -1,8 +1,10 @@
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RestaurantSection = () => {
   const [activeTab, setActiveTab] = useState('Restaurant 1');
+  const navigate = useNavigate();
 
   return (
     <div className='py-4'>
@@ -26,7 +28,7 @@ const RestaurantSection = () => {
           </button>
           <button
             className='bg-white border border-[#0075FF] text-[#0075FF] px-4 py-2 rounded-md text-lg font-medium flex items-center'
-            onClick={() => window.open('/website', '_blank')}
+            onClick={() => navigate('/restaurant-reservation')}
           >
             <ExternalLink className='h-4 w-4 mr-1' />
             To the website
