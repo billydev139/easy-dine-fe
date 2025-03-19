@@ -86,4 +86,5 @@ export const LogOutUserHandler = () => async (dispatch) => {
   dispatch(LogoutReducer());
 };
 
+
 export default authSlice.reducer;
