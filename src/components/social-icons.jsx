@@ -1,13 +1,48 @@
+import React from "react";
+import {
+  auth,
+  provider,
+  facebookProvider,
+  signInWithPopup,
+  githubProvider,
+  twitterProvider,
+} from "../firebase";
+//import showToast from "../../../utils/toaster";
+import { useNavigate } from "react-router-dom";
+import { axiosWithoutToken } from "../utils/axiosInstance";
+//import PATHS from "../../../routes/path";
+
 const SocialIcons = () => {
   const handleNavigation = url => {
     window.open(url, '_blank');
+  }; 
+  const navigate = useNavigate();
+  // login and signup with google
+  const handleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      if (user) {
+        const response = await axiosWithoutToken.post("/auth/google", {
+          idToken: user.accessToken,
+        });
+        localStorage.setItem("token", response?.data?.token);
+        if (response?.data?.token && response?.data?.message) {
+          // showToast("success", response?.data?.message);
+          navigate('/dashboard');
+        }
+      }
+    } catch (error) {
+      console.error("Error during Google sign-in", error);
+    }
   };
 
   return (
     <div className='flex justify-center gap-x-[18px] mb-9'>
       <button
         className='hover:shadow-md'
-        onClick={() => handleNavigation('https://www.google.com')}
+        onClick={ handleSignIn}
       >
         <img
           className='size-[60px]'
@@ -53,36 +88,3 @@ const SocialIcons = () => {
 };
 
 export default SocialIcons;
-
-// import { FaFacebookF } from 'react-icons/fa';
-// import { GrGoogle } from 'react-icons/gr';
-// import { BsTwitterX } from 'react-icons/bs';
-// import { PiGithubLogoFill } from 'react-icons/pi';
-// const SocialIcons = () => {
-//   return (
-//     <div className='flex items-center justify-center gap-3 mt-5'>
-//       <FaFacebookF
-//         // onClick={handleLogin}
-//         size={24}
-//         className='cursor-pointer text-blue-800'
-//       />
-//       <BsTwitterX
-//         // onClick={signInWithTwitter}
-//         size={24}
-//         className='cursor-pointer text-gray-500'
-//       />
-//       <PiGithubLogoFill
-//         // onClick={handleGitHubLogin}
-//         size={24}
-//         className='cursor-pointer text-red-600'
-//       />
-//       <GrGoogle
-//         // onClick={handleSignIn}
-//         // size={24}
-//         className='cursor-pointer text-blue-500 bg-white rounded-md p-2 w-10 h-10 px-3 '
-//       />
-//     </div>
-//   );
-// };
-
-// export default SocialIcons;
