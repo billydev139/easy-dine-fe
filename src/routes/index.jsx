@@ -5,6 +5,7 @@ import CustomLoader from '../components/CustomLoader';
 import AnimatedCursor from 'react-animated-cursor';
 import DashboardWebpage from '../components/settingPopUpPages/dashboard-website/dashboard-webpage';
 import RestaurantReservation from '../components/reservations';
+import SmallWebsite from '../components/settingPopUpPages/dashboard-website/small-website';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -52,6 +53,7 @@ const AppRoutes = () => {
   // Routes definition
   const protectedRoutes = [
     { path: '/dashboard', component: <Dashboard /> },
+    { path: '/small-website', component: <SmallWebsite /> },
     { path: '/restaurant-reservation', component: <RestaurantReservation /> },
     { path: '/dashboard/webpage', component: <DashboardWebpage /> },
     { path: '/user-management', component: <UserManagement /> },
