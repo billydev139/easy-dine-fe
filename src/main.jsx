@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
-import store, { persistor } from "./store/store.js";
+import store, { persistor } from "./store/store.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
