@@ -55,8 +55,26 @@ import wine_bottle from './wine-bottle.png';
 import A_icon from './A-icon.png';
 import main_page from './main-page.png';
 import wine from './wine.png';
+import alfreddo from './alfreddo.png';
+import gallery_1 from './gallery-1.png';
+import gallery_2 from './gallery-2.png';
+import gallery_3 from './gallery-3.png';
+import gallery_4 from './gallery-4.png';
+import gallery_5 from './gallery-5.png';
+import gallery_6 from './gallery-6.png';
+import qr_scanner from './qr-scanner.png';
+import mobile_phone from './mobile-phone.png';
 
 const Images = {
+  mobile_phone,
+  qr_scanner,
+  gallery_1,
+  gallery_2,
+  gallery_3,
+  gallery_4,
+  gallery_5,
+  gallery_6,
+  alfreddo,
   wine,
   main_page,
   A_icon,
