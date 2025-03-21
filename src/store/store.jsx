@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage"; // Defaults to localStorage for
 import contactUsSlice from "./contactSlice/contactUsSlice";
 import themeReducer from "./themeSlice";
 import authReducer from "./loginSlice/authSlice";
+import restaurantSlice from "./restaurant/restaurantSlice";
 
 // Persist configuration for themeSlice
 const themePersistConfig = {
@@ -29,6 +30,7 @@ const store = configureStore({
     auth:authReducer,
     contactUs: contactUsSlice, // Reducer for handling contact form state
     theme: persistedThemeReducer, // Persisted theme reducer
+    restaurant:restaurantSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
