@@ -85,7 +85,7 @@ const OverviewStats = () => {
               >
                 {card.percentage}
               </span>
-            </div>x`x`
+            </div>
 
             <div className='flex items-center mb-2'>
               <h3 className='text-2xl font-medium'>{card.value}</h3>
