@@ -64,8 +64,18 @@ import gallery_5 from './gallery-5.png';
 import gallery_6 from './gallery-6.png';
 import qr_scanner from './qr-scanner.png';
 import mobile_phone from './mobile-phone.png';
+import restaurant_01 from './restaurant-01.png';
+import restaurant_02 from './restaurant-02.png';
+import restaurant_03 from './restaurant-03.png';
+import restaurant_04 from './restaurant-04.png';
+import restaurant_05 from './restaurant-05.png';
 
 const Images = {
+  restaurant_01,
+  restaurant_02,
+  restaurant_03,
+  restaurant_04,
+  restaurant_05,
   mobile_phone,
   qr_scanner,
   gallery_1,

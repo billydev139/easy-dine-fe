@@ -6,6 +6,8 @@ import AnimatedCursor from 'react-animated-cursor';
 import DashboardWebpage from '../components/settingPopUpPages/dashboard-website/dashboard-webpage';
 import RestaurantReservation from '../components/reservations';
 import SmallWebsite from '../components/settingPopUpPages/dashboard-website/small-website';
+import RestaurantSettings from '../components/settingPopUpPages/restaurantSettings';
+import RestaurantEditForm from '../components/settingPopUpPages/restaurantSettings/editRestaurantForm';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -60,6 +62,8 @@ const AppRoutes = () => {
     { path: '/order-management', component: <OrderManagement /> },
     { path: '/inventory-management', component: <InventoryManagement /> },
     { path: '/manual-order', component: <ManualOrderTool /> },
+    { path: '/dashboard/restaurant-settings', component: <RestaurantSettings /> },
+    { path: '/dashboard/restaurant-edit-form', component: <RestaurantEditForm /> },
     {
       path: '/add-restaurant',
       component: <RestaurantManagement />,
