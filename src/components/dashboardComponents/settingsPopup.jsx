@@ -45,7 +45,7 @@ const SettingsPopup = ({ isOpen, onClose }) => {
           Restaurant Settings
         </li>
         <li
-          onClick={() => navigate('/dashboard/users')}
+          onClick={() => navigate('/dashboard/user-profiles')}
           className='flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer font-bold'
         >
           Users
