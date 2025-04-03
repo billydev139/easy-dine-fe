@@ -3,13 +3,18 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaCaretDown } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { toast } from 'sonner';
+import {addNewReservation} from '../../../../store/reservationSlice/reservationSlice';
 
 const ReservationForm = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [buttonStyle, setButtonStyle] = useState({
     bgColor: 'bg-blue-600',
     textColor: 'text-white',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleForm = () => {
     setIsOpen(!isOpen);
@@ -32,7 +37,7 @@ const ReservationForm = () => {
       gridCols: 'md:col-span-1',
     },
     {
-      id: 'floor',
+      id: 'floorNumber',
       label: 'Floor #',
       options: [
         { value: '', label: 'Floor 1', disabled: true },
@@ -43,7 +48,7 @@ const ReservationForm = () => {
       gridCols: 'md:col-span-1',
     },
     {
-      id: 'startTime',
+      id: 'startingTime',
       label: 'Starting Time',
       options: [
         { value: '', label: 'Select time', disabled: true },
@@ -55,7 +60,7 @@ const ReservationForm = () => {
       gridCols: 'md:col-span-1',
     },
     {
-      id: 'endTime',
+      id: 'endingTime',
       label: 'Ending Time',
       options: [
         { value: '', label: 'Select time', disabled: true },
@@ -84,33 +89,63 @@ const ReservationForm = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
-    phone: Yup.string().required('Phone number is required'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    emailAddress: Yup.string().email('Invalid email address').required('Email is required'),
     table: Yup.string().required('Please select a table'),
-    floor: Yup.string().required('Please select a floor'),
-    startTime: Yup.string().required('Please select a starting time'),
-    endTime: Yup.string().required('Please select an ending time'),
+    floorNumber: Yup.string().required('Please select a floor'),
+    startingTime: Yup.string().required('Please select a starting time'),
+    endingTime: Yup.string().required('Please select an ending time'),
     date: Yup.string().required('Please select a date'),
   });
 
-  // Initial form values
+  // Initial form values - updated to match your backend model
   const initialValues = {
     firstName: '',
     lastName: '',
-    phone: '',
-    email: '',
+    phoneNumber: '',
+    emailAddress: '',
     address: '',
     table: '',
-    floor: '',
-    startTime: '',
-    endTime: '',
+    floorNumber: '',
+    startingTime: '',
+    endingTime: '',
     date: '',
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log('Form values:', values);
-    // Handle form submission logic here
-    setSubmitting(false);
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    setIsLoading(true);
+    
+    try {
+     
+      // Format dates for backend
+      const formattedData = {
+        ...values,
+        startingTime: formatDateTimeForBackend(values.date, values.startingTime),
+        endingTime: formatDateTimeForBackend(values.date, values.endingTime),
+        date: new Date(values.date),
+        restaurantId: "67e3e27803c48233005233b6" // Replace with actual restaurant ID or dynamic value
+      };      
+      const response = await dispatch (addNewReservation(formattedData));
+      console.log('Reservation created:', response);
+      
+      toast.success('Reservation completed successfully!');
+      resetForm();
+      setIsOpen(false);
+    } catch (error) {
+      console.error('Error submitting reservation:', error);
+      toast.error(error.message || 'Failed to complete reservation. Please try again.');
+    } finally {
+      setSubmitting(false);
+      setIsLoading(false);
+    }
+  };
+  
+  // Function to format date and time for backend
+  const formatDateTimeForBackend = (date, time) => {
+    const [hours, minutes] = time.split(':');
+    const reservationDate = new Date(date);
+    reservationDate.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0);
+    return reservationDate;
   };
 
   return (
@@ -129,7 +164,7 @@ const ReservationForm = () => {
           <button
             onClick={toggleForm}
             type='button'
-            className={`flex items-center text-lg justify-center w-full py-3 ${buttonStyle.bgColor} ${buttonStyle.textColor} font-medium rounded-md mb-4`}
+            className={`flex items-center text-lg justify-center w-full py-3 ${buttonStyle.bgColor} ${buttonStyle.textColor} font-medium rounded-md mb-4 transition-all duration-300`}
           >
             Make a Reservation
             <ChevronDown
@@ -141,7 +176,7 @@ const ReservationForm = () => {
           </button>
 
           {isOpen && (
-            <div className='bg-white px-4 md:px-11 py-9 rounded-2xl shadow-lg border border-gray-100'>
+            <div className='bg-white px-4 md:px-11 py-9 rounded-2xl shadow-lg border border-gray-100 animate-[accordionDown_0.3s_ease-out]'>
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -163,7 +198,7 @@ const ReservationForm = () => {
                           id='firstName'
                           name='firstName'
                           placeholder='Type First Name...'
-                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none'
+                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                         />
                         <ErrorMessage
                           name='firstName'
@@ -184,7 +219,7 @@ const ReservationForm = () => {
                           id='lastName'
                           name='lastName'
                           placeholder='Type Last Name...'
-                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none'
+                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                         />
                         <ErrorMessage
                           name='lastName'
@@ -196,7 +231,7 @@ const ReservationForm = () => {
                       {/* Phone field */}
                       <div className='md:col-span-1'>
                         <label
-                          htmlFor='phone'
+                          htmlFor='phoneNumber'
                           className='block font-semibold text-gray-900 mb-1.5'
                         >
                           Phone Number
@@ -207,15 +242,15 @@ const ReservationForm = () => {
                             <ChevronDown size={16} className='ml-1 text-gray-900' />
                           </div>
                           <Field
-                            type='number'
-                            id='phone'
-                            name='phone'
+                            type='text'
+                            id='phoneNumber'
+                            name='phoneNumber'
                             placeholder='Type phone number...'
-                            className='w-full px-3 py-2 border border-[#C1C1C1] rounded-r-xl outline-none'
+                            className='w-full px-3 py-2 border border-[#C1C1C1] rounded-r-xl outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                           />
                         </div>
                         <ErrorMessage
-                          name='phone'
+                          name='phoneNumber'
                           component='div'
                           className='text-red-500 text-sm mt-1'
                         />
@@ -224,20 +259,20 @@ const ReservationForm = () => {
                       {/* Email field - moved after phone */}
                       <div className='md:col-span-1'>
                         <label
-                          htmlFor='email'
+                          htmlFor='emailAddress'
                           className='block font-semibold text-gray-900 mb-1.5'
                         >
                           Email Address
                         </label>
                         <Field
                           type='email'
-                          id='email'
-                          name='email'
+                          id='emailAddress'
+                          name='emailAddress'
                           placeholder='Type email address...'
-                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none'
+                          className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                         />
                         <ErrorMessage
-                          name='email'
+                          name='emailAddress'
                           component='div'
                           className='text-red-500 text-sm font-medium mt-1'
                         />
@@ -257,7 +292,7 @@ const ReservationForm = () => {
                         id='address'
                         name='address'
                         placeholder='Type your Address...'
-                        className='w-full px-3 py-2 border border-dashed border-[#C1C1C1] rounded-xl outline-none h-44'
+                        className='w-full px-3 py-2 border border-dashed border-[#C1C1C1] rounded-xl outline-none h-44 focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                       />
                     </div>
 
@@ -276,7 +311,7 @@ const ReservationForm = () => {
                               as='select'
                               id={field.id}
                               name={field.id}
-                              className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl cursor-pointer outline-none appearance-none'
+                              className='w-full px-3 py-2 border border-[#C1C1C1] rounded-xl cursor-pointer outline-none appearance-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400'
                             >
                               {field.options.map(option => (
                                 <option
@@ -288,7 +323,7 @@ const ReservationForm = () => {
                                 </option>
                               ))}
                             </Field>
-                            <FaCaretDown size={20} className='absolute right-2 top-3 ' />
+                            <FaCaretDown size={20} className='absolute right-2 top-3 text-gray-500' />
                           </div>
                           <ErrorMessage
                             name={field.id}
@@ -303,10 +338,18 @@ const ReservationForm = () => {
                     <div className='mt-6'>
                       <button
                         type='submit'
-                        disabled={isSubmitting}
-                        className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition duration-300'
+                        disabled={isSubmitting || isLoading}
+                        className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition duration-300 flex items-center justify-center'
                       >
-                        {isSubmitting ? 'Submitting...' : 'Complete Reservation'}
+                        {(isSubmitting || isLoading) ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Submitting...
+                          </>
+                        ) : 'Complete Reservation'}
                       </button>
                     </div>
                   </Form>
