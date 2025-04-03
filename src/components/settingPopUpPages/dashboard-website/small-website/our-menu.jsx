@@ -7,7 +7,7 @@ const OurMenu = () => {
   const [activeTab, setActiveTab] = useState('Starters');
   const dispatch = useDispatch();
   const { restaurant, isLoading, isSuccess, errorMessage } = useSelector((state) => state.restaurant);
-  console.log("OurMenu -> restaurant", restaurant)
+  //console.log("OurMenu -> restaurant", restaurant)
 
   // Define categories for the menu tabs
   const menuCategories = ['Starters', 'Main Course', 'Lunch', 'Dessert', 'Drinks'];
@@ -30,7 +30,7 @@ const OurMenu = () => {
   
       // Iterate over all restaurants in the results array
       restaurant.results.results.forEach(res => {
-        console.log("OurMenu -> res", res)
+       // console.log("OurMenu -> res", res)
         if (res.menuItems && res.menuItems.length > 0) {
           // Filter and map menu items for the current category
           const items = res.menuItems
