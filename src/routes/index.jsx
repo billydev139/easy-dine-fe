@@ -10,6 +10,7 @@ import RestaurantSettings from '../components/settingPopUpPages/restaurantSettin
 import RestaurantEditForm from '../components/settingPopUpPages/restaurantSettings/editRestaurantForm';
 import AllUsersProfile from '../components/settingPopUpPages/users/all-users';
 import TemplatesPlates from '../components/settingPopUpPages/templates-prints';
+import AddProductPage from '../pages/dashboard/menuManagement/add-product-page';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -89,6 +90,7 @@ const AppRoutes = () => {
     { path: '/menu-management', component: <MenuManagement /> },
     { path: '/dashboard/user-profiles', component: <AllUsersProfile /> },
     { path: '/dashboard/templates-prints', component: <TemplatesPlates /> },
+    { path: '/add-product-page', component: <AddProductPage /> },
   ];
 
   const publicRoutes = [
