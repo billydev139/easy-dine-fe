@@ -15,6 +15,7 @@ import themeReducer from "./themeSlice";
 import authReducer from "./loginSlice/authSlice";
 import restaurantSlice from "./restaurant/restaurantSlice";
 import reservationSlice from "./reservationSlice/reservationSlice";
+import menuSlice from "./menuSlice/menuSlice";
 
 // Persist configuration for themeSlice
 const themePersistConfig = {
@@ -33,6 +34,7 @@ const store = configureStore({
     theme: persistedThemeReducer, // Persisted theme reducer
     restaurant:restaurantSlice,
     reservation:reservationSlice,
+    menu:menuSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

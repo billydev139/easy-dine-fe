@@ -1,6 +1,10 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+//import { addProduct, updateProductStatus } from '../features/product/productSlice';
+import { createNewMenu } from '../../../store/menuSlice/menuSlice';
+//import { useToast } from '@/hooks/use-toast';
 import {
   Bold,
   Italic,
@@ -14,42 +18,41 @@ import {
 import DashboardLayout from '../../../layouts/dashboardLayout';
 
 export default function AddProductPage() {
+  const dispatch = useDispatch();
+ // State for toast
+ const [toastMessage, setToastMessage] = useState(null);
+   // Function to show toast
+   const showToast = (message, type = 'success') => {
+    setToastMessage({ message, type });
+    setTimeout(() => setToastMessage(null), 3000); // Clear toast after 3 seconds
+  };
+  
   // State for form fields
-  const [productName, setProductName] = useState('Hookah');
-  const [description, setDescription] = useState('Some initial <b>bold</b> text');
-  const [collection, setCollection] = useState('Daycard');
-  const [category, setCategory] = useState('Furniture');
-  const [articleNumber, setArticleNumber] = useState('742192617841');
+  const [productName, setProductName] = useState('');
+  const [description, setDescription] = useState('');
+  const [collection, setCollection] = useState('');
+  const [category, setCategory] = useState('');
+  const [articleNumber, setArticleNumber] = useState('');
   const [isAvailable, setIsAvailable] = useState(false);
-  const [availableDate, setAvailableDate] = useState('23/10/2023|14:30');
+  const [availableDate, setAvailableDate] = useState('');
   const [discount, setDiscount] = useState(true);
-  const [discountPercentage, setDiscountPercentage] = useState('10%');
-  const [quantity, setQuantity] = useState('2');
-  const [price, setPrice] = useState('$99.99');
-  const [productImage, setProductImage] = useState(
-    '/placeholder.svg?height=300&width=400'
-  );
-  const [ingredients, setIngredients] = useState([
-    { id: 1, name: 'Apple', color: 'red' },
-    { id: 2, name: 'Grape', color: 'purple' },
-    { id: 3, name: 'RedBull', color: 'blue' },
-  ]);
-  const [options, setOptions] = useState([
-    { id: 1, name: 'Apple', color: 'red' },
-    { id: 2, name: 'Grape', color: 'purple' },
-    { id: 3, name: 'RedBull', color: 'blue' },
-  ]);
+  const [discountPercentage, setDiscountPercentage] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [price, setPrice] = useState('');
+  const [productImage, setProductImage] = useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const [options, setOptions] = useState([]);
   const [settings, setSettings] = useState({
-    monthlyProductUpdates1: true,
-    monthlyProductUpdates2: true,
-    optionaleAuswahlPakete: true,
-    altersnachweis: true,
+    monthlyProductUpdates1: false,
+    monthlyProductUpdates2: false,
+    optionaleAuswahlPakete: false,
+    altersnachweis: false,
   });
 
   // State for new ingredient/option
   const [newIngredient, setNewIngredient] = useState('');
   const [newOption, setNewOption] = useState('');
-  const [selectedColor, setSelectedColor] = useState('blue');
+  const [selectedColor, setSelectedColor] = useState('');
 
   // State for form validation
   const [errors, setErrors] = useState({});
@@ -120,22 +123,18 @@ export default function AddProductPage() {
     }
   };
 
-  const [prepTime, setPrepTime] = useState('10.00-15.00 min');
-  const [orderDeadline, setOrderDeadline] = useState('22:45');
-  const [trend, setTrend] = useState('Hott');
-  const [originCountry, setOriginCountry] = useState('CH');
+  const [prepTime, setPrepTime] = useState('');
+  const [orderDeadline, setOrderDeadline] = useState('');
+  const [trend, setTrend] = useState('');
+  const [originCountry, setOriginCountry] = useState('');
 
   // State for toggles
   const [offers, setOffers] = useState(true);
   const [optionalSelection, setOptionalSelection] = useState(true);
 
   // State for packages and allergic ingredients
-  const [packages, setPackages] = useState(['RedBull', 'RedBull']);
-  const [allergicIngredients, setAllergicIngredients] = useState([
-    'Apple',
-    'Grape',
-    'RedBull',
-  ]);
+  const [packages, setPackages] = useState([]);
+  const [allergicIngredients, setAllergicIngredients] = useState([]);
 
   // State for new package and allergic ingredient
   const [newPackage, setNewPackage] = useState('');
@@ -185,53 +184,73 @@ export default function AddProductPage() {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Prepare payload
+  const preparePayload = () => {
+    return {
+      id: Date.now(), // Generate a unique ID
+      productName,
+      description,
+      collection,
+      category,
+      articleNumber,
+      isAvailable,
+      availableDate,
+      discount,
+      discountPercentage,
+      quantity,
+      price,
+      productImage,
+      ingredients,
+      options,
+      settings,
+      prepTime,
+      orderDeadline,
+      trend,
+      originCountry,
+      offers,
+      optionalSelection,
+      packages,
+      allergicIngredients,
+      createdAt: new Date().toISOString(),
+    };
+  };
+
   // Function to handle form submission
   const handleSubmit = e => {
     e.preventDefault();
     setIsSubmitting(true);
+    //dispatch(updateProductStatus('loading'));
 
     if (validateForm()) {
-      // Collect all form data
-      const formData = {
-        productName,
-        description,
-        collection,
-        category,
-        articleNumber,
-        isAvailable,
-        availableDate,
-        discount,
-        discountPercentage,
-        quantity,
-        price,
-        productImage,
-        ingredients,
-        options,
-        settings,
-        prepTime,
-        orderDeadline,
-        trend,
-        originCountry,
-        offers,
-        optionalSelection,
-        packages,
-        allergicIngredients,
-      };
+      // Collect all form data into a payload
+      const payload = preparePayload();
+      
+      console.log('Form payload:😍', payload);
 
-      console.log('Form submitted with data:', formData);
-
-      // Simulate API call
+      // Simulate API call with a timeout
       setTimeout(() => {
-        setSuccessMessage('Product saved successfully!');
-        setIsSubmitting(false);
-
-        // Clear success message after 3 seconds
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 3000);
+        try {
+          // Dispatch the action to add the product to the store
+          dispatch(createNewMenu(payload));
+          
+          setSuccessMessage('Product saved successfully!');
+          showToast('Product has been saved successfully', 'success');
+          
+          // Clear success message after 3 seconds
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 3000);
+        } catch (error) {
+          console.error('Error saving product:', error);
+          showToast('Failed to save product', 'error');
+        } finally {
+          setIsSubmitting(false);
+        }
       }, 1000);
     } else {
+      //dispatch(updateProductStatus('idle'));
       setIsSubmitting(false);
+      
       // Scroll to the first error
       if (formRef.current) {
         formRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -565,10 +584,9 @@ export default function AddProductPage() {
                       value={category}
                       onChange={e => setCategory(e.target.value)}
                     >
-                      <option>Furniture</option>
-                      <option>Electronics</option>
-                      <option>Clothing</option>
-                      <option>Food & Beverage</option>
+                      <option>Breakfast</option>
+                      <option>Lunch</option>
+                      <option>Dinner</option>
                     </select>
                     <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
                       <svg
@@ -862,6 +880,7 @@ export default function AddProductPage() {
                   <input
                     type='text'
                     value={prepTime}
+                    placeholder='eg. 10.00-15.00 min'
                     onChange={e => setPrepTime(e.target.value)}
                     className='w-full px-3 py-2 bg-blue-50 rounded-lg border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200'
                   />
@@ -873,6 +892,7 @@ export default function AddProductPage() {
                   <input
                     type='text'
                     value={orderDeadline}
+                    placeholder='eg. 22:45'
                     onChange={e => setOrderDeadline(e.target.value)}
                     className='w-full px-3 py-2 bg-blue-50 rounded-lg border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200'
                   />
@@ -884,6 +904,7 @@ export default function AddProductPage() {
                   <input
                     type='text'
                     value={trend}
+                    placeholder='eg. Hott'
                     onChange={e => setTrend(e.target.value)}
                     className='w-full px-3 py-2 bg-blue-50 rounded-lg border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200'
                   />
@@ -896,6 +917,7 @@ export default function AddProductPage() {
                     type='text'
                     value={originCountry}
                     onChange={e => setOriginCountry(e.target.value)}
+                    placeholder='eg. CH'
                     className='w-full px-3 py-2 bg-blue-50 rounded-lg border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-200'
                   />
                 </div>
