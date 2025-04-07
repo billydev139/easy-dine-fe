@@ -69,7 +69,7 @@ const SettingsPopup = ({ isOpen, onClose }) => {
           Integration
         </li>
         <li
-          onClick={() => navigate('/dashboard/subscription')}
+          onClick={() => navigate('/dashboard/subscriptions')}
           className='flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer font-bold'
         >
           Subscription

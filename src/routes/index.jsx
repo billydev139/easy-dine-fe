@@ -11,6 +11,9 @@ import RestaurantEditForm from '../components/settingPopUpPages/restaurantSettin
 import AllUsersProfile from '../components/settingPopUpPages/users/all-users';
 import TemplatesPlates from '../components/settingPopUpPages/templates-prints';
 import AddProductPage from '../pages/dashboard/menuManagement/add-product-page';
+import Accounting from '../components/settingPopUpPages/accounting/accounting';
+import IntegrationsPage from '../components/settingPopUpPages/integrations/integrations';
+import SubscriptionsPage from '../components/settingPopUpPages/subscriptions';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -67,6 +70,9 @@ const AppRoutes = () => {
     { path: '/manual-order', component: <ManualOrderTool /> },
     { path: '/dashboard/restaurant-settings', component: <RestaurantSettings /> },
     { path: '/dashboard/restaurant-edit-form', component: <RestaurantEditForm /> },
+    { path: '/dashboard/accounting', component: <Accounting /> },
+    { path: '/dashboard/integration', component: <IntegrationsPage /> },
+    { path: '/dashboard/subscriptions', component: <SubscriptionsPage /> },
     {
       path: '/add-restaurant',
       component: <RestaurantManagement />,
