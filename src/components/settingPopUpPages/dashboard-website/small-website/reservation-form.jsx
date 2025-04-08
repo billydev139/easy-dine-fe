@@ -4,8 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaCaretDown } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { toast } from 'sonner';
-import {addNewReservation} from '../../../../store/reservationSlice/reservationSlice';
+import { addNewReservation } from '../../../../store/reservationSlice/reservationSlice';
 
 const ReservationForm = () => {
   const dispatch = useDispatch();
@@ -90,7 +89,9 @@ const ReservationForm = () => {
     firstName: Yup.string().required('First name is required'),
     lastName: Yup.string().required('Last name is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
-    emailAddress: Yup.string().email('Invalid email address').required('Email is required'),
+    emailAddress: Yup.string()
+      .email('Invalid email address')
+      .required('Email is required'),
     table: Yup.string().required('Please select a table'),
     floorNumber: Yup.string().required('Please select a floor'),
     startingTime: Yup.string().required('Please select a starting time'),
@@ -114,20 +115,19 @@ const ReservationForm = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setIsLoading(true);
-    
+
     try {
-     
       // Format dates for backend
       const formattedData = {
         ...values,
         startingTime: formatDateTimeForBackend(values.date, values.startingTime),
         endingTime: formatDateTimeForBackend(values.date, values.endingTime),
         date: new Date(values.date),
-        restaurantId: "67e3e27803c48233005233b6" // Replace with actual restaurant ID or dynamic value
-      };      
-      const response = await dispatch (addNewReservation(formattedData));
+        restaurantId: '67e3e27803c48233005233b6', // Replace with actual restaurant ID or dynamic value
+      };
+      const response = await dispatch(addNewReservation(formattedData));
       console.log('Reservation created:', response);
-      
+
       toast.success('Reservation completed successfully!');
       resetForm();
       setIsOpen(false);
@@ -139,7 +139,7 @@ const ReservationForm = () => {
       setIsLoading(false);
     }
   };
-  
+
   // Function to format date and time for backend
   const formatDateTimeForBackend = (date, time) => {
     const [hours, minutes] = time.split(':');
@@ -323,7 +323,10 @@ const ReservationForm = () => {
                                 </option>
                               ))}
                             </Field>
-                            <FaCaretDown size={20} className='absolute right-2 top-3 text-gray-500' />
+                            <FaCaretDown
+                              size={20}
+                              className='absolute right-2 top-3 text-gray-500'
+                            />
                           </div>
                           <ErrorMessage
                             name={field.id}
@@ -341,15 +344,33 @@ const ReservationForm = () => {
                         disabled={isSubmitting || isLoading}
                         className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl transition duration-300 flex items-center justify-center'
                       >
-                        {(isSubmitting || isLoading) ? (
+                        {isSubmitting || isLoading ? (
                           <>
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg
+                              className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                            >
+                              <circle
+                                className='opacity-25'
+                                cx='12'
+                                cy='12'
+                                r='10'
+                                stroke='currentColor'
+                                strokeWidth='4'
+                              ></circle>
+                              <path
+                                className='opacity-75'
+                                fill='currentColor'
+                                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                              ></path>
                             </svg>
                             Submitting...
                           </>
-                        ) : 'Complete Reservation'}
+                        ) : (
+                          'Complete Reservation'
+                        )}
                       </button>
                     </div>
                   </Form>

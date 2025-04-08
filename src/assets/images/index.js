@@ -72,8 +72,16 @@ import restaurant_05 from './restaurant-05.png';
 import user_1 from './user-1.png';
 import user_2 from './user-2.png';
 import user_3 from './user-3.png';
+import wine_dark from './wine-dark.png';
+import mastercard_icon from './mastercard-icon.png';
+import ae_icon from './ae-icon.png';
+import visa_icon from './visa-icon.png';
 
 const Images = {
+  visa_icon,
+  ae_icon,
+  mastercard_icon,
+  wine_dark,
   user_1,
   user_2,
   user_3,
