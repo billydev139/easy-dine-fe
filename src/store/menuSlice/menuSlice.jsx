@@ -14,7 +14,11 @@ export const createNewMenu = createAsyncThunk(
     "/menus/createNewMenu",
     async (data, { rejectWithValue }) => {
       try {
-        const response = await axiosWithToken.post("/menus/", data);
+        const response = await axiosWithToken.post("/menus/", data, {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Axios will handle the boundary
+          },
+        });
         return response.data; // Assuming response.data contains the added /reservations info
       } catch (error) {
         return rejectWithValue(error);
