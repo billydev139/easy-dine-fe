@@ -11,87 +11,72 @@ import {
   X,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllMenus } from '../../../store/menuSlice/menuSlice';
 
 const MenuManagement = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('Breakfast');
-  const [menuItems, setMenuItems] = useState([
-    {
-      id: 1,
-      name: 'Classic Chicken Steak With Fries',
-      image:
-        'https://images.unsplash.com/photo-1659881981676-33ab127152c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q2xhc3NpYyUyMENoaWNrZW4lMjBTdGVhayUyMFdpdGglMjBGcmllc3xlbnwwfHwwfHx8MA%3D%3D',
-      rating: 4.5,
-      price: 12.63,
-      preparationTime: 15,
-      tags: ['Popular', 'Grilled'],
-      availableFor: ['Lunch', 'Dinner'],
-      ingredients: 'Grilled chicken breast, crispy fries, pepper sauce, fresh herbs',
-      inStock: true,
-      reviews: 2,
-      inMenu: false,
-    },
-    {
-      id: 2,
-      name: 'Spaghetti Carbonara',
-      image:
-        'https://plus.unsplash.com/premium_photo-1691948106030-d5e76d461b14?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8U3BhZ2hldHRpJTIwQ2FyYm9uYXJhfGVufDB8fDB8fHww',
-      rating: 4.8,
-      price: 10.99,
-      preparationTime: 20,
-      tags: ['Italian', 'Pasta'],
-      availableFor: ['Lunch', 'Dinner'],
-      ingredients: 'Spaghetti, egg yolk, pancetta, Parmesan cheese, black pepper',
-      inStock: true,
-      reviews: 5,
-      inMenu: false,
-    },
-    {
-      id: 3,
-      name: 'Margarita Pizza',
-      image:
-        'https://images.unsplash.com/photo-1669895616443-5d21d5acc6e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8TWFyZ2FyaXRhJTIwUGl6emF8ZW58MHx8MHx8fDA%3D',
-      rating: 4.7,
-      price: 14.5,
-      preparationTime: 18,
-      tags: ['Pizza', 'Vegetarian'],
-      availableFor: ['Lunch', 'Dinner'],
-      ingredients: 'Fresh Mozzarella, Tomato Sauce, Fresh Basil, Olive Oil',
-      inStock: true,
-      reviews: 3,
-      inMenu: false,
-    },
-    {
-      id: 4,
-      name: 'Avocado Toast with Poached Egg',
-      image:
-        'https://plus.unsplash.com/premium_photo-1692883560684-b7aa96067290?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8QXZvY2FkbyUyMFRvYXN0JTIwd2l0aCUyMFBvYWNoZWQlMjBFZ2d8ZW58MHx8MHx8fDA%3D',
-      rating: 4.6,
-      price: 8.75,
-      preparationTime: 10,
-      tags: ['Healthy', 'Breakfast'],
-      availableFor: ['Breakfast', 'Brunch'],
-      ingredients: 'Whole grain toast, avocado, poached egg, chili flakes, microgreens',
-      inStock: true,
-      reviews: 4,
-      inMenu: false,
-    },
-  ]);
-
   const [menuPreview, setMenuPreview] = useState([]);
   // State to track quantities for each menu item
   const [itemQuantities, setItemQuantities] = useState({});
+  
+  // Get the menus data from Redux store
+  const { menus, loading, error } = useSelector((state) => state.menu);
+  const menuList = menus?.results?.menus || [];
+  const allMenuItems = menuList.flatMap((menu) => menu.menuItems || []);
+  console.log(allMenuItems, 'allMenuItems😉');
+  console.log(menuList, 'menus✌️');
+  const dispatch = useDispatch();
+  
+  // Use the menuItems from the Redux store
+  const [menuItems, setMenuItems] = useState([]);
 
   const categories = ['All', 'Breakfast', 'Lunch', 'Dinner'];
 
+  const navigate = useNavigate();
+
+  // Fetch menus on component mount
+  useEffect(() => {
+    // Dispatch the action to get all menus
+    dispatch(getAllMenus({
+      isActive: true,
+      limit: 100 // Get a reasonable number of items
+    }));
+  }, [dispatch]);
+
+  // Update menuItems when menus are fetched from API
+  useEffect(() => {
+    if (allMenuItems) {
+      
+      // Transform API data to match our component's expected structure
+      const transformedMenuItems = allMenuItems.map(item => ({
+        id: item._id,
+        name: item.productName,
+        image: item.image,
+        rating: item.rating || 4.0,
+        price: item.price,
+        preparationTime: item.preparationTime || 15,
+        tags: item.tags || [],
+        availableFor: item.category ? [item.category] : ['Breakfast', 'Lunch', 'Dinner'],
+        ingredients: item.ingredients || [],
+        inStock: item.inStock || true,
+        reviews: item.reviews?.length || 0,
+        inMenu: false
+      }));
+      
+      setMenuItems(transformedMenuItems);
+    }
+  }, [menus]);
+
   const handleAddToMenu = id => {
     setMenuItems(prevItems =>
-      prevItems.map(item => (item.id === id ? { ...item, inMenu: true } : item))
+      prevItems.map(item => (item._id === id ? { ...item, inMenu: true } : item))
     );
-
     const itemToAdd = menuItems.find(item => item.id === id);
     if (itemToAdd && !menuPreview.some(item => item.id === id)) {
       setMenuPreview(prev => [...prev, itemToAdd]);
+  
       // Initialize quantity for this item
       setItemQuantities(prev => ({
         ...prev,
@@ -131,20 +116,18 @@ const MenuManagement = () => {
     }
   };
 
-  const navigate = useNavigate();
-
   const handleCreateNewDish = () => {
-    // Navigate('/add-product-page', { state: { from: 'menu-management' } });
-    navigate('/add-product-page'); // Navigate to the Add Product page route
+    navigate('/add-product-page');
   };
 
-  const filteredItems = menuItems.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
+  // Filter items based on search query and selected category
+  const filteredItems = allMenuItems.filter(item => {
+    const matchesSearch = item.productName.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory =
       activeCategory === 'All' ||
-      (activeCategory === 'Breakfast' && item.availableFor.includes('Breakfast')) ||
-      (activeCategory === 'Lunch' && item.availableFor.includes('Lunch')) ||
-      (activeCategory === 'Dinner' && item.availableFor.includes('Dinner'));
+      (activeCategory === 'Breakfast' && item.category.includes('Breakfast')) ||
+      (activeCategory === 'Lunch' && item.category.includes('Lunch')) ||
+      (activeCategory === 'Dinner' && item.category.includes('Dinner'));
 
     return matchesSearch && matchesCategory;
   });
@@ -154,8 +137,15 @@ const MenuManagement = () => {
   const handleSaveChanges = () => {
     setShowModal(true);
 
-    // You can also save the quantities here if needed
+    // You can implement logic to save the menu with quantities to your backend
     console.log('Saving menu with quantities:', itemQuantities);
+    console.log('Menu items to save:', menuPreview.map(item => ({
+      id: item.id,
+      quantity: itemQuantities[item.id] || 1
+    })));
+    
+    // Here you would typically dispatch an action to save the menu changes
+    // dispatch(saveMenuChanges(menuPreview, itemQuantities));
   };
 
   // Function to close the modal
@@ -163,7 +153,7 @@ const MenuManagement = () => {
     setShowModal(false);
   };
 
-  // Auto-close modal after 5 seconds
+  // Auto-close modal after 3 seconds
   useEffect(() => {
     let timer;
     if (showModal) {
@@ -236,96 +226,134 @@ const MenuManagement = () => {
               ))}
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              {filteredItems.map(item => (
-                <div
-                  key={item.id}
-                  className='border border-gray-200 rounded-lg overflow-hidden'
-                >
-                  <div className='relative'>
-                    <img
-                      src={item.image || '/placeholder.svg'}
-                      alt={item.name}
-                      className='w-full h-48 object-cover'
-                    />
-                    {item.inStock && (
-                      <div className='absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded'>
-                        In Stock
-                      </div>
-                    )}
-                    <div className='absolute bottom-2 right-2 bg-white text-gray-700 text-xs px-2 py-1 rounded shadow'>
-                      {item.preparationTime} mins
-                    </div>
+            {loading ? (
+              <div className="flex justify-center items-center py-8">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+              </div>
+            ) : error ? (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <p>Error loading menu items. Please try again later.</p>
+              </div>
+            ) : (
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                {filteredItems.length === 0 ? (
+                  console.log(filteredItems, 'filteredItems😎'),
+                  <div className="col-span-2 py-8 text-center">
+                    <p className="text-gray-500">No menu items found matching your search criteria.</p>
                   </div>
-
-                  <div className='p-4'>
-                    <div className='flex justify-between items-start mb-2'>
-                      <h3 className='font-medium text-gray-800'>{item.name}</h3>
-                      <div className='flex items-center'>
-                        <Star className='h-4 w-4 text-yellow-400 fill-yellow-400' />
-                        <span className='text-sm ml-1'>{item.rating}</span>
+                ) : (
+                  filteredItems.map(item => (
+                    console.log(item, 'item inside filterdeItems😎'),
+                    <div
+                      key={item._id}
+                      className='border border-gray-200 rounded-lg overflow-hidden'
+                    >
+                      <div className='relative'>
+                        <img
+                          src={item.images || '/placeholder.svg'}
+                          alt={item.productName}
+                          className='w-full h-48 object-cover'
+                        />
+                        {item.collection && (
+                          <div className='absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded'>
+                            In Stock
+                          </div>
+                        )}
+                        <div className='absolute bottom-2 right-2 bg-white text-gray-700 text-xs px-2 py-1 rounded shadow'>
+                          {item.prepTime} mins
+                        </div>
                       </div>
-                    </div>
+  
+                      <div className='p-4'>
+                        <div className='flex justify-between items-start mb-2'>
+                          <h3 className='font-medium text-gray-800'>{item.productName}</h3>
+                          <div className='flex items-center'>
+                            <Star className='h-4 w-4 text-yellow-400 fill-yellow-400' />
+                            {/* <span className='text-sm ml-1'>{item.rating}</span> */}
+                          </div>
+                        </div>
 
-                    <div className='flex gap-2 mb-2'>
-                      {item.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className='text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded'
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className='text-lg font-semibold mb-2'>
-                      {item.price.toFixed(2)} CHF
-                    </div>
-
-                    <div className='mb-2'>
-                      <p className='text-xs text-gray-500'>Available For</p>
-                      <div className='flex gap-2 mt-1'>
-                        {item.availableFor.map(meal => (
+                        <div className='flex gap-2 mb-2'>
+                          {/* {item.tags.map((tag, index) => (
+                            <span
+                              key={index}
+                              className='text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded'
+                            >
+                              {tag}
+                            </span>
+                          ))} */}
+                          {["popular", "vegetarian"].map((tag, index) => (
                           <span
-                            key={meal}
-                            className='text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-600 border border-blue-200'
+                            key={index}
+                            className='text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded'
                           >
-                            {meal}
+                            {tag}
                           </span>
                         ))}
+                        </div>
+
+                        <div className='text-lg font-semibold mb-2'>
+                          {item.price?.toFixed(2) || '0.00'} CHF
+                        </div>
+
+                        <div className='mb-2'>
+                          <p className='text-xs text-gray-500'>Available For</p>
+                          <div className='flex gap-2 mt-1'>
+                            {/* {item.availableFor.map(meal => (
+                              <span
+                                key={meal}
+                                className='text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-600 border border-blue-200'
+                              >
+                                {meal}
+                              </span>
+                            ))} */}
+                             <span
+                                className='text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-600 border border-blue-200'
+                              >
+                                {item.category}
+                              </span>
+                          </div>
+                        </div>
+
+                        <div className='mb-3'>
+                          <p className='text-xs text-gray-500'>Ingredients:
+                          {" "}
+                            {item.ingredients.map((ingredient, index) => (
+                              <span key={index}>
+                                {ingredient.name}
+                                {index !== item.ingredients.length - 1 && ', '}
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+
+                        <div className='flex justify-between items-center'>
+                          <div className='relative'>
+                            <button className='flex items-center text-xs text-gray-600'>
+                              Show Reviews ({"23"})
+                              <ChevronDown className='h-3 w-3 ml-1' />
+                            </button>
+                          </div>
+
+                          <button
+                            onClick={() => handleAddToMenu(item._id)}
+                            className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium ${
+                              item.inMenu
+                                ? 'bg-gray-200 text-gray-700'
+                                : 'bg-blue-500 text-white hover:bg-blue-600'
+                            }`}
+                            disabled={item.inMenu}
+                          >
+                            <Plus className='h-4 w-4' />
+                            {item.inMenu ? 'Added to Menu' : 'Add to Menu'}
+                          </button>
+                        </div>
                       </div>
                     </div>
-
-                    <div className='mb-3'>
-                      <p className='text-xs text-gray-500'>Ingredients:</p>
-                      <p className='text-xs text-gray-700 mt-1'>{item.ingredients}</p>
-                    </div>
-
-                    <div className='flex justify-between items-center'>
-                      <div className='relative'>
-                        <button className='flex items-center text-xs text-gray-600'>
-                          Show Reviews ({item.reviews})
-                          <ChevronDown className='h-3 w-3 ml-1' />
-                        </button>
-                      </div>
-
-                      <button
-                        onClick={() => handleAddToMenu(item.id)}
-                        className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium ${
-                          item.inMenu
-                            ? 'bg-gray-200 text-gray-700'
-                            : 'bg-blue-500 text-white hover:bg-blue-600'
-                        }`}
-                        disabled={item.inMenu}
-                      >
-                        <Plus className='h-4 w-4' />
-                        {item.inMenu ? 'Added to Menu' : 'Add to Menu'}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  ))
+                )}
+              </div>
+            )}
           </div>
 
           {/* Menu Preview Panel - New Version */}
@@ -376,14 +404,14 @@ const MenuManagement = () => {
                   >
                     <img
                       src={item.image || '/placeholder.svg'}
-                      alt={item.name}
+                      alt={item.productName}
                       className='w-28 h-20 rounded-md object-cover'
                     />
 
                     <div className='flex-grow'>
-                      <h3 className='font-medium text-gray-800'>{item.name}</h3>
+                      <h3 className='font-medium text-gray-800'>{item.productName}</h3>
                       <p className='text-blue-600 font-medium mt-1'>
-                        {item.price.toFixed(2)} CHF
+                        {item.price?.toFixed(2) || '0.00'} CHF
                       </p>
                       <div className='flex items-center mt-1'>
                         <span className='w-2 h-2 bg-green-500 rounded-full mr-2'></span>

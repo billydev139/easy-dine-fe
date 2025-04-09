@@ -615,6 +615,7 @@ export default function AddProductPage() {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
+                      <option>Select</option>
                       <option>Breakfast</option>
                       <option>Lunch</option>
                       <option>Dinner</option>
