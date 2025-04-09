@@ -17,8 +17,8 @@ const navigationItems = [
     icon: <Icons.HiOutlineBuildingStorefront size={22} />,
   },
   {
-    path: '/user-management',
-    label: 'User Management',
+    path: "/user-management",
+    label: "User Management",
     icon: <Icons.SiNginxproxymanager size={22} />,
   },
   {
