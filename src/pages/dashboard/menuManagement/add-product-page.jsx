@@ -217,7 +217,7 @@ export default function AddProductPage() {
 
     // Add image file if exists (important: use 'images' as the field name based on your backend)
     if (imageFile) {
-      formData.append("images", imageFile);
+      formData.append("image", imageFile);
     }
 
     return formData;

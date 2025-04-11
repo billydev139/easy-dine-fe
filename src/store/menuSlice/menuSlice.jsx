@@ -26,6 +26,36 @@ export const createNewMenu = createAsyncThunk(
   }
 );
 
+export const createMenuItemsBulk = createAsyncThunk(
+  "/menus/createMenuItemsBulk",
+  async ({ restaurantId, menuItems }, { rejectWithValue }) => {
+    try {
+      // Transform the menu items to match your backend schema
+      const transformedItems = menuItems.map(item => ({
+        productName: item.name,
+        price: item.price,
+        category: item.availableFor[0] || 'Breakfast', // Take first category if available
+        description: item.description || 'No description provided',
+        preparationTime: item.preparationTime || 15,
+        inStock: item.inStock !== false, // Default to true unless explicitly false
+        ingredients: item.ingredients || [],
+        image: item.image || '',
+        tags: item.tags || [],
+        quantity: item.quantity || 1 // From your quantity state
+      }));
+
+      const response = await axiosWithToken.post("/menus/bulk", {
+        restaurantId,
+        menuItems: transformedItems
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+
 // Define the asynchronous thunk for fetching all menus
 export const getAllMenus = createAsyncThunk(
   "/menus/getAllMenus",
@@ -73,6 +103,26 @@ const menuSlice = createSlice({
       .addCase(getAllMenus.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMessage = action.payload.message;
+      })
+      // createMenuItemsBulk cases
+       .addCase(createMenuItemsBulk.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.errorMessage = "";
+      })
+      .addCase(createMenuItemsBulk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        // Update the singleMenu if it's the same restaurant's menu
+        if (state.singleMenu?.restaurantId === action.payload.restaurantId) {
+          state.singleMenu = action.payload;
+        }
+        // Or update the menus array if needed
+      })
+      .addCase(createMenuItemsBulk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.errorMessage = action.payload?.message || 'Failed to add menu items';
       });
   },
 });
