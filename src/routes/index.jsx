@@ -14,6 +14,8 @@ import AddProductPage from '../pages/dashboard/menuManagement/add-product-page';
 import Accounting from '../components/settingPopUpPages/accounting/accounting';
 import IntegrationsPage from '../components/settingPopUpPages/integrations/integrations';
 import SubscriptionsPage from '../components/settingPopUpPages/subscriptions';
+import InvoiceManagement from '../pages/dashboard/invoiceCustomization';
+import ModulesExtensions from '../pages/dashboard/modules-extensions/modules-extensions';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -73,6 +75,8 @@ const AppRoutes = () => {
     { path: '/dashboard/accounting', component: <Accounting /> },
     { path: '/dashboard/integration', component: <IntegrationsPage /> },
     { path: '/dashboard/subscriptions', component: <SubscriptionsPage /> },
+    { path: '/invoice-management', component: <InvoiceManagement /> },
+    { path: '/modules-extensions', component: <ModulesExtensions /> },
     {
       path: '/add-restaurant',
       component: <RestaurantManagement />,
