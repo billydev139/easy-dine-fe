@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { config } from '../../../utils/EndPoints';
 import { getAllMenus, createMenuItemsBulk } from '../../../store/menuSlice/menuSlice';
 import axios from 'axios'; // Import axios for API calls
 
@@ -29,6 +30,7 @@ const MenuManagement = () => {
   const { menus, loading, error } = useSelector((state) => state.menu);
   const menuList = menus?.results?.menus || [];
   const allMenuItems = menuList.flatMap((menu) => menu.menuItems || []);
+  console.log('allMenuItems✌️', allMenuItems);
   const dispatch = useDispatch();
   
   // Use the menuItems from the Redux store
@@ -267,12 +269,12 @@ const MenuManagement = () => {
                       className='border border-gray-200 rounded-lg overflow-hidden'
                     >
                       <div className='relative'>
-                        <img
-                          src={item.images || '/placeholder.svg'}
-                          alt={item.productName}
-                          className='w-full h-48 object-cover'
-                        />
-                        {item.collection && (
+                      <img
+                        src={item.images ? `${config.imageUrl}${item.images}` : '/placeholder.svg'}
+                        alt={item.productName}
+                        className='w-full h-48 object-cover'
+                      />
+                        {item.isAvailable && (
                           <div className='absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded'>
                             In Stock
                           </div>
@@ -399,12 +401,13 @@ const MenuManagement = () => {
             ) : (
               <div className='bg-white flex-grow overflow-y-auto p-4 space-y-3'>
                 {menuPreview.map(item => (
+                  console.log('item inside preview🤷‍♂️', item),
                   <div
                     key={item.id}
                     className='bg-white p-3 rounded-lg shadow-sm flex items-center gap-3 border border-gray-100'
                   >
                     <img
-                      src={item.images || '/placeholder.svg'}
+                       src={item.image ? `${config.imageUrl}${item.image}` : '/placeholder.svg'}
                       alt={item.productName}
                       className='w-28 h-20 rounded-md object-cover'
                     />
