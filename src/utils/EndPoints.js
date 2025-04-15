@@ -1,8 +1,10 @@
 
 const config = {
   
-    baseUrl: import.meta.env.VITE_BASE_URL,
-    imageUrl: import.meta.env.VITE_IMAGE_URL,
+    baseUrl: "https://api.easydine.ch",
+    imageUrl: "https://api.easydine.ch",
+    // baseUrl: import.meta.env.VITE_BASE_URL,
+    // imageUrl: import.meta.env.VITE_IMAGE_URL,
     endPoints: {
       SUB_ADMIN: {
         LOGIN: "/auth/login",
