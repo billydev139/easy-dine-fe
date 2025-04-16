@@ -16,6 +16,12 @@ import IntegrationsPage from '../components/settingPopUpPages/integrations/integ
 import SubscriptionsPage from '../components/settingPopUpPages/subscriptions';
 import InvoiceManagement from '../pages/dashboard/invoiceCustomization';
 import ModulesExtensions from '../pages/dashboard/modules-extensions/modules-extensions';
+import QRGenerator from '../pages/dashboard/QRgenerator';
+import Cashbook from '../pages/dashboard/Cashbook';
+import Reports from '../pages/dashboard/Reports';
+import Trash from '../pages/dashboard/Trash';
+import EmailManagement from '../pages/dashboard/emailManagement';
+import MenuCustomization from '../pages/dashboard/menuCustomization';
 
 // Lazy-loaded components
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
@@ -77,6 +83,12 @@ const AppRoutes = () => {
     { path: '/dashboard/subscriptions', component: <SubscriptionsPage /> },
     { path: '/invoice-management', component: <InvoiceManagement /> },
     { path: '/modules-extensions', component: <ModulesExtensions /> },
+    { path: '/qr-generator', component: <QRGenerator /> },
+    { path: '/menu-customization', component: <MenuCustomization /> },
+    { path: '/cashbook', component: <Cashbook /> },
+    { path: '/reports', component: <Reports /> },
+    { path: '/email-management', component: <EmailManagement /> },
+    { path: '/trash', component: <Trash /> },
     {
       path: '/add-restaurant',
       component: <RestaurantManagement />,
@@ -99,7 +111,7 @@ const AppRoutes = () => {
     },
     { path: '/menu-management', component: <MenuManagement /> },
     { path: '/dashboard/user-profiles', component: <AllUsersProfile /> },
-    { path: '/dashboard/templates-prints', component: <TemplatesPlates /> },
+    { path: '/dashboard/templates-print', component: <TemplatesPlates /> },
     { path: '/add-product-page', component: <AddProductPage /> },
   ];
 

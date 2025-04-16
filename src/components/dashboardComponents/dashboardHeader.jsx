@@ -29,7 +29,7 @@ const DashboardHeader = ({ sidebarOpen, setSidebarOpen }) => {
           }}
           className='z-10 block  '
         >
-          <Icons.RiMenu3Fill size={20} />
+          <Icons.RiMenu4Line size={20} />
         </button>
         <h2 className='text-xl font-semibold'>Dashboard</h2>
       </div>
