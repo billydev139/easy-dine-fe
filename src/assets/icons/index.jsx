@@ -40,7 +40,7 @@ import {
 } from 'react-icons/md';
 import { PiBellSimpleBold } from 'react-icons/pi';
 import { CiCalendar } from 'react-icons/ci';
-import { RiDeleteBin6Line, RiLockLine, RiMenu3Fill } from 'react-icons/ri';
+import { RiDeleteBin6Line, RiLockLine, RiMenu4Line } from 'react-icons/ri';
 import { SiNginxproxymanager } from 'react-icons/si';
 import { TfiWallet } from 'react-icons/tfi';
 import { TiArrowSortedDown, TiMessages, TiSocialLinkedin } from 'react-icons/ti';
@@ -49,8 +49,20 @@ import { HiUsers } from 'react-icons/hi2';
 import { MdMenu } from 'react-icons/md';
 import { FaHandHoldingDollar } from 'react-icons/fa6';
 import { TbSettingsCog } from 'react-icons/tb';
+import { BsQrCode } from 'react-icons/bs';
+import { FaChartBar } from 'react-icons/fa';
+import { RiMoneyDollarCircleLine } from 'react-icons/ri';
+import { TfiTrash } from 'react-icons/tfi';
+import { MdOutlineMailOutline } from 'react-icons/md';
+import { RiMenu2Line } from 'react-icons/ri';
 
 const Icons = {
+  RiMenu2Line,
+  MdOutlineMailOutline,
+  TfiTrash,
+  RiMoneyDollarCircleLine,
+  FaChartBar,
+  BsQrCode,
   TbSettingsCog,
   TiArrowSortedDown,
   LiaJediOrder,
@@ -85,7 +97,7 @@ const Icons = {
   IoSettingsOutline,
   LiaFileContractSolid,
   TiMessages,
-  RiMenu3Fill,
+  RiMenu4Line,
   RiLockLine,
   IoIosLock,
   FaRegEyeSlash,

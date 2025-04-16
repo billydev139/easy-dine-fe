@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import Icons from "../../../../assets/icons";
-import ReactApexChart from "react-apexcharts";
+import { useSelector } from 'react-redux';
+import Icons from '../../../../assets/icons';
+import ReactApexChart from 'react-apexcharts';
 
 const CustomerInsights = () => {
   const chartOptions = {

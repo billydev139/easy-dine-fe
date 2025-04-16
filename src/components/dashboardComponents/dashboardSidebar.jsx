@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Images from '../../assets/images';
@@ -60,6 +60,36 @@ const navigationItems = [
     path: '/modules-extensions',
     label: 'Modules & Extensions',
     icon: <Icons.TbSettingsCog size={22} />,
+  },
+  {
+    path: '/qr-generator',
+    label: 'QR Code Generator',
+    icon: <Icons.BsQrCode size={22} />,
+  },
+  {
+    path: '/menu-customization',
+    label: 'Menu Customization',
+    icon: <Icons.RiMenu2Line size={22} />,
+  },
+  {
+    path: '/cashbook',
+    label: 'Cashbook',
+    icon: <Icons.RiMoneyDollarCircleLine size={22} />,
+  },
+  {
+    path: '/reports',
+    label: 'Reports',
+    icon: <Icons.FaChartBar size={22} />,
+  },
+  {
+    path: '/email-management',
+    label: 'Email Management',
+    icon: <Icons.MdOutlineMailOutline size={22} />,
+  },
+  {
+    path: '/trash',
+    label: 'Trash',
+    icon: <Icons.TfiTrash size={22} />,
   },
   {
     path: '#',
