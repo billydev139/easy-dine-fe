@@ -55,8 +55,10 @@ import { RiMoneyDollarCircleLine } from 'react-icons/ri';
 import { TfiTrash } from 'react-icons/tfi';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { RiMenu2Line } from 'react-icons/ri';
+import { LuClipboardCheck } from 'react-icons/lu';
 
 const Icons = {
+  LuClipboardCheck,
   RiMenu2Line,
   MdOutlineMailOutline,
   TfiTrash,
