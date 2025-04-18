@@ -38,12 +38,12 @@ const SettingsPopup = ({ isOpen, onClose }) => {
         >
           Webpage
         </li>
-        <li
+        {/* <li
           onClick={() => navigate('/dashboard/restaurant-settings')}
           className='flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer font-bold'
         >
           Restaurant Settings
-        </li>
+        </li> */}
         <li
           onClick={() => navigate('/dashboard/user-profiles')}
           className='flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md cursor-pointer font-bold'

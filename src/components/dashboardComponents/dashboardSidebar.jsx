@@ -12,8 +12,8 @@ const navigationItems = [
     icon: <Icons.MdOutlineDashboard size={22} />,
   },
   {
-    path: '/add-restaurant',
-    label: 'Add Restaurant',
+    path: '/restaurant-settings',
+    label: 'Restaurant Settings',
     icon: <Icons.HiOutlineBuildingStorefront size={22} />,
   },
   // {

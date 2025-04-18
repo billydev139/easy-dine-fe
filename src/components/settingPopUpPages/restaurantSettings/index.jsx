@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, CircleX, Edit, Trash2, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CircleX, Edit, Plus, Trash2, User } from 'lucide-react';
 import { useState } from 'react';
 import DashboardLayout from '../../../layouts/dashboardLayout';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -93,12 +93,16 @@ const RestaurantSettings = () => {
     navigate('/dashboard/restaurant-edit-form');
   };
 
+  const handleAddRestaurant = () => {
+    navigate('/dashboard/restaurant-add-form');
+  };
+
   return (
     <DashboardLayout>
       <div className='pt-9 w-full min-h-screen'>
         <div className='flex w-full items-center mb-7'>
-          <FaArrowLeft className='w-6 h-6 mr-2 text-[#282F5A] cursor-pointer' />
-          <span className='text-[#282F5A] text-xl mr-2'>Setting &gt;</span>
+          {/* <FaArrowLeft className='w-6 h-6 mr-2 text-[#282F5A] cursor-pointer' />
+          <span className='text-[#282F5A] text-xl mr-2'>Setting &gt;</span> */}
           <span className='text-[#282F5A] text-xl font-semibold'>
             Restaurant Settings
           </span>
@@ -111,32 +115,41 @@ const RestaurantSettings = () => {
                 <h1 className='text-xl text-[#131313] font-semibold'>
                   Manage Restaurant
                 </h1>
-                <p className='text-[#131313] text-sm'>
+                {/* <p className='text-[#131313] text-sm'>
                   Lorem ipsum dolor sit amet, consecteture
-                </p>
+                </p> */}
               </div>
-              <div className='relative'>
-                <input
-                  type='text'
-                  placeholder='Search Restaurant'
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  className='w-[503px] pl-10 pr-4 py-2 placeholder:text-[#131313] placeholder:text-sm bg-[#EEF5FF] border border-[#9EC3FF] rounded-xl outline-none'
-                />
-                <svg
-                  className='absolute flex-1 left-3 top-3 w-5 h-5 text-[#131313]'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+              <div className='flex items-center gap-4'>
+                <div className='relative'>
+                  <input
+                    type='text'
+                    placeholder='Search Restaurant'
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className='w-[403px] pl-10 pr-4 py-2 placeholder:text-[#131313] placeholder:text-sm bg-[#EEF5FF] border border-[#9EC3FF] rounded-xl outline-none'
                   />
-                </svg>
+                  <svg
+                    className='absolute flex-1 left-3 top-3 w-5 h-5 text-[#131313]'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+                    />
+                  </svg>
+                </div>
+                <button
+                  onClick={handleAddRestaurant}
+                  className='flex items-center gap-2 bg-[#0075FF] hover:bg-[#0055FF] text-white px-4 py-2 rounded-xl'
+                >
+                  <Plus size={20} />
+                  <span>Add Restaurant</span>
+                </button>
               </div>
             </div>
 
@@ -179,7 +192,10 @@ const RestaurantSettings = () => {
 
                       <div className='pt-3'>
                         <div className='flex items-center space-x-2'>
-                          <button className='text-[#0075FF] hover:text-[#0055FF] p-2 rounded'>
+                          <button 
+                            onClick={handleEditClick}
+                            className='text-[#0075FF] hover:text-[#0055FF] p-2 rounded'
+                          >
                             <Edit size={20} />
                           </button>
                           <button

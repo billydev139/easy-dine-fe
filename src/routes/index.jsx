@@ -7,7 +7,9 @@ import DashboardWebpage from '../components/settingPopUpPages/dashboard-website/
 import RestaurantReservation from '../components/reservations';
 import SmallWebsite from '../components/settingPopUpPages/dashboard-website/small-website';
 import RestaurantSettings from '../components/settingPopUpPages/restaurantSettings';
+// import EditRestaurant from '../components/settingPopUpPages/restaurantSettings/editRestaurant';
 import RestaurantEditForm from '../components/settingPopUpPages/restaurantSettings/editRestaurantForm';
+import RestaurantAddForm from '../components/settingPopUpPages/restaurantSettings/addRestaurantForm';
 import AllUsersProfile from '../components/settingPopUpPages/users/all-users';
 import TemplatesPlates from '../components/settingPopUpPages/templates-prints';
 import AddProductPage from '../pages/dashboard/menuManagement/add-product-page';
@@ -76,8 +78,9 @@ const AppRoutes = () => {
     { path: '/order-management', component: <OrderManagement /> },
     { path: '/inventory-management', component: <InventoryManagement /> },
     { path: '/manual-order', component: <ManualOrderTool /> },
-    { path: '/dashboard/restaurant-settings', component: <RestaurantSettings /> },
+    { path: '/restaurant-settings', component: <RestaurantSettings /> },
     { path: '/dashboard/restaurant-edit-form', component: <RestaurantEditForm /> },
+    { path: '/dashboard/restaurant-add-form', component: <RestaurantAddForm /> },
     { path: '/dashboard/accounting', component: <Accounting /> },
     { path: '/dashboard/integration', component: <IntegrationsPage /> },
     { path: '/dashboard/subscriptions', component: <SubscriptionsPage /> },

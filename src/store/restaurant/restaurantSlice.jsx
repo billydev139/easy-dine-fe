@@ -29,15 +29,18 @@ export const getAllRestaurant = createAsyncThunk(
   }
 );
 
-// Define the asynchronous thunk for adding a new restaurant
 export const addNewRestaurant = createAsyncThunk(
   "restaurant/addNewRestaurant",
-  async (data, { rejectWithValue }) => {
+  async (formData, { rejectWithValue }) => {
     try {
-      const response = await axiosWithToken.post("/restaurants/", data);
-      return response.data; // Assuming response.data contains the added restaurant info
+      const response = await axiosWithToken.post("/restaurants/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );

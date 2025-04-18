@@ -165,7 +165,7 @@ const RestaurantEditForm = () => {
     <DashboardLayout>
       <div className='flex w-full items-center mt-9 mb-5'>
         <FaArrowLeft className='w-6 h-6 mr-2 text-[#282F5A] cursor-pointer' />
-        <span className='text-[#282F5A] text-xl mr-2'>Setting &gt;</span>
+        <span className='text-[#282F5A] text-xl mr-2'>Restaurant Setting &gt;</span>
         <span className='text-[#282F5A] text-xl font-semibold'>Edit Restaurant</span>
       </div>
       <div className='my-5 p-6 bg-white rounded-xl border border-[#CCCCCC]'>
@@ -229,8 +229,8 @@ const RestaurantEditForm = () => {
         </form>
       </div>
 
-      <div className='flex gap-x-4 mb-6'>
-        {/* Locations */}
+      {/* <div className='flex gap-x-4 mb-6'>
+       
         <div className='w-full p-6 border-[#CCCCCC] bg-white border rounded-[20px]'>
           <h2 className='text-lg text-[#131313] font-semibold mb-4'>Locations</h2>
           <div className='flex mb-4'>
@@ -270,7 +270,6 @@ const RestaurantEditForm = () => {
           ))}
         </div>
 
-        {/* Area */}
         <div className='w-full p-6 bg-white rounded-[20px] border border-[#CCCCCC]'>
           <h2 className='text-xl font-semibold mb-4'>Areas</h2>
           <div className='flex mb-4'>
@@ -304,7 +303,7 @@ const RestaurantEditForm = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </DashboardLayout>
   );
 };
