@@ -1,314 +1,3 @@
-// import { useRef, useState } from 'react';
-// import { useFormik } from 'formik';
-// import * as Yup from 'yup';
-// import { Building, Trash2 } from 'lucide-react';
-// import { FaArrowLeft } from 'react-icons/fa';
-// import DashboardLayout from '../../../layouts/dashboardLayout';
-
-// const initialValues = {
-//   logo: '',
-//   restaurantName: '',
-//   address: '',
-//   contactNumber: '',
-//   email: '',
-//   website: '',
-//   typeOfCuisine: '',
-//   operatingHours: '',
-//   deliveryAvailable: '',
-//   managerName: '',
-//   managerContact: '',
-//   status: '',
-//   seatingCapacity: '',
-// };
-
-// const validationSchema = Yup.object({
-//   restaurantName: Yup.string().required('Restaurant Name is required'),
-//   address: Yup.string().required('Address is required'),
-//   contactNumber: Yup.string()
-//     .matches(/\d{10}/, 'Contact Number must be 10 digits')
-//     .required('Contact Number is required'),
-//   email: Yup.string().email('Invalid email format').required('Email is required'),
-//   website: Yup.string().url('Invalid URL format'),
-//   typeOfCuisine: Yup.string().required('Type of Cuisine is required'),
-//   operatingHours: Yup.string().required('Operating Hours are required'),
-//   deliveryAvailable: Yup.string().required('Delivery Availability is required'),
-//   managerName: Yup.string().required('Manager Name is required'),
-//   managerContact: Yup.string()
-//     .matches(/\d{10}/, 'Manager Contact must be 10 digits')
-//     .required('Manager Contact is required'),
-//   status: Yup.string().required('Status is required'),
-//   seatingCapacity: Yup.number()
-//     .typeError('Seating Capacity must be a number')
-//     .positive('Seating Capacity must be positive')
-//     .integer('Seating Capacity must be an integer')
-//     .required('Seating Capacity is required'),
-// });
-
-// const RestaurantAddForm = () => {
-//   const fileInputRef = useRef(null);
-//   const [image, setImage] = useState('/src/assets/images/restaurant-01.png');
-
-//   const formik = useFormik({
-//     initialValues,
-//     validationSchema,
-//     onSubmit: values => {
-//       console.log('Form Submitted', values);
-//     },
-//   });
-
-//   const handleImageClick = () => fileInputRef.current.click();
-
-//   const handleFileChange = event => {
-//     const file = event.target.files[0];
-//     if (file) setImage(URL.createObjectURL(file));
-//   };
-
-//   const formFields = [
-//     {
-//       label: 'Restaurant Name',
-//       name: 'restaurantName',
-//       type: 'text',
-//       placeholder: 'Enter Restaurant Name',
-//     },
-//     { label: 'Address', name: 'address', type: 'text', placeholder: 'Enter Address' },
-//     {
-//       label: 'Contact Number',
-//       name: 'contactNumber',
-//       type: 'text',
-//       placeholder: 'Enter Phone Number',
-//     },
-//     { label: 'Email', name: 'email', type: 'email', placeholder: 'john@example.com' },
-//     { label: 'Website', name: 'website', type: 'text', placeholder: 'Enter Website' },
-//     {
-//       label: 'Operating Hours',
-//       name: 'operatingHours',
-//       type: 'text',
-//       placeholder: 'Enter Operating Hours',
-//     },
-//     {
-//       label: 'Type of Cuisine',
-//       name: 'typeOfCuisine',
-//       type: 'text',
-//       placeholder: 'Types of cuisines',
-//     },
-//     {
-//       label: 'Delivery Available',
-//       name: 'deliveryAvailable',
-//       type: 'text',
-//       placeholder: 'Availability',
-//     },
-//     {
-//       label: 'Manager Name',
-//       name: 'managerName',
-//       type: 'text',
-//       placeholder: 'Manager Name',
-//     },
-//     {
-//       label: 'Manager Contact',
-//       name: 'managerContact',
-//       type: 'text',
-//       placeholder: 'Manager Contact Number',
-//     },
-//     { label: 'Status', name: 'status', type: 'text', placeholder: 'Enter Status' },
-//     {
-//       label: 'Seating Capacity',
-//       name: 'seatingCapacity',
-//       type: 'text',
-//       placeholder: 'Enter Seating Capacity',
-//     },
-//   ];
-
-//   const [locations, setLocations] = useState([
-//     { id: 1, name: 'Downtown Branch', areas: 4 },
-//     { id: 2, name: 'Village Branch', areas: 4 },
-//     { id: 3, name: 'Downtown Branch', areas: 4 },
-//   ]);
-//   const [newLocationName, setNewLocationName] = useState('');
-
-//   const handleAddLocation = () => {
-//     if (newLocationName.trim() === '') return;
-
-//     const newLocation = {
-//       id: Date.now(),
-//       name: newLocationName,
-//       areas: 0,
-//     };
-//     setLocations([...locations, newLocation]);
-//     setNewLocationName('');
-//   };
-
-//   const handleDeleteLocation = id => {
-//     setLocations(locations.filter(location => location.id !== id));
-//   };
-
-//   const [areas, setAreas] = useState([]);
-//   const [newAreaName, setNewAreaName] = useState('');
-
-//   const handleAddArea = () => {
-//     if (newAreaName.trim() && !areas.includes(newAreaName.trim())) {
-//       setAreas([...areas, newAreaName.trim()]);
-//       setNewAreaName('');
-//     }
-//   };
-
-//   const handleDeleteArea = areaToDelete => {
-//     setAreas(areas.filter(area => area !== areaToDelete));
-//   };
-
-//   const handleKeyPress = e => {
-//     if (e.key === 'Enter') {
-//       handleAddArea();
-//     }
-//   };
-
-//   return (
-//     <DashboardLayout>
-//       <div className='flex w-full items-center mt-9 mb-5'>
-//         <FaArrowLeft className='w-6 h-6 mr-2 text-[#282F5A] cursor-pointer' />
-//         <span className='text-[#282F5A] text-xl mr-2'>Restaurant Setting &gt;</span>
-//         <span className='text-[#282F5A] text-xl font-semibold'>Add Restaurant</span>
-//       </div>
-//       <div className='my-5 p-6 bg-white rounded-xl border border-[#CCCCCC]'>
-//         <div className='flex items-center mb-6'>
-//           <img
-//             src={image}
-//             alt='Restaurant Logo'
-//             className='w-20 h-20 rounded-full mr-4 cursor-pointer'
-//             onClick={handleImageClick}
-//           />
-//           <input
-//             type='file'
-//             ref={fileInputRef}
-//             className='hidden'
-//             onChange={handleFileChange}
-//             accept='image/*'
-//           />
-//           <div>
-//             <h2 className='text-lg font-semibold'>Update Logo</h2>
-//             <p className='text-xs text-gray-500'>
-//               The site icon is what you see in browser tabs etc. It should be square and
-//               at least 512 x 512 pixels.
-//             </p>
-//           </div>
-//         </div>
-
-//         <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4'>
-//           {formFields.map(({ label, name, type, placeholder }) => (
-//             <div key={name}>
-//               <label className='block text-base font-semibold text-[#131313] mb-1'>
-//                 {label}
-//               </label>
-//               <input
-//                 type={type}
-//                 name={name}
-//                 placeholder={placeholder}
-//                 value={formik.values[name]}
-//                 onChange={formik.handleChange}
-//                 onBlur={formik.handleBlur}
-//                 className='w-full px-4 text-[#131313] py-2.5 border rounded-xl border-[#9EC3FF] bg-[#EEF5FF] outline-none text-sm'
-//               />
-//               {formik.touched[name] && formik.errors[name] && (
-//                 <div className='text-red-500 text-xs mt-1'>{formik.errors[name]}</div>
-//               )}
-//             </div>
-//           ))}
-//           <div className='col-span-2 flex justify-end space-x-3 mt-6'>
-//             <button
-//               type='button'
-//               className='px-10 py-2 text-sm text-white bg-[#0075FF] hover:bg-[#0055FF] rounded-xl'
-//             >
-//               Close
-//             </button>
-//             <button
-//               type='submit'
-//               className='px-10 py-2 text-sm bg-[#0F0A33] hover:shadow-lg hover:shadow-[#0075FFCC] text-white rounded-xl'
-//             >
-//               Save
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-
-//       {/* <div className='flex gap-x-4 mb-6'>
-
-//         <div className='w-full p-6 border-[#CCCCCC] bg-white border rounded-[20px]'>
-//           <h2 className='text-lg text-[#131313] font-semibold mb-4'>Locations</h2>
-//           <div className='flex mb-4'>
-//             <input
-//               type='text'
-//               placeholder='New Location Name...'
-//               value={newLocationName}
-//               onChange={e => setNewLocationName(e.target.value)}
-//               className='flex-grow mr-3 px-4 py-3 placeholder:text-sm placeholder:text-[#696969] border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl outline-none'
-//             />
-//             <button
-//               onClick={handleAddLocation}
-//               className='bg-[#0075FF] text-white text-sm font-semibold px-10 rounded-xl hover:bg-[#0055FF] flex items-center'
-//             >
-//               <span className='mr-1 mb-1 text-lg'>+</span> Add
-//             </button>
-//           </div>
-//           {locations.map(location => (
-//             <div
-//               key={location.id}
-//               className='flex items-center justify-between mb-2.5 p-3 border hover:border-[#0075FF] rounded-[10px] hover:bg-[#EEF5FF]'
-//             >
-//               <div className='flex gap-x-3 items-center'>
-//                 <Building />
-//                 <div className='flex gap-x-6'>
-//                   <p className='font-medium'>{location.name}</p>
-//                   <p className='text-sm text-gray-500'>({location.areas} areas)</p>
-//                 </div>
-//               </div>
-//               <button
-//                 onClick={() => handleDeleteLocation(location.id)}
-//                 className='text-[#E54B47] hover:text-[#E52B47] p-2'
-//               >
-//                 <Trash2 size={20} />
-//               </button>
-//             </div>
-//           ))}
-//         </div>
-//         <div className='w-full p-6 bg-white rounded-[20px] border border-[#CCCCCC]'>
-//           <h2 className='text-xl font-semibold mb-4'>Areas</h2>
-//           <div className='flex mb-4'>
-//             <input
-//               type='text'
-//               value={newAreaName}
-//               onChange={e => setNewAreaName(e.target.value)}
-//               onKeyPress={handleKeyPress}
-//               placeholder='New Area Name...'
-//               className='flex-grow mr-3 px-4 py-3 placeholder:text-sm placeholder:text-[#696969] border border-[#9EC3FF] bg-[#EEF5FF] rounded-xl outline-none'
-//             />
-//             <button
-//               onClick={handleAddArea}
-//               className='bg-[#0075FF] text-white text-sm font-semibold px-10 rounded-xl hover:bg-[#0055FF] flex items-center'
-//             >
-//               <span className='mr-1 mb-1 text-lg'>+</span> Add
-//             </button>
-//           </div>
-//           {areas.map((area, index) => (
-//             <div
-//               key={index}
-//               className='flex items-center justify-between mb-2.5 p-3 border hover:border-[#0075FF] rounded-[10px] hover:bg-[#EEF5FF]'
-//             >
-//               <span>{area}</span>
-//               <button
-//                 onClick={() => handleDeleteArea(area)}
-//                 className='text-[#E54B47] hover:text-[#E52B47] p-2'
-//               >
-//                 <Trash2 size={20} />
-//               </button>
-//             </div>
-//           ))}
-//         </div>
-//       </div> */}
-//     </DashboardLayout>
-//   );
-// };
-
-// export default RestaurantAddForm;
-
 
 import { useRef, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
@@ -316,7 +5,70 @@ import * as Yup from 'yup';
 import { FaArrowLeft } from 'react-icons/fa';
 import DashboardLayout from '../../../layouts/dashboardLayout';
 import { useDispatch } from 'react-redux';
-import { addNewRestaurant } from '../../../store/restaurant/restaurantSlice'; // Adjust path as needed
+import { addNewRestaurant } from '../../../store/restaurant/restaurantSlice';
+import Swal from 'sweetalert2';
+
+// Country data for dropdown
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", 
+  "Antigua and Barbuda", "Argentina", "Armenia", "Australia", 
+  "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", 
+  "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", 
+  "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
+  "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Côte d'Ivoire", 
+  "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", 
+  "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", 
+  "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", 
+  "Democratic Republic of the Congo", "Denmark", "Djibouti", 
+  "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", 
+  "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", 
+  "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", 
+  "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", 
+  "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", 
+  "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
+  "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", 
+  "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", 
+  "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", 
+  "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", 
+  "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", 
+  "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", 
+  "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", 
+  "Norway", "Oman", "Pakistan", "Palau", "Palestine State", "Panama", 
+  "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", 
+  "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", 
+  "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", 
+  "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", 
+  "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", 
+  "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", 
+  "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", 
+  "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", 
+  "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", 
+  "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", 
+  "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", 
+  "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
+
+const openingHoursOptions = [   
+  { value: "06:00", label: "06:00 AM" },   
+  { value: "07:00", label: "07:00 AM" },   
+  { value: "08:00", label: "08:00 AM" },   
+  { value: "09:00", label: "09:00 AM" },   
+  { value: "10:00", label: "10:00 AM" },   
+  { value: "11:00", label: "11:00 AM" },   
+  { value: "12:00", label: "12:00 PM" },   
+  { value: "13:00", label: "01:00 PM" },   
+  { value: "14:00", label: "02:00 PM" },   
+  { value: "15:00", label: "03:00 PM" },   
+  { value: "16:00", label: "04:00 PM" },   
+  { value: "17:00", label: "05:00 PM" },   
+  { value: "18:00", label: "06:00 PM" },   
+  { value: "19:00", label: "07:00 PM" },   
+  { value: "20:00", label: "08:00 PM" },   
+  { value: "21:00", label: "09:00 PM" },   
+  { value: "22:00", label: "10:00 PM" },   
+  { value: "23:00", label: "11:00 PM" }, 
+];
 
 const validationSchema = Yup.object({
   // Section 1 - Restaurant details
@@ -330,10 +82,11 @@ const validationSchema = Yup.object({
   address: Yup.string(),
   
   // Section 2 - Operational Details
-  openingHours: Yup.string(),
+  openingTime: Yup.string().required('Opening time is required'),
+  closingTime: Yup.string().required('Closing time is required'),
   restaurantType: Yup.string(),
-  cuisineTypes: Yup.array(),
-  diningOptions: Yup.array(),
+  cuisineTypes: Yup.array().max(3, 'You can select up to 3 cuisine types'),
+  diningOptions: Yup.array().max(3, 'You can select up to 3 dining options'),
 });
 
 const cuisineOptions = [
@@ -370,7 +123,8 @@ const RestaurantAddForm = () => {
       status: true,
       
       // Section 2 - Operational Details
-      openingHours: '',
+      openingTime: '',
+      closingTime: '',
       restaurantType: '',
       cuisineTypes: [],
       diningOptions: [],
@@ -392,9 +146,32 @@ const RestaurantAddForm = () => {
       if (selectedLogo) {
         formData.append('logo', selectedLogo);
       }
-      console.log('Form Data:💖', formData);
+      console.log('🚀 ~ formData:', formData);
+      
       // Dispatch the action to add a new restaurant
-      dispatch(addNewRestaurant(formData));
+      dispatch(addNewRestaurant(formData))
+      .then((action) => {
+        if (action.payload) {
+          // Success case
+          Swal.fire({
+            title: 'Success!',
+            text: 'Restaurant added successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        } else if (action.error) {
+          // Error case
+          throw new Error(action.error.message || 'Failed to add restaurant');
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error!',
+          text: error.message || 'Failed to add restaurant',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
     },
   });
 
@@ -415,7 +192,7 @@ const RestaurantAddForm = () => {
         'cuisineTypes',
         currentCuisines.filter(item => item !== cuisine)
       );
-    } else {
+    } else if (currentCuisines.length < 3) {
       formik.setFieldValue('cuisineTypes', [...currentCuisines, cuisine]);
     }
   };
@@ -427,7 +204,7 @@ const RestaurantAddForm = () => {
         'diningOptions',
         currentOptions.filter(item => item !== option)
       );
-    } else {
+    } else if (currentOptions.length < 3) {
       formik.setFieldValue('diningOptions', [...currentOptions, option]);
     }
   };
@@ -573,15 +350,18 @@ const RestaurantAddForm = () => {
               <label className='block text-base font-semibold text-[#131313] mb-1'>
                 Country <span className='text-red-500'>*</span>
               </label>
-              <input
-                type='text'
+              <select
                 name='country'
-                placeholder='Enter Country'
                 value={formik.values.country}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 className='w-full px-4 text-[#131313] py-2.5 border rounded-xl border-[#9EC3FF] bg-[#EEF5FF] outline-none text-sm'
-              />
+              >
+                <option value="">Select Country</option>
+                {countries.map((country) => (
+                  <option key={country} value={country}>{country}</option>
+                ))}
+              </select>
               {formik.touched.country && formik.errors.country && (
                 <div className='text-red-500 text-xs mt-1'>{formik.errors.country}</div>
               )}
@@ -645,19 +425,52 @@ const RestaurantAddForm = () => {
           <h2 className='text-xl font-semibold mb-4'>Operational Details</h2>
           
           <div className='grid grid-cols-2 gap-4'>
-            <div>
-              <label className='block text-base font-semibold text-[#131313] mb-1'>
-                Opening Hours
+            {/* Opening Hours Section */}
+            <div className="col-span-2">
+              <label className='block text-base font-semibold text-[#131313] mb-2'>
+                Opening Hours <span className='text-red-500'>*</span>
               </label>
-              <input
-                type='text'
-                name='openingHours'
-                placeholder='e.g., Monday-Sunday: 9:00 AM - 10:00 PM'
-                value={formik.values.openingHours}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className='w-full px-4 text-[#131313] py-2.5 border rounded-xl border-[#9EC3FF] bg-[#EEF5FF] outline-none text-sm'
-              />
+              <div className="flex gap-4">
+                <select
+                  name="openingTime"
+                  value={formik.values.openingTime}
+                  onChange={(e) => {
+                    formik.setFieldValue('openingTime', e.target.value);
+                  }}
+                  onBlur={formik.handleBlur}
+                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px] focus:outline-none"
+                >
+                  <option value="">Select Opening Time</option>
+                  {openingHoursOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                
+                <select
+                  name="closingTime"
+                  value={formik.values.closingTime}
+                  onChange={(e) => {
+                    formik.setFieldValue('closingTime', e.target.value);
+                  }}
+                  onBlur={formik.handleBlur}
+                  className="w-1/2 border border-[#9EC3FF] rounded-xl bg-[#EEF5FF] px-4 py-[10px] focus:outline-none"
+                >
+                  <option value="">Select Closing Time</option>
+                  {openingHoursOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {formik.touched.openingTime && formik.errors.openingTime && (
+                <div className='text-red-500 text-xs mt-1'>{formik.errors.openingTime}</div>
+              )}
+              {formik.touched.closingTime && formik.errors.closingTime && (
+                <div className='text-red-500 text-xs mt-1'>{formik.errors.closingTime}</div>
+              )}
             </div>
             
             <div>
@@ -680,46 +493,66 @@ const RestaurantAddForm = () => {
             
             <div className='col-span-2'>
               <label className='block text-base font-semibold text-[#131313] mb-2'>
-                Cuisine Types
+                Cuisine Types (Max 3)
               </label>
-              <div className='flex flex-wrap gap-2'>
+              <div className='flex flex-wrap gap-4'>
                 {cuisineOptions.map((cuisine) => (
-                  <div key={cuisine} className='flex items-center'>
+                  <div key={cuisine} className="flex items-center">
                     <input
-                      type='checkbox'
+                      type="checkbox"
                       id={`cuisine-${cuisine}`}
                       checked={formik.values.cuisineTypes.includes(cuisine)}
                       onChange={() => handleCuisineTypeChange(cuisine)}
-                      className='mr-1'
+                      className="hidden"
                     />
-                    <label htmlFor={`cuisine-${cuisine}`} className='text-sm mr-3'>
+                    <label
+                      htmlFor={`cuisine-${cuisine}`}
+                      className={`px-4 py-2 rounded-full border cursor-pointer transition-colors ${
+                        formik.values.cuisineTypes.includes(cuisine)
+                          ? 'bg-[#0075FF] text-white border-[#0075FF]'
+                          : 'bg-[#EEF5FF] text-[#131313] border-[#9EC3FF]'
+                      }`}
+                    >
                       {cuisine}
                     </label>
                   </div>
                 ))}
               </div>
+              {formik.touched.cuisineTypes && formik.errors.cuisineTypes && (
+                <div className='text-red-500 text-xs mt-1'>{formik.errors.cuisineTypes}</div>
+              )}
             </div>
             
             <div className='col-span-2'>
               <label className='block text-base font-semibold text-[#131313] mb-2'>
-                Dining Options
+                Dining Options (Max 3)
               </label>
-              <div className='flex flex-wrap gap-2'>
+              <div className='flex flex-wrap gap-4'>
                 {diningOptionsList.map((option) => (
-                  <div key={option} className='flex items-center'>
+                  <div key={option} className="flex items-center">
                     <input
-                      type='checkbox'
+                      type="checkbox"
                       id={`dining-${option}`}
                       checked={formik.values.diningOptions.includes(option)}
                       onChange={() => handleDiningOptionChange(option)}
-                      className='mr-1'
+                      className="hidden"
                     />
-                    <label htmlFor={`dining-${option}`} className='text-sm mr-3'>
+                    <label
+                      htmlFor={`dining-${option}`}
+                      className={`px-4 py-2 rounded-full border cursor-pointer transition-colors ${
+                        formik.values.diningOptions.includes(option)
+                          ? 'bg-[#0075FF] text-white border-[#0075FF]'
+                          : 'bg-[#EEF5FF] text-[#131313] border-[#9EC3FF]'
+                      }`}
+                    >
                       {option}
                     </label>
                   </div>
                 ))}
               </div>
+              {formik.touched.diningOptions && formik.errors.diningOptions && (
+                <div className='text-red-500 text-xs mt-1'>{formik.errors.diningOptions}</div>
+              )}
             </div>
           </div>
         </div>
